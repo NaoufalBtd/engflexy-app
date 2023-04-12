@@ -1,5 +1,6 @@
 {
   "extends": [
+    "universe/native",
     "airbnb",
     "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
