@@ -1,4 +1,5 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { useRouter } from "expo-router";
 import { Box, Button, Heading, Text } from "native-base";
 import React from "react";
 import { ImageBackground } from "react-native";
@@ -9,6 +10,7 @@ interface LessonCardProps {
 }
 
 const LessonCard: React.FC<LessonCardProps> = ({ title, subtitle }) => {
+  const router = useRouter();
   return (
     <Box w="90%" margin="auto">
       <ImageBackground
@@ -53,7 +55,7 @@ const LessonCard: React.FC<LessonCardProps> = ({ title, subtitle }) => {
             color="white"
             borderRadius="lg"
             onPress={() => {
-              console.log("hello");
+              router.push("/course/learnWords");
             }}>
             Enroll
           </Button>
