@@ -9,6 +9,7 @@ import { SplashScreen, Stack } from "expo-router";
 import { NativeBaseProvider } from "native-base";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
+import nativeBaseTheme from "../src/theme";
 
 export { ErrorBoundary } from "expo-router";
 
@@ -20,6 +21,15 @@ export const unstable_settings = {
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
+    "Roboto-Light": require("../assets/fonts/Roboto-Light.ttf"),
+    "Roboto-Medium": require("../assets/fonts/Roboto-Medium.ttf"),
+    "Roboto-Bold": require("../assets/fonts/Roboto-Bold.ttf"),
+    // "Roboto-ExtraBold": require("../assets/fonts/Roboto-ExtraBold.ttf"),
+    "Syne-Medium": require("../assets/fonts/Syne-Medium.ttf"),
+    "Syne-Bold": require("../assets/fonts/Syne-Bold.ttf"),
+    "Syne-ExtraBold": require("../assets/fonts/Syne-ExtraBold.ttf"),
+    Syne: require("../assets/fonts/Syne-Regular.ttf"),
     ...FontAwesome.font,
   });
 
@@ -42,7 +52,7 @@ function RootLayoutNav() {
 
   return (
     <>
-      <NativeBaseProvider>
+      <NativeBaseProvider theme={nativeBaseTheme}>
         <ThemeProvider
           value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
           <Stack>
