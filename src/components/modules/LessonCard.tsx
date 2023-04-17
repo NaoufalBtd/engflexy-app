@@ -55,7 +55,7 @@ const LessonCard: React.FC<LessonCardProps> = ({ title, subtitle }) => {
             color="white"
             borderRadius="lg"
             onPress={() => {
-              router.push("/course/learnWords");
+              router.push("/course/dragAndDrop");
             }}>
             Enroll
           </Button>
