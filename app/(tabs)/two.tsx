@@ -1,10 +1,10 @@
-import { Text } from "native-base";
-import { View } from "react-native/";
+import React from "react";
+import QcmQuizTemplate from "../.../../../src/components/templates/QcmQuizTemplate";
 
-export default function TabTwoScreen() {
-  return (
-    <View>
-      <Text>Tab Two</Text>
-    </View>
-  );
-}
+interface PlanningProps {}
+
+const two: React.FC<PlanningProps> = () => {
+  return <QcmQuizTemplate />;
+};
+
+export default two;

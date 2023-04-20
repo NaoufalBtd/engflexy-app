@@ -23,7 +23,7 @@ const NumericShowcaseBox: React.FC<NumericShowcaseBoxProps> = ({
       py="5"
       px="4"
       shadow={active ? 9 : null}
-      bgColor={active ? "primary.500" : null}
+      bgColor={active ? "brand.secondary" : null}
       style={style || null}>
       <Heading
         color={active ? "white" : null}

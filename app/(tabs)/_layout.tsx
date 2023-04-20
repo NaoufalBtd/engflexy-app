@@ -3,6 +3,11 @@ import { Tabs } from "expo-router";
 import { useColorScheme } from "react-native";
 import Colors from "../../src/constants/Colors";
 
+export const unstable_settings = {
+  // Ensure that reloading on `/modal` keeps a back button present.
+  initialRouteName: "two",
+};
+
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
@@ -22,18 +27,20 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
       }}>
       <Tabs.Screen
+        name="two"
+        options={{
+          title: "Tab Two",
+          headerShown: false,
+          // tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="home"
         options={{
           headerShown: false,
         }}
       />
-      <Tabs.Screen
-        name="two"
-        options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
+
       <Tabs.Screen name="Schedule" />
     </Tabs>
   );

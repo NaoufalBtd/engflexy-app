@@ -3,6 +3,7 @@ import { useRouter } from "expo-router";
 import { Box, Button, Heading, Text } from "native-base";
 import React from "react";
 import { ImageBackground } from "react-native";
+import { useAppTheme } from "../../theme";
 import NumericShowcaseBox from "../elements/NumericShowcaseBox";
 interface LessonCardProps {
   title: string;
@@ -11,6 +12,7 @@ interface LessonCardProps {
 
 const LessonCard: React.FC<LessonCardProps> = ({ title, subtitle }) => {
   const router = useRouter();
+  const theme = useAppTheme();
   return (
     <Box w="90%" margin="auto">
       <ImageBackground
@@ -27,7 +29,7 @@ const LessonCard: React.FC<LessonCardProps> = ({ title, subtitle }) => {
           title="Enrolled"
           style={{
             position: "absolute",
-            backgroundColor: "white",
+            backgroundColor: theme.colors.background.level1,
             paddingHorizontal: 5,
             right: 5,
             top: 5,
