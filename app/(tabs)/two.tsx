@@ -1,10 +1,10 @@
 import React from "react";
-import QcmQuizTemplate from "../.../../../src/components/templates/QcmQuizTemplate";
+import LoginTemplate from "../../src/components/templates/LoginTemplate";
 
 interface PlanningProps {}
 
 const two: React.FC<PlanningProps> = () => {
-  return <QcmQuizTemplate />;
+  return <LoginTemplate />;
 };
 
 export default two;

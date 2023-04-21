@@ -11,7 +11,7 @@ export { ErrorBoundary } from "expo-router";
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "(tabs)",
+  initialRouteName: "index",
 };
 
 export default function RootLayout() {
@@ -53,6 +53,7 @@ function RootLayoutNav() {
           value={colorScheme === "dark" ? DefaultTheme : DefaultTheme}>
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="index" options={{ headerShown: false }} />
             <Stack.Screen name="modal" options={{ presentation: "modal" }} />
             <Stack.Screen name="course" options={{ headerShown: false }} />
             <Stack.Screen name="planning" options={{ headerShown: false }} />
