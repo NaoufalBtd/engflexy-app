@@ -19,6 +19,22 @@ interface LoginTemplateProps {}
 
 const LoginTemplate: React.FC<LoginTemplateProps> = () => {
   const [boxWidth, setBoxWidth] = useState(0);
+
+  const handleLogin = async () => {
+    console.log("Login");
+    const response = await fetch("http://192.168.0.106:3000/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: "admin",
+        password: "admin",
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
+  };
   return (
     <View
       height={"full"}
@@ -86,6 +102,7 @@ const LoginTemplate: React.FC<LoginTemplateProps> = () => {
           </HStack>
           <Box width={"full"}>
             <Button
+              onPress={handleLogin}
               borderRadius={"lg"}
               mx="auto"
               w={{ base: "3/4", md: "1/3" }}>
