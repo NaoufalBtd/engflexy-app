@@ -1,0 +1,408 @@
+[
+  {
+    "id": 28417,
+    "code": "Describe what you see",
+    "libelle": "Describe what you see",
+    "urlImage": "https://drive.google.com/uc?id=1bn5csIeleyXq2Ta88FBW8y1yXbGvj8TR",
+    "urlImage2": null,
+    "urlImage3": null,
+    "urlVideo": null,
+    "contenu": "\nWhat do you like more: a cinema or theatre? Why?    \nWhat was the last movie that you saw? Did you like it?          \nWhen did you go to the theatre last time? What kind of performance was that?      \nWas it good or bad? Why?       \n",
+    "questions": null,
+    "indicationProf": null,
+    "numeroOrder": 1,
+    "categorieSection": {
+      "id": 1,
+      "libelle": "Warm up",
+      "code": "Warm up",
+      "numeroOrder": 1,
+      "superCategorieSection": {
+        "id": 159,
+        "code": "Obligatory",
+        "libelle": "Obligatory"
+      }
+    },
+    "cours": {
+      "id": 25001,
+      "description": null,
+      "image": null,
+      "libelle": "Intro lesson",
+      "code": null,
+      "etatCours": null,
+      "parcours": {
+        "id": 25000,
+        "datePublication": null,
+        "dateCreation": null,
+        "description": null,
+        "libelle": "4 UPPER INTERMEDIATE",
+        "code": "4 UPPER INTERMEDIATE",
+        "numeroOrder": 0,
+        "nombreCours": 51,
+        "centre": {
+          "id": 83,
+          "libelle": "American Center 1",
+          "description": null,
+          "log": null,
+          "password": null,
+          "ref": "a1"
+        }
+      },
+      "nombreSectionFinalise": 4,
+      "nombreSectionEnCours": 3,
+      "nombreLinkEnCours": 2,
+      "nombreLinkFinalise": 5,
+      "numeroOrder": 0
+    },
+    "url": 1,
+    "content": 1,
+    "sessionCours": null
+  },
+  {
+    "id": 35167,
+    "code": null,
+    "libelle": "Vocabulary",
+    "urlImage": null,
+    "urlImage2": null,
+    "urlImage3": null,
+    "urlVideo": null,
+    "contenu": null,
+    "questions": null,
+    "indicationProf": null,
+    "numeroOrder": 3,
+    "categorieSection": {
+      "id": 8,
+      "libelle": "Vocabulary",
+      "code": "Vocabulary",
+      "numeroOrder": 3,
+      "superCategorieSection": {
+        "id": 159,
+        "code": "Obligatory",
+        "libelle": "Obligatory"
+      }
+    },
+    "cours": {
+      "id": 25001,
+      "description": null,
+      "image": null,
+      "libelle": "Intro lesson",
+      "code": null,
+      "etatCours": null,
+      "parcours": {
+        "id": 25000,
+        "datePublication": null,
+        "dateCreation": null,
+        "description": null,
+        "libelle": "4 UPPER INTERMEDIATE",
+        "code": "4 UPPER INTERMEDIATE",
+        "numeroOrder": 0,
+        "nombreCours": 51,
+        "centre": {
+          "id": 83,
+          "libelle": "American Center 1",
+          "description": null,
+          "log": null,
+          "password": null,
+          "ref": "a1"
+        }
+      },
+      "nombreSectionFinalise": 4,
+      "nombreSectionEnCours": 3,
+      "nombreLinkEnCours": 2,
+      "nombreLinkFinalise": 5,
+      "numeroOrder": 0
+    },
+    "url": 0,
+    "content": 0,
+    "sessionCours": null
+  },
+  {
+    "id": 25204,
+    "code": "Study the information",
+    "libelle": "Study the information",
+    "urlImage": "https://drive.google.com/uc?export=view&id=1HaK5NA16sxqieUIJiDXSEwjNFqWNUN_A",
+    "urlImage2": null,
+    "urlImage3": null,
+    "urlVideo": null,
+    "contenu": "He has been limping for two weeks already. \nI was working at the same moment yesterday and I am working now. \nI will be working tomorrow at the same time. \nI will have finished my work by midday.\nI will be really happy then!\nI will have been working for 5 hours by midday.  \nI was tired yesterday. I had been doing shopping for the whole day. ",
+    "questions": null,
+    "indicationProf": null,
+    "numeroOrder": 4,
+    "categorieSection": {
+      "id": 2,
+      "libelle": "Get to know",
+      "code": "Get to know",
+      "numeroOrder": 4,
+      "superCategorieSection": {
+        "id": 159,
+        "code": "Obligatory",
+        "libelle": "Obligatory"
+      }
+    },
+    "cours": {
+      "id": 25001,
+      "description": null,
+      "image": null,
+      "libelle": "Intro lesson",
+      "code": null,
+      "etatCours": null,
+      "parcours": {
+        "id": 25000,
+        "datePublication": null,
+        "dateCreation": null,
+        "description": null,
+        "libelle": "4 UPPER INTERMEDIATE",
+        "code": "4 UPPER INTERMEDIATE",
+        "numeroOrder": 0,
+        "nombreCours": 51,
+        "centre": {
+          "id": 83,
+          "libelle": "American Center 1",
+          "description": null,
+          "log": null,
+          "password": null,
+          "ref": "a1"
+        }
+      },
+      "nombreSectionFinalise": 4,
+      "nombreSectionEnCours": 3,
+      "nombreLinkEnCours": 2,
+      "nombreLinkFinalise": 5,
+      "numeroOrder": 0
+    },
+    "url": 1,
+    "content": 1,
+    "sessionCours": null
+  },
+  {
+    "id": 25254,
+    "code": "Let's practice",
+    "libelle": "Let's practice",
+    "urlImage": null,
+    "urlImage2": null,
+    "urlImage3": null,
+    "urlVideo": null,
+    "contenu": null,
+    "questions": null,
+    "indicationProf": null,
+    "numeroOrder": 5,
+    "categorieSection": {
+      "id": 6,
+      "libelle": "Let's practice",
+      "code": "Let's practice",
+      "numeroOrder": 5,
+      "superCategorieSection": {
+        "id": 159,
+        "code": "Obligatory",
+        "libelle": "Obligatory"
+      }
+    },
+    "cours": {
+      "id": 25001,
+      "description": null,
+      "image": null,
+      "libelle": "Intro lesson",
+      "code": null,
+      "etatCours": null,
+      "parcours": {
+        "id": 25000,
+        "datePublication": null,
+        "dateCreation": null,
+        "description": null,
+        "libelle": "4 UPPER INTERMEDIATE",
+        "code": "4 UPPER INTERMEDIATE",
+        "numeroOrder": 0,
+        "nombreCours": 51,
+        "centre": {
+          "id": 83,
+          "libelle": "American Center 1",
+          "description": null,
+          "log": null,
+          "password": null,
+          "ref": "a1"
+        }
+      },
+      "nombreSectionFinalise": 4,
+      "nombreSectionEnCours": 3,
+      "nombreLinkEnCours": 2,
+      "nombreLinkFinalise": 5,
+      "numeroOrder": 0
+    },
+    "url": 0,
+    "content": 0,
+    "sessionCours": null
+  },
+  {
+    "id": 25002,
+    "code": "Time to talk",
+    "libelle": "Time to talk",
+    "urlImage": "https://drive.google.com/uc?id=1hQAAV2UY6z4OijpxS6j3DoaL05fqi8Ge",
+    "urlImage2": null,
+    "urlImage3": null,
+    "urlVideo": null,
+    "contenu": "\n1. Do you have any hobbies? Describe them, please. \n2. How often do you visit other countries? \n3. What are your favorite ones? \n4. Who do you love traveling with? \n5. What do you usually do on vacation? \n6. Do you travel to hot countries in winter and cold ones in summer? \n7. Where is your dream city or place located? \n8. Is there a place you would never go to? Why? \n9. Name three most popular vacation destinations for the people of your country. \n10. Have you had your vacation this year yet? If not, what are the plans?\n",
+    "questions": null,
+    "indicationProf": null,
+    "numeroOrder": 6,
+    "categorieSection": {
+      "id": 3,
+      "libelle": "Discussion",
+      "code": "Discussion",
+      "numeroOrder": 6,
+      "superCategorieSection": {
+        "id": 159,
+        "code": "Obligatory",
+        "libelle": "Obligatory"
+      }
+    },
+    "cours": {
+      "id": 25001,
+      "description": null,
+      "image": null,
+      "libelle": "Intro lesson",
+      "code": null,
+      "etatCours": null,
+      "parcours": {
+        "id": 25000,
+        "datePublication": null,
+        "dateCreation": null,
+        "description": null,
+        "libelle": "4 UPPER INTERMEDIATE",
+        "code": "4 UPPER INTERMEDIATE",
+        "numeroOrder": 0,
+        "nombreCours": 51,
+        "centre": {
+          "id": 83,
+          "libelle": "American Center 1",
+          "description": null,
+          "log": null,
+          "password": null,
+          "ref": "a1"
+        }
+      },
+      "nombreSectionFinalise": 4,
+      "nombreSectionEnCours": 3,
+      "nombreLinkEnCours": 2,
+      "nombreLinkFinalise": 5,
+      "numeroOrder": 0
+    },
+    "url": 1,
+    "content": 1,
+    "sessionCours": null
+  },
+  {
+    "id": 28014,
+    "code": null,
+    "libelle": "Life Story",
+    "urlImage": null,
+    "urlImage2": null,
+    "urlImage3": null,
+    "urlVideo": "https://www.youtube.com/watch?v=3PyrgGTFp0E",
+    "contenu": null,
+    "questions": null,
+    "indicationProf": null,
+    "numeroOrder": 8,
+    "categorieSection": {
+      "id": 4,
+      "libelle": "Life Story",
+      "code": "Life Story",
+      "numeroOrder": 8,
+      "superCategorieSection": {
+        "id": 160,
+        "code": "Additional",
+        "libelle": "Additional"
+      }
+    },
+    "cours": {
+      "id": 25001,
+      "description": null,
+      "image": null,
+      "libelle": "Intro lesson",
+      "code": null,
+      "etatCours": null,
+      "parcours": {
+        "id": 25000,
+        "datePublication": null,
+        "dateCreation": null,
+        "description": null,
+        "libelle": "4 UPPER INTERMEDIATE",
+        "code": "4 UPPER INTERMEDIATE",
+        "numeroOrder": 0,
+        "nombreCours": 51,
+        "centre": {
+          "id": 83,
+          "libelle": "American Center 1",
+          "description": null,
+          "log": null,
+          "password": null,
+          "ref": "a1"
+        }
+      },
+      "nombreSectionFinalise": 4,
+      "nombreSectionEnCours": 3,
+      "nombreLinkEnCours": 2,
+      "nombreLinkFinalise": 5,
+      "numeroOrder": 0
+    },
+    "url": 1,
+    "content": 0,
+    "sessionCours": null
+  },
+  {
+    "id": 25151,
+    "code": "Let’s have fun",
+    "libelle": "Let’s have fun",
+    "urlImage": "https://drive.google.com/uc?id=1jdB-dUc8Hr0vdSVP3S8TSaPRd_guV_nO&export=download",
+    "urlImage2": null,
+    "urlImage3": null,
+    "urlVideo": null,
+    "contenu": "\nMake a story about a guy who went to Mars and spent 10 years there. \nTry to provide as many details as you can using the following words:\n\ngood-natured\nfun-loving\napprehensive\nclassy\nhomesick\nmiraculous\nirreversible\nimmortal\noutgoing\ncold fish\n",
+    "questions": null,
+    "indicationProf": null,
+    "numeroOrder": 10,
+    "categorieSection": {
+      "id": 5,
+      "libelle": "Games",
+      "code": "Games",
+      "numeroOrder": 10,
+      "superCategorieSection": {
+        "id": 160,
+        "code": "Additional",
+        "libelle": "Additional"
+      }
+    },
+    "cours": {
+      "id": 25001,
+      "description": null,
+      "image": null,
+      "libelle": "Intro lesson",
+      "code": null,
+      "etatCours": null,
+      "parcours": {
+        "id": 25000,
+        "datePublication": null,
+        "dateCreation": null,
+        "description": null,
+        "libelle": "4 UPPER INTERMEDIATE",
+        "code": "4 UPPER INTERMEDIATE",
+        "numeroOrder": 0,
+        "nombreCours": 51,
+        "centre": {
+          "id": 83,
+          "libelle": "American Center 1",
+          "description": null,
+          "log": null,
+          "password": null,
+          "ref": "a1"
+        }
+      },
+      "nombreSectionFinalise": 4,
+      "nombreSectionEnCours": 3,
+      "nombreLinkEnCours": 2,
+      "nombreLinkFinalise": 5,
+      "numeroOrder": 0
+    },
+    "url": 1,
+    "content": 1,
+    "sessionCours": null
+  }
+]

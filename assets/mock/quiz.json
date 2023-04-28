@@ -1,0 +1,81 @@
+[
+  {
+    "id": 39094,
+    "ref": null,
+    "libelle": "The couple described how they @eat@ in the dining room when the explosion destroyed the hotel.",
+    "urlImg": null,
+    "urlVideo": null,
+    "numero": 1,
+    "pointReponseJuste": 1.0,
+    "pointReponsefausse": 0.0,
+    "typeDeQuestion": { "id": 6, "ref": "t6", "lib": "Write the correct form" },
+    "quiz": {
+      "id": 39093,
+      "ref": "quiz-31277",
+      "lib": "Let's practice",
+      "dateDebut": "2023-01-04T17:03:35.000+00:00",
+      "dateFin": "2023-01-04T17:03:35.000+00:00",
+      "section": {
+        "id": 31277,
+        "code": "Let's practice",
+        "libelle": "Let's practice",
+        "urlImage": null,
+        "urlImage2": null,
+        "urlImage3": null,
+        "urlVideo": null,
+        "contenu": null,
+        "questions": null,
+        "indicationProf": null,
+        "numeroOrder": 5,
+        "categorieSection": {
+          "id": 6,
+          "libelle": "Let's practice",
+          "code": "Let's practice",
+          "numeroOrder": 5,
+          "superCategorieSection": {
+            "id": 159,
+            "code": "Obligatory",
+            "libelle": "Obligatory"
+          }
+        },
+        "cours": {
+          "id": 31051,
+          "description": null,
+          "image": null,
+          "libelle": "Intro lesson",
+          "code": null,
+          "etatCours": null,
+          "parcours": {
+            "id": 31050,
+            "datePublication": null,
+            "dateCreation": null,
+            "description": null,
+            "libelle": "5 ADVANCED",
+            "code": "5 ADVANCED",
+            "numeroOrder": 0,
+            "nombreCours": 51,
+            "centre": {
+              "id": 83,
+              "libelle": "American Center 1",
+              "description": null,
+              "log": null,
+              "password": null,
+              "ref": "a1"
+            }
+          },
+          "nombreSectionFinalise": 4,
+          "nombreSectionEnCours": 2,
+          "nombreLinkEnCours": 2,
+          "nombreLinkFinalise": 4,
+          "numeroOrder": 0
+        },
+        "url": 0,
+        "content": 0,
+        "sessionCours": null
+      },
+      "numero": null,
+      "seuilReussite": null
+    },
+    "homeWork": null
+  }
+]

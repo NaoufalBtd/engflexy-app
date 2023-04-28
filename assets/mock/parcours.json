@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "datePublication": null,
+    "dateCreation": null,
+    "description": null,
+    "libelle": "1 ELEMENTARY",
+    "code": "1 ELEMENTRY",
+    "numeroOrder": 0,
+    "nombreCours": 51,
+    "centre": {
+      "id": 83,
+      "libelle": "American Center 1",
+      "description": null,
+      "log": null,
+      "password": null,
+      "ref": "a1"
+    }
+  },
+  {
+    "id": 5095,
+    "datePublication": null,
+    "dateCreation": null,
+    "description": null,
+    "libelle": "2 PRE INTERMEDIATE",
+    "code": "2 PRE INTERMEDIATE",
+    "numeroOrder": 0,
+    "nombreCours": 51,
+    "centre": {
+      "id": 83,
+      "libelle": "American Center 1",
+      "description": null,
+      "log": null,
+      "password": null,
+      "ref": "a1"
+    }
+  },
+  {
+    "id": 13000,
+    "datePublication": null,
+    "dateCreation": null,
+    "description": null,
+    "libelle": "3 INTERMEDIATE",
+    "code": "3 INTERMEDIATE",
+    "numeroOrder": 0,
+    "nombreCours": 51,
+    "centre": {
+      "id": 83,
+      "libelle": "American Center 1",
+      "description": null,
+      "log": null,
+      "password": null,
+      "ref": "a1"
+    }
+  },
+  {
+    "id": 25000,
+    "datePublication": null,
+    "dateCreation": null,
+    "description": null,
+    "libelle": "4 UPPER INTERMEDIATE",
+    "code": "4 UPPER INTERMEDIATE",
+    "numeroOrder": 0,
+    "nombreCours": 51,
+    "centre": {
+      "id": 83,
+      "libelle": "American Center 1",
+      "description": null,
+      "log": null,
+      "password": null,
+      "ref": "a1"
+    }
+  },
+  {
+    "id": 31050,
+    "datePublication": null,
+    "dateCreation": null,
+    "description": null,
+    "libelle": "5 ADVANCED",
+    "code": "5 ADVANCED",
+    "numeroOrder": 0,
+    "nombreCours": 51,
+    "centre": {
+      "id": 83,
+      "libelle": "American Center 1",
+      "description": null,
+      "log": null,
+      "password": null,
+      "ref": "a1"
+    }
+  }
+]
