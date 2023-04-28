@@ -1,4 +1,6 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { AxiosError } from "axios";
+import { useRouter } from "expo-router";
 import {
   Box,
   Button,
@@ -7,40 +9,66 @@ import {
   Icon,
   Input,
   Pressable,
+  ScrollView,
   Stack,
   Text,
-  View,
 } from "native-base";
 import React, { useState } from "react";
 import { SvgXml } from "react-native-svg";
 import login from "../../../assets/svg/login.svg";
+import { useAppDispatch } from "../../hooks/stateHooks";
+import { postFetcher } from "../../utils/serverUtils";
 
 interface LoginTemplateProps {}
 
 const LoginTemplate: React.FC<LoginTemplateProps> = () => {
   const [boxWidth, setBoxWidth] = useState(0);
+  const [screenHeight, setScreenHeight] = useState(0);
+  const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<null | string>(null);
+
+  const dispatch = useAppDispatch();
+  const route = useRouter();
 
   const handleLogin = async () => {
-    console.log("Login");
-    const response = await fetch("http://192.168.0.106:3000/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: "admin",
-        password: "admin",
-      }),
-    });
-    const data = await response.json();
-    console.log(data);
+    const url = "http://192.168.0.106:8036/etudiant/user/login";
+    try {
+      const res = await postFetcher<{
+        token: string;
+      }>(url, {
+        username,
+        password,
+      });
+
+      dispatch({
+        type: login,
+        payload: {
+          username,
+          // token: res.data.token,
+        },
+      });
+      route.replace("/home");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        setError(error.response?.data.message);
+      }
+    }
   };
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
-    <View
-      height={"full"}
+    <ScrollView
+      flex={1}
+      height={screenHeight}
       bgColor={"background.surface"}
       onLayout={(evt) => {
         setBoxWidth(evt.nativeEvent.layout.width);
+        setScreenHeight(evt.nativeEvent.layout.height);
       }}>
       <Box mt="10" />
       <Box>
@@ -59,20 +87,15 @@ const LoginTemplate: React.FC<LoginTemplateProps> = () => {
         <Stack space={4} alignItems={"center"}>
           <Input
             variant="filled"
-            // borderColor={"muted.400"}
-            placeholderTextColor={"muted.400"}
+            value={username}
+            onChangeText={setUsername}
+            // placeholderTextColor={"muted.400"}
             w={{
               base: "75%",
               md: "25%",
             }}
             InputLeftElement={
-              <Icon
-                as={FontAwesome}
-                name="user"
-                size={5}
-                ml="2"
-                color="muted.400"
-              />
+              <Icon as={FontAwesome} name="user" size={5} ml="2" />
             }
             placeholder="Name"
           />
@@ -82,12 +105,14 @@ const LoginTemplate: React.FC<LoginTemplateProps> = () => {
               base: "75%",
               md: "25%",
             }}
-            type={true ? "text" : "password"}
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChangeText={setPassword}
             InputRightElement={
-              <Pressable onPress={() => console.log("ok")}>
+              <Pressable onPress={togglePassword}>
                 <Icon
                   as={FontAwesome}
-                  name="eye"
+                  name={showPassword ? "eye" : "eye-slash"}
                   size={5}
                   mr="2"
                   color="muted.400"
@@ -117,7 +142,7 @@ const LoginTemplate: React.FC<LoginTemplateProps> = () => {
           </Box>
         </Stack>
       </Box>
-    </View>
+    </ScrollView>
   );
 };
 

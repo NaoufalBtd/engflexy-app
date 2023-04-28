@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import { Box, Button, Heading, Text, View } from "native-base";
 import React, { useEffect } from "react";
 import Animated, {
@@ -19,6 +20,8 @@ const WelcomeTemplates: React.FC<WelcomeTemplatesProps> = () => {
   const [scrollIdx, setScrollIdx] = React.useState(0);
   const carouselRef = React.useRef<ICarouselInstance>(null);
 
+  const route = useRouter();
+
   const content = [
     {
       title: "Discover all the best recipes you needed",
@@ -39,6 +42,7 @@ const WelcomeTemplates: React.FC<WelcomeTemplatesProps> = () => {
     const currentIndex = carouselRef.current?.getCurrentIndex();
     if (carouselRef.current?.getCurrentIndex() === content.length - 1) {
       console.log("Get Started");
+      route.replace("/(tabs)/home");
       return;
     }
     carouselRef.current?.next();

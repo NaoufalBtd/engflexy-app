@@ -5,13 +5,16 @@ import { SplashScreen, Stack } from "expo-router";
 import { NativeBaseProvider } from "native-base";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
+import { Provider as ReduxProvider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor, store } from "../src/store";
 import nativeBaseTheme from "../src/theme";
 
 export { ErrorBoundary } from "expo-router";
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "index",
+  initialRouteName: "(tabs)",
 };
 
 export default function RootLayout() {
@@ -48,18 +51,33 @@ function RootLayoutNav() {
 
   return (
     <>
-      <NativeBaseProvider theme={nativeBaseTheme}>
-        <ThemeProvider
-          value={colorScheme === "dark" ? DefaultTheme : DefaultTheme}>
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="index" options={{ headerShown: false }} />
-            <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-            <Stack.Screen name="course" options={{ headerShown: false }} />
-            <Stack.Screen name="planning" options={{ headerShown: false }} />
-          </Stack>
-        </ThemeProvider>
-      </NativeBaseProvider>
+      <ReduxProvider store={store}>
+        <PersistGate persistor={persistor} loading={null}>
+          <NativeBaseProvider theme={nativeBaseTheme}>
+            <ThemeProvider
+              value={colorScheme === "dark" ? DefaultTheme : DefaultTheme}>
+              <Stack>
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                {/* <Stack.Screen name="index" options={{ headerShown: false }} /> */}
+                <Stack.Screen
+                  name="modal"
+                  options={{ presentation: "modal" }}
+                />
+                <Stack.Screen name="course" options={{ headerShown: false }} />
+                <Stack.Screen
+                  name="lessonsList"
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen name="lesson" options={{ headerShown: false }} />
+                <Stack.Screen
+                  name="planning"
+                  options={{ headerShown: false }}
+                />
+              </Stack>
+            </ThemeProvider>
+          </NativeBaseProvider>
+        </PersistGate>
+      </ReduxProvider>
     </>
   );
 }
