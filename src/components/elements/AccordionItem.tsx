@@ -2,6 +2,8 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Box, Collapse, Heading } from "native-base";
 import React, { useState } from "react";
 import { TouchableOpacity } from "react-native";
+import { useAppTheme } from "../../theme";
+import { alpha } from "../../utils/uiUtils";
 
 interface AccordionItemProps {
   children: React.ReactNode;
@@ -15,6 +17,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
   title,
 }) => {
   const [open, setOpen] = useState(!!isOpen);
+  const { colors } = useAppTheme();
 
   const toggleOpen = () => {
     setOpen(!open);
@@ -33,7 +36,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
         </Box>
       </TouchableOpacity>
       <Collapse isOpen={open}>
-        <Box bgColor={"background.body"} p={3}>
+        <Box bgColor={alpha(colors.background.body, 0.6)} p={3}>
           {children}
         </Box>
       </Collapse>

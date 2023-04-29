@@ -31,7 +31,7 @@ const VocBox: React.FC<VocBoxProps> = ({
         <HStack alignItems={"center"} space={1}>
           <Text fontSize="md">[{ipa}]</Text>
           <Heading>{word}</Heading>
-          <Listen />{" "}
+          <Listen />
         </HStack>
         <Heading textAlign="center" color="text.500">
           {wordInArabic}

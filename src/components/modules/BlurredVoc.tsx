@@ -1,8 +1,9 @@
 import { BlurView } from "expo-blur";
-import { Image } from "expo-image";
-import { Box, Heading } from "native-base";
+import { Box, HStack, Heading, Image } from "native-base";
 import React from "react";
 import { StyleSheet } from "react-native";
+import { useAppTheme } from "../../theme";
+import { alpha } from "../../utils/uiUtils";
 import Listen from "../elements/Listen";
 
 interface BlurredVocProps {
@@ -12,16 +13,26 @@ interface BlurredVocProps {
 }
 
 const BlurredVoc: React.FC<BlurredVocProps> = ({ imageUri, ipa, word }) => {
+  const { colors } = useAppTheme();
   return (
-    <Box py={3} borderColor={"white"} borderWidth={1}>
-      <Image style={styles.image} source={{ uri: imageUri }} />
-      <BlurView intensity={100} style={styles.blurContainer}>
-        <Box>
-          <Box>
+    <Box borderColor={"white"} borderWidth={1} height={350}>
+      <Image
+        style={styles.image}
+        alt="blurred vocabulary image"
+        source={{ uri: imageUri }}
+      />
+      <BlurView tint="dark" intensity={100} style={styles.blurContainer}>
+        <Box
+          p="5"
+          borderRadius={"xl"}
+          bgColor={alpha(colors.background.level1, 0.5)}>
+          <HStack space={4} alignItems={"center"}>
             <Heading>[{ipa}]</Heading>
             <Listen />
-          </Box>
-          <Heading>{word}</Heading>
+          </HStack>
+          <Heading textAlign={"center"} fontSize={"3xl"}>
+            {word}
+          </Heading>
         </Box>
       </BlurView>
     </Box>
