@@ -3,14 +3,14 @@ import React from "react";
 import Listen from "../elements/Listen";
 
 interface VocBoxProps {
-  ipa: string;
+  transcription: string;
   word: string;
   imageUri: string;
   wordInArabic: string;
 }
 
 const VocBox: React.FC<VocBoxProps> = ({
-  ipa,
+  transcription,
   word,
   imageUri,
   wordInArabic,
@@ -28,11 +28,13 @@ const VocBox: React.FC<VocBoxProps> = ({
       mx={"auto"}
       my="3">
       <Box>
+        <Box mx={"auto"}></Box>
         <HStack alignItems={"center"} space={1}>
-          <Text fontSize="md">[{ipa}]</Text>
-          <Heading>{word}</Heading>
+          <Text fontSize="md">{transcription}</Text>
           <Listen />
         </HStack>
+        <Heading>{word}</Heading>
+
         <Heading textAlign="center" color="text.500">
           {wordInArabic}
         </Heading>

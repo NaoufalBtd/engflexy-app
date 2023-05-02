@@ -2,29 +2,44 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {
   Box,
   Button,
-  Center,
+  Divider,
   HStack,
   Heading,
   Icon,
   Progress,
   ScrollView,
   Text,
+  View,
 } from "native-base";
-import React from "react";
+import React, { useState } from "react";
+import vocData from "../../../../assets/mock/voc.json";
+import { Lesson } from "../../../types/models/lessonsModel";
+import { calculatePercentage, isLastIndex } from "../../../utils";
 import AccordionItem from "../../elements/AccordionItem";
 import BlurredVoc from "../../modules/BlurredVoc";
 import VocBox from "../../modules/VocBox";
 
-interface learnWordsProps {}
+interface learnWordsProps {
+  lesson: Lesson;
+}
 
-const VocabularyTemplate: React.FC<learnWordsProps> = () => {
-  const [isFlipped, setIsFlipped] = React.useState(false);
+const VocabularyTemplate: React.FC<learnWordsProps> = ({ lesson }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [index, setIndex] = useState(0);
+  const vocsNumber = vocData.length;
+  const currentVoc = vocData[index];
+  // const quizId  = lesson.id;
+  //todo getData from backend https://engflexy.ma/app/admin/sectionItem/sectionId/${quizId}
 
   const handleFlip = () => {
     setIsFlipped(true);
   };
+  const handleNextVoc = () => {
+    setIsFlipped(false);
+    setIndex(index + 1);
+  };
   return (
-    <ScrollView>
+    <View>
       <Box>
         {/* Header progress bar */}
         <Box
@@ -37,58 +52,66 @@ const VocabularyTemplate: React.FC<learnWordsProps> = () => {
           justifyContent={"space-between"}>
           <Box w="3/4" mx="auto">
             <Heading textAlign="center" fontStyle="italic" color="primary.400">
-              10 in row
+              {index} in row
             </Heading>
-            <Progress size="md" colorScheme={"primary"} value={66} />
+            <Progress
+              size="md"
+              colorScheme={"primary"}
+              value={calculatePercentage(index, vocsNumber)}
+            />
           </Box>
         </Box>
       </Box>
       {isFlipped ? (
         <Box>
-          <Center>
-            <VocBox
-              ipa="klɒɡ"
-              word="Word"
-              imageUri="https://wallpaperaccess.com/full/317501.jpg"
-              wordInArabic="كلمة"
-            />
+          <Box bg="background.surface" py={3} rounded="2xl">
+            <ScrollView>
+              <VocBox
+                transcription={currentVoc.transcription}
+                word={currentVoc.response}
+                imageUri={currentVoc.imageUrl}
+                wordInArabic={currentVoc.translation}
+              />
 
-            <Box borderRadius={10} bgColor={"primary.700"}>
-              <AccordionItem title="Explanation" isOpen>
-                <Text>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Ipsam magnam assumenda fugiat natus quae nisi amet tempora
-                  voluptates, perspiciatis quod deleniti exercitationem, vitae
-                  minima dicta atque officiis dolore deserunt consequatur.
-                </Text>
-              </AccordionItem>
+              <Box borderRadius={10} bgColor={"primary.700"}>
+                <AccordionItem title="Explanation" isOpen>
+                  <Text>{currentVoc.explanation}</Text>
+                </AccordionItem>
 
-              <AccordionItem title="Example">
-                <Text>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Ipsam magnam assumenda fugiat natus quae nisi amet tempora
-                  voluptates, perspiciatis quod deleniti exercitationem, vitae
-                  minima dicta atque officiis dolore deserunt consequatur.
-                </Text>
-              </AccordionItem>
+                <AccordionItem title="Example">
+                  <Text>{currentVoc.example}</Text>
+                </AccordionItem>
 
-              <AccordionItem title="Synonyms">
-                <Box flexDir={"row"}>
-                  <Box flexDir={"row"}>
-                    <Text mr="1">Word</Text>
-                    <FontAwesome name="volume-up" size={24} color="black" />
+                <AccordionItem title="Synonyms">
+                  <Box flexDir={"row"} flexWrap={"wrap"}>
+                    {currentVoc.synonyms.map((synonym, index) => (
+                      <Box key={synonym} flexDir={"row"}>
+                        <Text mr="1">{synonym}</Text>
+                        <FontAwesome name="volume-up" size={24} color="black" />
+                        <Divider orientation="vertical" mx={2} />
+                      </Box>
+                    ))}
                   </Box>
-                </Box>
-              </AccordionItem>
-            </Box>
-          </Center>
+                </AccordionItem>
+              </Box>
+            </ScrollView>
+          </Box>
+          {!isLastIndex(vocData, index) && (
+            <Button
+              variant={"outline"}
+              onPress={handleNextVoc}
+              rounded={"lg"}
+              my={4}>
+              <Text fontSize={"lg"}>Next</Text>
+            </Button>
+          )}
         </Box>
       ) : (
         <Box px={5} justifyContent={"center"}>
           <BlurredVoc
-            ipa="klɒɡ"
-            word="Word"
-            imageUri="https://wallpaperaccess.com/full/317501.jpg"
+            transcription={currentVoc.transcription}
+            word={currentVoc.response}
+            imageUri={currentVoc.imageUrl}
           />
           <Box width={"full"} my={3} alignItems={"center"}>
             <Button px="5" py="4" onPress={handleFlip}>
@@ -101,7 +124,7 @@ const VocabularyTemplate: React.FC<learnWordsProps> = () => {
         </Box>
       )}
       {/* <LessonStagger /> */}
-    </ScrollView>
+    </View>
   );
 };
 

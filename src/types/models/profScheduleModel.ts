@@ -1,4 +1,4 @@
-type ProdSchedule = {
+export type ProfSchedule = {
   id: number;
   subject: string;
   startTime: string;

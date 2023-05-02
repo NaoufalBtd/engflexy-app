@@ -1,22 +1,26 @@
 [
   {
-    "id": 39094,
+    "id": 13298,
     "ref": null,
-    "libelle": "The couple described how they @eat@ in the dining room when the explosion destroyed the hotel.",
+    "libelle": "..... you admire me if I become a spaceman?",
     "urlImg": null,
-    "urlVideo": null,
+    "urlVideo": null2020,
     "numero": 1,
     "pointReponseJuste": 1.0,
     "pointReponsefausse": 0.0,
-    "typeDeQuestion": { "id": 6, "ref": "t6", "lib": "Write the correct form" },
+    "typeDeQuestion": {
+      "id": 1,
+      "ref": "t1",
+      "lib": "Choose the correct alternative"
+    },
     "quiz": {
-      "id": 39093,
-      "ref": "quiz-31277",
+      "id": 13297,
+      "ref": "quiz-13296",
       "lib": "Let's practice",
-      "dateDebut": "2023-01-04T17:03:35.000+00:00",
-      "dateFin": "2023-01-04T17:03:35.000+00:00",
+      "dateDebut": "2022-11-05T23:00:00.000+00:00",
+      "dateFin": null,
       "section": {
-        "id": 31277,
+        "id": 13296,
         "code": "Let's practice",
         "libelle": "Let's practice",
         "urlImage": null,
@@ -39,19 +43,19 @@
           }
         },
         "cours": {
-          "id": 31051,
+          "id": 13003,
           "description": null,
           "image": null,
-          "libelle": "Intro lesson",
+          "libelle": "1 Likes and Dislikes",
           "code": null,
           "etatCours": null,
           "parcours": {
-            "id": 31050,
+            "id": 13000,
             "datePublication": null,
             "dateCreation": null,
             "description": null,
-            "libelle": "5 ADVANCED",
-            "code": "5 ADVANCED",
+            "libelle": "3 INTERMEDIATE",
+            "code": "3 INTERMEDIATE",
             "numeroOrder": 0,
             "nombreCours": 51,
             "centre": {
@@ -64,10 +68,1132 @@
             }
           },
           "nombreSectionFinalise": 4,
-          "nombreSectionEnCours": 2,
-          "nombreLinkEnCours": 2,
-          "nombreLinkFinalise": 4,
-          "numeroOrder": 0
+          "nombreSectionEnCours": 4,
+          "nombreLinkEnCours": 3,
+          "nombreLinkFinalise": 5,
+          "numeroOrder": 1
+        },
+        "url": 0,
+        "content": 0,
+        "sessionCours": null
+      },
+      "numero": null,
+      "seuilReussite": null
+    },
+    "homeWork": null
+  },
+  {
+    "id": 13302,
+    "ref": null,
+    "libelle": "Carol ..... believable stories.",
+    "urlImg": null,
+    "urlVideo": null,
+    "numero": 2,
+    "pointReponseJuste": 1.0,
+    "pointReponsefausse": 0.0,
+    "typeDeQuestion": {
+      "id": 1,
+      "ref": "t1",
+      "lib": "Choose the correct alternative"
+    },
+    "quiz": {
+      "id": 13297,
+      "ref": "quiz-13296",
+      "lib": "Let's practice",
+      "dateDebut": "2022-11-05T23:00:00.000+00:00",
+      "dateFin": null,
+      "section": {
+        "id": 13296,
+        "code": "Let's practice",
+        "libelle": "Let's practice",
+        "urlImage": null,
+        "urlImage2": null,
+        "urlImage3": null,
+        "urlVideo": null,
+        "contenu": null,
+        "questions": null,
+        "indicationProf": null,
+        "numeroOrder": 5,
+        "categorieSection": {
+          "id": 6,
+          "libelle": "Let's practice",
+          "code": "Let's practice",
+          "numeroOrder": 5,
+          "superCategorieSection": {
+            "id": 159,
+            "code": "Obligatory",
+            "libelle": "Obligatory"
+          }
+        },
+        "cours": {
+          "id": 13003,
+          "description": null,
+          "image": null,
+          "libelle": "1 Likes and Dislikes",
+          "code": null,
+          "etatCours": null,
+          "parcours": {
+            "id": 13000,
+            "datePublication": null,
+            "dateCreation": null,
+            "description": null,
+            "libelle": "3 INTERMEDIATE",
+            "code": "3 INTERMEDIATE",
+            "numeroOrder": 0,
+            "nombreCours": 51,
+            "centre": {
+              "id": 83,
+              "libelle": "American Center 1",
+              "description": null,
+              "log": null,
+              "password": null,
+              "ref": "a1"
+            }
+          },
+          "nombreSectionFinalise": 4,
+          "nombreSectionEnCours": 4,
+          "nombreLinkEnCours": 3,
+          "nombreLinkFinalise": 5,
+          "numeroOrder": 1
+        },
+        "url": 0,
+        "content": 0,
+        "sessionCours": null
+      },
+      "numero": null,
+      "seuilReussite": null
+    },
+    "homeWork": null
+  },
+  {
+    "id": 13306,
+    "ref": null,
+    "libelle": "She ..... highly keen on collecting stuffed animals last year.",
+    "urlImg": null,
+    "urlVideo": null,
+    "numero": 3,
+    "pointReponseJuste": 1.0,
+    "pointReponsefausse": 0.0,
+    "typeDeQuestion": {
+      "id": 1,
+      "ref": "t1",
+      "lib": "Choose the correct alternative"
+    },
+    "quiz": {
+      "id": 13297,
+      "ref": "quiz-13296",
+      "lib": "Let's practice",
+      "dateDebut": "2022-11-05T23:00:00.000+00:00",
+      "dateFin": null,
+      "section": {
+        "id": 13296,
+        "code": "Let's practice",
+        "libelle": "Let's practice",
+        "urlImage": null,
+        "urlImage2": null,
+        "urlImage3": null,
+        "urlVideo": null,
+        "contenu": null,
+        "questions": null,
+        "indicationProf": null,
+        "numeroOrder": 5,
+        "categorieSection": {
+          "id": 6,
+          "libelle": "Let's practice",
+          "code": "Let's practice",
+          "numeroOrder": 5,
+          "superCategorieSection": {
+            "id": 159,
+            "code": "Obligatory",
+            "libelle": "Obligatory"
+          }
+        },
+        "cours": {
+          "id": 13003,
+          "description": null,
+          "image": null,
+          "libelle": "1 Likes and Dislikes",
+          "code": null,
+          "etatCours": null,
+          "parcours": {
+            "id": 13000,
+            "datePublication": null,
+            "dateCreation": null,
+            "description": null,
+            "libelle": "3 INTERMEDIATE",
+            "code": "3 INTERMEDIATE",
+            "numeroOrder": 0,
+            "nombreCours": 51,
+            "centre": {
+              "id": 83,
+              "libelle": "American Center 1",
+              "description": null,
+              "log": null,
+              "password": null,
+              "ref": "a1"
+            }
+          },
+          "nombreSectionFinalise": 4,
+          "nombreSectionEnCours": 4,
+          "nombreLinkEnCours": 3,
+          "nombreLinkFinalise": 5,
+          "numeroOrder": 1
+        },
+        "url": 0,
+        "content": 0,
+        "sessionCours": null
+      },
+      "numero": null,
+      "seuilReussite": null
+    },
+    "homeWork": null
+  },
+  {
+    "id": 13310,
+    "ref": null,
+    "libelle": "I ..... a bestseller in hardcover a week ago.",
+    "urlImg": null,
+    "urlVideo": null,
+    "numero": 4,
+    "pointReponseJuste": 1.0,
+    "pointReponsefausse": 0.0,
+    "typeDeQuestion": {
+      "id": 1,
+      "ref": "t1",
+      "lib": "Choose the correct alternative"
+    },
+    "quiz": {
+      "id": 13297,
+      "ref": "quiz-13296",
+      "lib": "Let's practice",
+      "dateDebut": "2022-11-05T23:00:00.000+00:00",
+      "dateFin": null,
+      "section": {
+        "id": 13296,
+        "code": "Let's practice",
+        "libelle": "Let's practice",
+        "urlImage": null,
+        "urlImage2": null,
+        "urlImage3": null,
+        "urlVideo": null,
+        "contenu": null,
+        "questions": null,
+        "indicationProf": null,
+        "numeroOrder": 5,
+        "categorieSection": {
+          "id": 6,
+          "libelle": "Let's practice",
+          "code": "Let's practice",
+          "numeroOrder": 5,
+          "superCategorieSection": {
+            "id": 159,
+            "code": "Obligatory",
+            "libelle": "Obligatory"
+          }
+        },
+        "cours": {
+          "id": 13003,
+          "description": null,
+          "image": null,
+          "libelle": "1 Likes and Dislikes",
+          "code": null,
+          "etatCours": null,
+          "parcours": {
+            "id": 13000,
+            "datePublication": null,
+            "dateCreation": null,
+            "description": null,
+            "libelle": "3 INTERMEDIATE",
+            "code": "3 INTERMEDIATE",
+            "numeroOrder": 0,
+            "nombreCours": 51,
+            "centre": {
+              "id": 83,
+              "libelle": "American Center 1",
+              "description": null,
+              "log": null,
+              "password": null,
+              "ref": "a1"
+            }
+          },
+          "nombreSectionFinalise": 4,
+          "nombreSectionEnCours": 4,
+          "nombreLinkEnCours": 3,
+          "nombreLinkFinalise": 5,
+          "numeroOrder": 1
+        },
+        "url": 0,
+        "content": 0,
+        "sessionCours": null
+      },
+      "numero": null,
+      "seuilReussite": null
+    },
+    "homeWork": null
+  },
+  {
+    "id": 13316,
+    "ref": null,
+    "libelle": "  @you, loathe@ big fat spiders when you were a kid?",
+    "urlImg": null,
+    "urlVideo": null,
+    "numero": 5,
+    "pointReponseJuste": 1.0,
+    "pointReponsefausse": 0.0,
+    "typeDeQuestion": { "id": 6, "ref": "t6", "lib": "Write the correct form" },
+    "quiz": {
+      "id": 13297,
+      "ref": "quiz-13296",
+      "lib": "Let's practice",
+      "dateDebut": "2022-11-05T23:00:00.000+00:00",
+      "dateFin": null,
+      "section": {
+        "id": 13296,
+        "code": "Let's practice",
+        "libelle": "Let's practice",
+        "urlImage": null,
+        "urlImage2": null,
+        "urlImage3": null,
+        "urlVideo": null,
+        "contenu": null,
+        "questions": null,
+        "indicationProf": null,
+        "numeroOrder": 5,
+        "categorieSection": {
+          "id": 6,
+          "libelle": "Let's practice",
+          "code": "Let's practice",
+          "numeroOrder": 5,
+          "superCategorieSection": {
+            "id": 159,
+            "code": "Obligatory",
+            "libelle": "Obligatory"
+          }
+        },
+        "cours": {
+          "id": 13003,
+          "description": null,
+          "image": null,
+          "libelle": "1 Likes and Dislikes",
+          "code": null,
+          "etatCours": null,
+          "parcours": {
+            "id": 13000,
+            "datePublication": null,
+            "dateCreation": null,
+            "description": null,
+            "libelle": "3 INTERMEDIATE",
+            "code": "3 INTERMEDIATE",
+            "numeroOrder": 0,
+            "nombreCours": 51,
+            "centre": {
+              "id": 83,
+              "libelle": "American Center 1",
+              "description": null,
+              "log": null,
+              "password": null,
+              "ref": "a1"
+            }
+          },
+          "nombreSectionFinalise": 4,
+          "nombreSectionEnCours": 4,
+          "nombreLinkEnCours": 3,
+          "nombreLinkFinalise": 5,
+          "numeroOrder": 1
+        },
+        "url": 0,
+        "content": 0,
+        "sessionCours": null
+      },
+      "numero": null,
+      "seuilReussite": null
+    },
+    "homeWork": null
+  },
+  {
+    "id": 13322,
+    "ref": null,
+    "libelle": "I hope our son @don’t@ be too keen on computer games in a few years.",
+    "urlImg": null,
+    "urlVideo": null,
+    "numero": 6,
+    "pointReponseJuste": 1.0,
+    "pointReponsefausse": 0.0,
+    "typeDeQuestion": { "id": 4, "ref": "t4", "lib": "Correct the mistake" },
+    "quiz": {
+      "id": 13297,
+      "ref": "quiz-13296",
+      "lib": "Let's practice",
+      "dateDebut": "2022-11-05T23:00:00.000+00:00",
+      "dateFin": null,
+      "section": {
+        "id": 13296,
+        "code": "Let's practice",
+        "libelle": "Let's practice",
+        "urlImage": null,
+        "urlImage2": null,
+        "urlImage3": null,
+        "urlVideo": null,
+        "contenu": null,
+        "questions": null,
+        "indicationProf": null,
+        "numeroOrder": 5,
+        "categorieSection": {
+          "id": 6,
+          "libelle": "Let's practice",
+          "code": "Let's practice",
+          "numeroOrder": 5,
+          "superCategorieSection": {
+            "id": 159,
+            "code": "Obligatory",
+            "libelle": "Obligatory"
+          }
+        },
+        "cours": {
+          "id": 13003,
+          "description": null,
+          "image": null,
+          "libelle": "1 Likes and Dislikes",
+          "code": null,
+          "etatCours": null,
+          "parcours": {
+            "id": 13000,
+            "datePublication": null,
+            "dateCreation": null,
+            "description": null,
+            "libelle": "3 INTERMEDIATE",
+            "code": "3 INTERMEDIATE",
+            "numeroOrder": 0,
+            "nombreCours": 51,
+            "centre": {
+              "id": 83,
+              "libelle": "American Center 1",
+              "description": null,
+              "log": null,
+              "password": null,
+              "ref": "a1"
+            }
+          },
+          "nombreSectionFinalise": 4,
+          "nombreSectionEnCours": 4,
+          "nombreLinkEnCours": 3,
+          "nombreLinkFinalise": 5,
+          "numeroOrder": 1
+        },
+        "url": 0,
+        "content": 0,
+        "sessionCours": null
+      },
+      "numero": null,
+      "seuilReussite": null
+    },
+    "homeWork": null
+  },
+  {
+    "id": 13324,
+    "ref": null,
+    "libelle": "Dean’s stories aren’t always believable, but children @are loving@ them.",
+    "urlImg": null,
+    "urlVideo": null,
+    "numero": 7,
+    "pointReponseJuste": 1.0,
+    "pointReponsefausse": 0.0,
+    "typeDeQuestion": { "id": 4, "ref": "t4", "lib": "Correct the mistake" },
+    "quiz": {
+      "id": 13297,
+      "ref": "quiz-13296",
+      "lib": "Let's practice",
+      "dateDebut": "2022-11-05T23:00:00.000+00:00",
+      "dateFin": null,
+      "section": {
+        "id": 13296,
+        "code": "Let's practice",
+        "libelle": "Let's practice",
+        "urlImage": null,
+        "urlImage2": null,
+        "urlImage3": null,
+        "urlVideo": null,
+        "contenu": null,
+        "questions": null,
+        "indicationProf": null,
+        "numeroOrder": 5,
+        "categorieSection": {
+          "id": 6,
+          "libelle": "Let's practice",
+          "code": "Let's practice",
+          "numeroOrder": 5,
+          "superCategorieSection": {
+            "id": 159,
+            "code": "Obligatory",
+            "libelle": "Obligatory"
+          }
+        },
+        "cours": {
+          "id": 13003,
+          "description": null,
+          "image": null,
+          "libelle": "1 Likes and Dislikes",
+          "code": null,
+          "etatCours": null,
+          "parcours": {
+            "id": 13000,
+            "datePublication": null,
+            "dateCreation": null,
+            "description": null,
+            "libelle": "3 INTERMEDIATE",
+            "code": "3 INTERMEDIATE",
+            "numeroOrder": 0,
+            "nombreCours": 51,
+            "centre": {
+              "id": 83,
+              "libelle": "American Center 1",
+              "description": null,
+              "log": null,
+              "password": null,
+              "ref": "a1"
+            }
+          },
+          "nombreSectionFinalise": 4,
+          "nombreSectionEnCours": 4,
+          "nombreLinkEnCours": 3,
+          "nombreLinkFinalise": 5,
+          "numeroOrder": 1
+        },
+        "url": 0,
+        "content": 0,
+        "sessionCours": null
+      },
+      "numero": null,
+      "seuilReussite": null
+    },
+    "homeWork": null
+  },
+  {
+    "id": 13326,
+    "ref": null,
+    "libelle": "Usually, Selena doesn’t @carries@ hardcovers with her, because they’re too heavy.",
+    "urlImg": null,
+    "urlVideo": null,
+    "numero": 8,
+    "pointReponseJuste": 1.0,
+    "pointReponsefausse": 0.0,
+    "typeDeQuestion": { "id": 4, "ref": "t4", "lib": "Correct the mistake" },
+    "quiz": {
+      "id": 13297,
+      "ref": "quiz-13296",
+      "lib": "Let's practice",
+      "dateDebut": "2022-11-05T23:00:00.000+00:00",
+      "dateFin": null,
+      "section": {
+        "id": 13296,
+        "code": "Let's practice",
+        "libelle": "Let's practice",
+        "urlImage": null,
+        "urlImage2": null,
+        "urlImage3": null,
+        "urlVideo": null,
+        "contenu": null,
+        "questions": null,
+        "indicationProf": null,
+        "numeroOrder": 5,
+        "categorieSection": {
+          "id": 6,
+          "libelle": "Let's practice",
+          "code": "Let's practice",
+          "numeroOrder": 5,
+          "superCategorieSection": {
+            "id": 159,
+            "code": "Obligatory",
+            "libelle": "Obligatory"
+          }
+        },
+        "cours": {
+          "id": 13003,
+          "description": null,
+          "image": null,
+          "libelle": "1 Likes and Dislikes",
+          "code": null,
+          "etatCours": null,
+          "parcours": {
+            "id": 13000,
+            "datePublication": null,
+            "dateCreation": null,
+            "description": null,
+            "libelle": "3 INTERMEDIATE",
+            "code": "3 INTERMEDIATE",
+            "numeroOrder": 0,
+            "nombreCours": 51,
+            "centre": {
+              "id": 83,
+              "libelle": "American Center 1",
+              "description": null,
+              "log": null,
+              "password": null,
+              "ref": "a1"
+            }
+          },
+          "nombreSectionFinalise": 4,
+          "nombreSectionEnCours": 4,
+          "nombreLinkEnCours": 3,
+          "nombreLinkFinalise": 5,
+          "numeroOrder": 1
+        },
+        "url": 0,
+        "content": 0,
+        "sessionCours": null
+      },
+      "numero": null,
+      "seuilReussite": null
+    },
+    "homeWork": null
+  },
+  {
+    "id": 13328,
+    "ref": null,
+    "libelle": "  I @not detest@ you even if you become a sales rep.",
+    "urlImg": null,
+    "urlVideo": null,
+    "numero": 9,
+    "pointReponseJuste": 1.0,
+    "pointReponsefausse": 0.0,
+    "typeDeQuestion": { "id": 6, "ref": "t6", "lib": "Write the correct form" },
+    "quiz": {
+      "id": 13297,
+      "ref": "quiz-13296",
+      "lib": "Let's practice",
+      "dateDebut": "2022-11-05T23:00:00.000+00:00",
+      "dateFin": null,
+      "section": {
+        "id": 13296,
+        "code": "Let's practice",
+        "libelle": "Let's practice",
+        "urlImage": null,
+        "urlImage2": null,
+        "urlImage3": null,
+        "urlVideo": null,
+        "contenu": null,
+        "questions": null,
+        "indicationProf": null,
+        "numeroOrder": 5,
+        "categorieSection": {
+          "id": 6,
+          "libelle": "Let's practice",
+          "code": "Let's practice",
+          "numeroOrder": 5,
+          "superCategorieSection": {
+            "id": 159,
+            "code": "Obligatory",
+            "libelle": "Obligatory"
+          }
+        },
+        "cours": {
+          "id": 13003,
+          "description": null,
+          "image": null,
+          "libelle": "1 Likes and Dislikes",
+          "code": null,
+          "etatCours": null,
+          "parcours": {
+            "id": 13000,
+            "datePublication": null,
+            "dateCreation": null,
+            "description": null,
+            "libelle": "3 INTERMEDIATE",
+            "code": "3 INTERMEDIATE",
+            "numeroOrder": 0,
+            "nombreCours": 51,
+            "centre": {
+              "id": 83,
+              "libelle": "American Center 1",
+              "description": null,
+              "log": null,
+              "password": null,
+              "ref": "a1"
+            }
+          },
+          "nombreSectionFinalise": 4,
+          "nombreSectionEnCours": 4,
+          "nombreLinkEnCours": 3,
+          "nombreLinkFinalise": 5,
+          "numeroOrder": 1
+        },
+        "url": 0,
+        "content": 0,
+        "sessionCours": null
+      },
+      "numero": null,
+      "seuilReussite": null
+    },
+    "homeWork": null
+  },
+  {
+    "id": 13330,
+    "ref": null,
+    "libelle": "For some reason, our parents @did@ highly excited yesterday.",
+    "urlImg": null,
+    "urlVideo": null,
+    "numero": 10,
+    "pointReponseJuste": 1.0,
+    "pointReponsefausse": 0.0,
+    "typeDeQuestion": { "id": 4, "ref": "t4", "lib": "Correct the mistake" },
+    "quiz": {
+      "id": 13297,
+      "ref": "quiz-13296",
+      "lib": "Let's practice",
+      "dateDebut": "2022-11-05T23:00:00.000+00:00",
+      "dateFin": null,
+      "section": {
+        "id": 13296,
+        "code": "Let's practice",
+        "libelle": "Let's practice",
+        "urlImage": null,
+        "urlImage2": null,
+        "urlImage3": null,
+        "urlVideo": null,
+        "contenu": null,
+        "questions": null,
+        "indicationProf": null,
+        "numeroOrder": 5,
+        "categorieSection": {
+          "id": 6,
+          "libelle": "Let's practice",
+          "code": "Let's practice",
+          "numeroOrder": 5,
+          "superCategorieSection": {
+            "id": 159,
+            "code": "Obligatory",
+            "libelle": "Obligatory"
+          }
+        },
+        "cours": {
+          "id": 13003,
+          "description": null,
+          "image": null,
+          "libelle": "1 Likes and Dislikes",
+          "code": null,
+          "etatCours": null,
+          "parcours": {
+            "id": 13000,
+            "datePublication": null,
+            "dateCreation": null,
+            "description": null,
+            "libelle": "3 INTERMEDIATE",
+            "code": "3 INTERMEDIATE",
+            "numeroOrder": 0,
+            "nombreCours": 51,
+            "centre": {
+              "id": 83,
+              "libelle": "American Center 1",
+              "description": null,
+              "log": null,
+              "password": null,
+              "ref": "a1"
+            }
+          },
+          "nombreSectionFinalise": 4,
+          "nombreSectionEnCours": 4,
+          "nombreLinkEnCours": 3,
+          "nombreLinkFinalise": 5,
+          "numeroOrder": 1
+        },
+        "url": 0,
+        "content": 0,
+        "sessionCours": null
+      },
+      "numero": null,
+      "seuilReussite": null
+    },
+    "homeWork": null
+  },
+  {
+    "id": 13332,
+    "ref": null,
+    "libelle": "I @disagree@ with Josh yesterday because he was shooting the breeze.",
+    "urlImg": null,
+    "urlVideo": null,
+    "numero": 11,
+    "pointReponseJuste": 1.0,
+    "pointReponsefausse": 0.0,
+    "typeDeQuestion": { "id": 4, "ref": "t4", "lib": "Correct the mistake" },
+    "quiz": {
+      "id": 13297,
+      "ref": "quiz-13296",
+      "lib": "Let's practice",
+      "dateDebut": "2022-11-05T23:00:00.000+00:00",
+      "dateFin": null,
+      "section": {
+        "id": 13296,
+        "code": "Let's practice",
+        "libelle": "Let's practice",
+        "urlImage": null,
+        "urlImage2": null,
+        "urlImage3": null,
+        "urlVideo": null,
+        "contenu": null,
+        "questions": null,
+        "indicationProf": null,
+        "numeroOrder": 5,
+        "categorieSection": {
+          "id": 6,
+          "libelle": "Let's practice",
+          "code": "Let's practice",
+          "numeroOrder": 5,
+          "superCategorieSection": {
+            "id": 159,
+            "code": "Obligatory",
+            "libelle": "Obligatory"
+          }
+        },
+        "cours": {
+          "id": 13003,
+          "description": null,
+          "image": null,
+          "libelle": "1 Likes and Dislikes",
+          "code": null,
+          "etatCours": null,
+          "parcours": {
+            "id": 13000,
+            "datePublication": null,
+            "dateCreation": null,
+            "description": null,
+            "libelle": "3 INTERMEDIATE",
+            "code": "3 INTERMEDIATE",
+            "numeroOrder": 0,
+            "nombreCours": 51,
+            "centre": {
+              "id": 83,
+              "libelle": "American Center 1",
+              "description": null,
+              "log": null,
+              "password": null,
+              "ref": "a1"
+            }
+          },
+          "nombreSectionFinalise": 4,
+          "nombreSectionEnCours": 4,
+          "nombreLinkEnCours": 3,
+          "nombreLinkFinalise": 5,
+          "numeroOrder": 1
+        },
+        "url": 0,
+        "content": 0,
+        "sessionCours": null
+      },
+      "numero": null,
+      "seuilReussite": null
+    },
+    "homeWork": null
+  },
+  {
+    "id": 13334,
+    "ref": null,
+    "libelle": "  How @you, bear@ this incredible mess every day?",
+    "urlImg": null,
+    "urlVideo": null,
+    "numero": 12,
+    "pointReponseJuste": 1.0,
+    "pointReponsefausse": 0.0,
+    "typeDeQuestion": { "id": 6, "ref": "t6", "lib": "Write the correct form" },
+    "quiz": {
+      "id": 13297,
+      "ref": "quiz-13296",
+      "lib": "Let's practice",
+      "dateDebut": "2022-11-05T23:00:00.000+00:00",
+      "dateFin": null,
+      "section": {
+        "id": 13296,
+        "code": "Let's practice",
+        "libelle": "Let's practice",
+        "urlImage": null,
+        "urlImage2": null,
+        "urlImage3": null,
+        "urlVideo": null,
+        "contenu": null,
+        "questions": null,
+        "indicationProf": null,
+        "numeroOrder": 5,
+        "categorieSection": {
+          "id": 6,
+          "libelle": "Let's practice",
+          "code": "Let's practice",
+          "numeroOrder": 5,
+          "superCategorieSection": {
+            "id": 159,
+            "code": "Obligatory",
+            "libelle": "Obligatory"
+          }
+        },
+        "cours": {
+          "id": 13003,
+          "description": null,
+          "image": null,
+          "libelle": "1 Likes and Dislikes",
+          "code": null,
+          "etatCours": null,
+          "parcours": {
+            "id": 13000,
+            "datePublication": null,
+            "dateCreation": null,
+            "description": null,
+            "libelle": "3 INTERMEDIATE",
+            "code": "3 INTERMEDIATE",
+            "numeroOrder": 0,
+            "nombreCours": 51,
+            "centre": {
+              "id": 83,
+              "libelle": "American Center 1",
+              "description": null,
+              "log": null,
+              "password": null,
+              "ref": "a1"
+            }
+          },
+          "nombreSectionFinalise": 4,
+          "nombreSectionEnCours": 4,
+          "nombreLinkEnCours": 3,
+          "nombreLinkFinalise": 5,
+          "numeroOrder": 1
+        },
+        "url": 0,
+        "content": 0,
+        "sessionCours": null
+      },
+      "numero": null,
+      "seuilReussite": null
+    },
+    "homeWork": null
+  },
+  {
+    "id": 13338,
+    "ref": null,
+    "libelle": "I ..... guess the end of the film yesterday. Did you?",
+    "urlImg": null,
+    "urlVideo": null,
+    "numero": 13,
+    "pointReponseJuste": 1.0,
+    "pointReponsefausse": 0.0,
+    "typeDeQuestion": {
+      "id": 1,
+      "ref": "t1",
+      "lib": "Choose the correct alternative"
+    },
+    "quiz": {
+      "id": 13297,
+      "ref": "quiz-13296",
+      "lib": "Let's practice",
+      "dateDebut": "2022-11-05T23:00:00.000+00:00",
+      "dateFin": null,
+      "section": {
+        "id": 13296,
+        "code": "Let's practice",
+        "libelle": "Let's practice",
+        "urlImage": null,
+        "urlImage2": null,
+        "urlImage3": null,
+        "urlVideo": null,
+        "contenu": null,
+        "questions": null,
+        "indicationProf": null,
+        "numeroOrder": 5,
+        "categorieSection": {
+          "id": 6,
+          "libelle": "Let's practice",
+          "code": "Let's practice",
+          "numeroOrder": 5,
+          "superCategorieSection": {
+            "id": 159,
+            "code": "Obligatory",
+            "libelle": "Obligatory"
+          }
+        },
+        "cours": {
+          "id": 13003,
+          "description": null,
+          "image": null,
+          "libelle": "1 Likes and Dislikes",
+          "code": null,
+          "etatCours": null,
+          "parcours": {
+            "id": 13000,
+            "datePublication": null,
+            "dateCreation": null,
+            "description": null,
+            "libelle": "3 INTERMEDIATE",
+            "code": "3 INTERMEDIATE",
+            "numeroOrder": 0,
+            "nombreCours": 51,
+            "centre": {
+              "id": 83,
+              "libelle": "American Center 1",
+              "description": null,
+              "log": null,
+              "password": null,
+              "ref": "a1"
+            }
+          },
+          "nombreSectionFinalise": 4,
+          "nombreSectionEnCours": 4,
+          "nombreLinkEnCours": 3,
+          "nombreLinkFinalise": 5,
+          "numeroOrder": 1
+        },
+        "url": 0,
+        "content": 0,
+        "sessionCours": null
+      },
+      "numero": null,
+      "seuilReussite": null
+    },
+    "homeWork": null
+  },
+  {
+    "id": 13342,
+    "ref": null,
+    "libelle": "  Dan never fully @disagree@ with people. He respects all points of view.",
+    "urlImg": null,
+    "urlVideo": null,
+    "numero": 14,
+    "pointReponseJuste": 1.0,
+    "pointReponsefausse": 0.0,
+    "typeDeQuestion": { "id": 6, "ref": "t6", "lib": "Write the correct form" },
+    "quiz": {
+      "id": 13297,
+      "ref": "quiz-13296",
+      "lib": "Let's practice",
+      "dateDebut": "2022-11-05T23:00:00.000+00:00",
+      "dateFin": null,
+      "section": {
+        "id": 13296,
+        "code": "Let's practice",
+        "libelle": "Let's practice",
+        "urlImage": null,
+        "urlImage2": null,
+        "urlImage3": null,
+        "urlVideo": null,
+        "contenu": null,
+        "questions": null,
+        "indicationProf": null,
+        "numeroOrder": 5,
+        "categorieSection": {
+          "id": 6,
+          "libelle": "Let's practice",
+          "code": "Let's practice",
+          "numeroOrder": 5,
+          "superCategorieSection": {
+            "id": 159,
+            "code": "Obligatory",
+            "libelle": "Obligatory"
+          }
+        },
+        "cours": {
+          "id": 13003,
+          "description": null,
+          "image": null,
+          "libelle": "1 Likes and Dislikes",
+          "code": null,
+          "etatCours": null,
+          "parcours": {
+            "id": 13000,
+            "datePublication": null,
+            "dateCreation": null,
+            "description": null,
+            "libelle": "3 INTERMEDIATE",
+            "code": "3 INTERMEDIATE",
+            "numeroOrder": 0,
+            "nombreCours": 51,
+            "centre": {
+              "id": 83,
+              "libelle": "American Center 1",
+              "description": null,
+              "log": null,
+              "password": null,
+              "ref": "a1"
+            }
+          },
+          "nombreSectionFinalise": 4,
+          "nombreSectionEnCours": 4,
+          "nombreLinkEnCours": 3,
+          "nombreLinkFinalise": 5,
+          "numeroOrder": 1
+        },
+        "url": 0,
+        "content": 0,
+        "sessionCours": null
+      },
+      "numero": null,
+      "seuilReussite": null
+    },
+    "homeWork": null
+  },
+  {
+    "id": 13346,
+    "ref": null,
+    "libelle": "  Carl @not abhor@ people at all. He is just gloomy.",
+    "urlImg": null,
+    "urlVideo": null,
+    "numero": 15,
+    "pointReponseJuste": 1.0,
+    "pointReponsefausse": 0.0,
+    "typeDeQuestion": { "id": 6, "ref": "t6", "lib": "Write the correct form" },
+    "quiz": {
+      "id": 13297,
+      "ref": "quiz-13296",
+      "lib": "Let's practice",
+      "dateDebut": "2022-11-05T23:00:00.000+00:00",
+      "dateFin": null,
+      "section": {
+        "id": 13296,
+        "code": "Let's practice",
+        "libelle": "Let's practice",
+        "urlImage": null,
+        "urlImage2": null,
+        "urlImage3": null,
+        "urlVideo": null,
+        "contenu": null,
+        "questions": null,
+        "indicationProf": null,
+        "numeroOrder": 5,
+        "categorieSection": {
+          "id": 6,
+          "libelle": "Let's practice",
+          "code": "Let's practice",
+          "numeroOrder": 5,
+          "superCategorieSection": {
+            "id": 159,
+            "code": "Obligatory",
+            "libelle": "Obligatory"
+          }
+        },
+        "cours": {
+          "id": 13003,
+          "description": null,
+          "image": null,
+          "libelle": "1 Likes and Dislikes",
+          "code": null,
+          "etatCours": null,
+          "parcours": {
+            "id": 13000,
+            "datePublication": null,
+            "dateCreation": null,
+            "description": null,
+            "libelle": "3 INTERMEDIATE",
+            "code": "3 INTERMEDIATE",
+            "numeroOrder": 0,
+            "nombreCours": 51,
+            "centre": {
+              "id": 83,
+              "libelle": "American Center 1",
+              "description": null,
+              "log": null,
+              "password": null,
+              "ref": "a1"
+            }
+          },
+          "nombreSectionFinalise": 4,
+          "nombreSectionEnCours": 4,
+          "nombreLinkEnCours": 3,
+          "nombreLinkFinalise": 5,
+          "numeroOrder": 1
         },
         "url": 0,
         "content": 0,

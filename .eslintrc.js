@@ -1,21 +1,40 @@
 module.exports = {
+  root: true,
+  parser: "@typescript-eslint/parser",
+  plugins: ["@typescript-eslint", "react", "react-native"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    // "plugin:react-native/all",
+  ],
   env: {
     browser: true,
-    es2021: true
+    node: true,
+    es6: true,
+    "react-native/react-native": true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'standard-with-typescript'
-  ],
-  overrides: [
-  ],
+  ignorePatterns: [".eslintrc.js"],
+  parser: "@typescript-eslint/parser",
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module'
+    project: "./tsconfig.json",
+    tsconfigRootDir: __dirname,
+    ecmaFeatures: {
+      jsx: true,
+    },
+    sourceType: "module",
   },
-  plugins: [
-    'react'
-  ],
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
   rules: {
-  }
-}
+    // Your custom rules go here
+    //react must be in scope when using jsx
+    "react/react-in-jsx-scope": "off",
+    //no empty interface
+    "@typescript-eslint/no-empty-interface": "warn",
+  },
+};

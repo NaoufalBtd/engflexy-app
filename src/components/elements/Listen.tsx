@@ -1,5 +1,5 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Icon } from "native-base";
+import { Factory, Icon } from "native-base";
 import { ThemeComponentSizeType } from "native-base/lib/typescript/components/types";
 import React from "react";
 import { TouchableOpacity } from "react-native";
@@ -15,8 +15,9 @@ const Listen: React.FC<ListenProps> = ({
   size = "md",
   bordered,
 }) => {
+  const NBTouchableOpacity = Factory(TouchableOpacity);
   return (
-    <TouchableOpacity
+    <NBTouchableOpacity
       style={
         bordered && {
           borderWidth: 1,
@@ -27,7 +28,7 @@ const Listen: React.FC<ListenProps> = ({
         }
       }>
       <Icon as={FontAwesome} name="volume-up" size={size} color={color} />
-    </TouchableOpacity>
+    </NBTouchableOpacity>
   );
 };
 

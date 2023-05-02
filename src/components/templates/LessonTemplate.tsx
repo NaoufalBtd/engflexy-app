@@ -1,28 +1,44 @@
-import { Text, View } from "native-base";
+import _ from "lodash";
+import { Text } from "native-base";
 import React from "react";
-import cours from "../../../assets/mock/cours.json";
+import { useAppSelector } from "../../hooks/stateHooks";
+import LessonLayout from "../layouts/LessonLayout";
+import LessonSectionLayout from "../layouts/LessonSectionLayout";
 import ArticleTemplate from "./LessonTemplates/ArticleTemplate";
+import PracticeTemplate from "./LessonTemplates/PracticeTemplate";
 import VocabularyTemplate from "./LessonTemplates/VocabularyTemplate";
 
-interface LessonTemplateProps {
-  data: typeof cours;
-}
+interface LessonTemplateProps {}
 
 const LESSONS_SECTIONS_CODE = [
   { title: "Warm up", component: ArticleTemplate },
   { title: "vocabulary", component: VocabularyTemplate },
-  { title: "Get to know", component: Text },
-  { title: "Let's practice", component: Text },
+  { title: "Get to know", component: ArticleTemplate },
+  { title: "Let's practice", component: PracticeTemplate },
+  { title: "Discussion", component: ArticleTemplate },
 ];
-const LessonTemplate: React.FC<LessonTemplateProps> = ({ data }) => {
-  const [index, setIndex] = React.useState(1);
-  const Template = LESSONS_SECTIONS_CODE[index].component;
-  const courseData = cours[1];
+const LessonTemplate: React.FC<LessonTemplateProps> = () => {
+  const { lessons, lessonIndex } = useAppSelector((state) => state.lessons);
+  const Template = LESSONS_SECTIONS_CODE[lessonIndex].component;
+  const lessonData = _.find(
+    _.values(lessons.byId),
+    (lesson) =>
+      lesson.categorySection.label === LESSONS_SECTIONS_CODE[lessonIndex].title
+  );
 
   return (
-    <View bgColor={"background.surface"} h={"full"}>
-      {Template && <Template />}
-    </View>
+    <LessonLayout
+      bg={"background.surface"}
+      h={"full"}
+      lessonTemplate={() => (
+        <LessonSectionLayout>
+          <Template lesson={lessonData} />
+        </LessonSectionLayout>
+      )}
+      homeWorkTemplate={() => <Text>Home Work</Text>}
+      dictionaryTemplate={() => <Text>Dictionary</Text>}
+      chatTemplate={() => <Text>Chat</Text>}
+    />
   );
 };
 

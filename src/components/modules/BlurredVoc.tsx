@@ -8,11 +8,15 @@ import Listen from "../elements/Listen";
 
 interface BlurredVocProps {
   imageUri: string;
-  ipa: string;
+  transcription: string;
   word: string;
 }
 
-const BlurredVoc: React.FC<BlurredVocProps> = ({ imageUri, ipa, word }) => {
+const BlurredVoc: React.FC<BlurredVocProps> = ({
+  imageUri,
+  transcription,
+  word,
+}) => {
   const { colors } = useAppTheme();
   return (
     <Box borderColor={"white"} borderWidth={1} height={350}>
@@ -27,7 +31,7 @@ const BlurredVoc: React.FC<BlurredVocProps> = ({ imageUri, ipa, word }) => {
           borderRadius={"xl"}
           bgColor={alpha(colors.background.level1, 0.5)}>
           <HStack space={4} alignItems={"center"}>
-            <Heading>[{ipa}]</Heading>
+            <Heading>{transcription}</Heading>
             <Listen />
           </HStack>
           <Heading textAlign={"center"} fontSize={"3xl"}>

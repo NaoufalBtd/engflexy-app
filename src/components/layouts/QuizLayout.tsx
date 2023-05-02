@@ -4,18 +4,36 @@ import {
   HStack,
   Progress,
   ScrollView,
-  StatusBar,
   Text,
   View,
 } from "native-base";
 import React from "react";
+import { useAppDispatch } from "../../hooks/stateHooks";
+import { nextQuestion, previousQuestion } from "../../reducers/quizReducer";
+import { calculatePercentage } from "../../utils";
 import BackButton from "../elements/BackButton";
 
 interface QuizLayoutProps {
   children: React.ReactNode;
+  qnNumbers: number;
+  currQnNumber: number;
 }
 
-const QuizLayout: React.FC<QuizLayoutProps> = ({ children }) => {
+const QuizLayout: React.FC<QuizLayoutProps> = ({
+  children,
+  qnNumbers,
+  currQnNumber,
+}) => {
+  const per = calculatePercentage(currQnNumber, qnNumbers);
+  const dispatch = useAppDispatch();
+
+  const handleNext = () => {
+    dispatch(nextQuestion());
+  };
+  const handlePrevious = () => {
+    dispatch(previousQuestion());
+  };
+
   return (
     <View
       pt={5}
@@ -23,21 +41,15 @@ const QuizLayout: React.FC<QuizLayoutProps> = ({ children }) => {
       flex={1}
       height={"100%"}
       bgColor={"background.surface"}>
-      <StatusBar
-        backgroundColor="transparent"
-        translucent={true}
-        hidden={true}
-      />
-
       <Box
         flexDir={"row"}
         alignItems={"center"}
         px={3}
         justifyContent={"space-between"}>
         <BackButton />
-        <Progress value={60} w={"3/5"} />
+        <Progress value={per} w={"3/5"} />
         <Box bgColor={"brand.primary"} p="3" borderRadius={"lg"} shadow={7}>
-          3/20
+          {currQnNumber}/{qnNumbers}
         </Box>
       </Box>
       <Box
@@ -52,10 +64,10 @@ const QuizLayout: React.FC<QuizLayoutProps> = ({ children }) => {
       </Box>
       <Box mt="4">
         <HStack justifyContent={"center"} space={5}>
-          <Button variant={"outline"}>
+          <Button variant={"outline"} onPress={handleNext}>
             <Text>Previous</Text>
           </Button>
-          <Button variant={"subtle"}>
+          <Button variant={"subtle"} onPress={handlePrevious}>
             <Text>Next</Text>
           </Button>
         </HStack>
