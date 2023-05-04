@@ -2,7 +2,10 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Box, HStack, Icon, Pressable, ScrollView, Text } from "native-base";
 import React from "react";
 import { useAppDispatch } from "../../hooks/stateHooks";
-import { nextLesson, previousLesson } from "../../reducers/lessonsReducer";
+import {
+  nextLesson,
+  previousLesson,
+} from "../../store/reducers/lessonsReducer";
 
 interface LessonSectionLayoutProps {
   children: React.ReactNode;

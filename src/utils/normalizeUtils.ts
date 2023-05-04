@@ -1,8 +1,13 @@
 import { ApiLesson } from "../types/api/ApiLesson";
-import { ApiQnAnswer } from "../types/api/ApiQnAnswer";
+import { ApiQnResponse } from "../types/api/ApiQnResponse";
 import { ApiQuestion } from "../types/api/ApiQuestion";
-import { QnAnswer, QnAnswers } from "../types/models/QnAnswerModel";
-import { Question, Questions } from "../types/models/QuestionModel";
+import { QnResponse, QnResponses } from "../types/models/QnResponseModel";
+import {
+  Question,
+  QuestionType,
+  QuestionTypes,
+  Questions,
+} from "../types/models/QuestionModel";
 import { Lesson } from "../types/models/lessonsModel";
 
 export const normalizeLessons = (lessons: ApiLesson[]) => {
@@ -53,7 +58,9 @@ export const normalizeQuiz = (quiz: ApiQuestion[]): Questions => {
   return { allIds, byId };
 };
 
-export const normalizeQnAnswers = (qnAnswers: ApiQnAnswer[]): QnAnswers => {
+export const normalizeQnResponse = (
+  qnAnswers: ApiQnResponse[]
+): QnResponses => {
   const allIds: number[] = [];
   const correctAnswersIds: number[] = [];
   const byId = qnAnswers.reduce((acc, qnAnswer) => {
@@ -68,7 +75,24 @@ export const normalizeQnAnswers = (qnAnswers: ApiQnAnswer[]): QnAnswers => {
       correctAnswersIds.push(qnAnswer.id);
     }
     return acc;
-  }, {} as { [key: string]: QnAnswer });
+  }, {} as { [key: string]: QnResponse });
 
   return { allIds, byId, correctAnswersIds };
+};
+
+export const normalizeQnsTypes = (
+  qnTypes: ApiQuestion["typeDeQuestion"][]
+): QuestionTypes => {
+  const allIds: number[] = [];
+  const byId = qnTypes.reduce((acc, qnType) => {
+    acc[qnType.id] = {
+      id: qnType.id,
+      ref: qnType.ref,
+      label: qnType.lib,
+    };
+    allIds.push(qnType.id);
+    return acc;
+  }, {} as { [key: string]: QuestionType });
+
+  return { allIds, byId };
 };

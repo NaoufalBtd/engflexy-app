@@ -1,33 +1,36 @@
+import _ from "lodash";
 import { Box, Checkbox, Text } from "native-base";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet } from "react-native";
+import { useAppDispatch } from "../../../../hooks/stateHooks";
+import { changeResponse } from "../../../../store/reducers/quizReducer";
+import { QnResponses } from "../../../../types/models/QnResponseModel";
+import { Question } from "../../../../types/models/QuestionModel";
 import Listen from "../../../elements/Listen";
 
 interface indexProps {
-  question: {
-    questionText: string;
-  };
-  answers: {
-    answerText: string;
-    isCorrect: boolean;
-  }[];
+  question: Question;
+  answers: QnResponses;
 }
 
 const QcmQuiz: React.FC<indexProps> = ({ question, answers }) => {
-  const questionText = "This is a [placeholder] question";
-  // const [selectedAnswers, setSelectedAnswers] = React.useState<string[]>([]);
-  const [groupValues, setGroupValues] = React.useState<string[]>([]);
-  console.log("selectedAnswers", groupValues);
+  const [groupValues, setGroupValues] = useState<string[]>([]);
+  const dispatch = useAppDispatch();
+
+  const questionText = "This is a ..... questionas";
 
   const renderText = (text: string) => {
-    //match the placeholder with regExp
-    const regExp = new RegExp("\\[(.*?)]", "g");
+    const regExp = new RegExp("\\.{5}?", "g"); // match the placeholder with 5 dots in a row
     const parts = text.split(regExp);
 
     if (parts.length > 1) {
       return (
-        <>
-          <Text style={styles.text}>{parts[0]}</Text>
+        <Box px={2} flexDir={"row"} alignItems={"center"} flexWrap={"wrap"}>
+          {parts[0].split(" ").map((word) => (
+            <Text key={word} fontSize={"md"}>
+              {word}{" "}
+            </Text>
+          ))}
           <Box
             borderWidth={2}
             borderStyle={"dashed"}
@@ -36,20 +39,31 @@ const QcmQuiz: React.FC<indexProps> = ({ question, answers }) => {
             p="1"
             px="3"
             mx="2">
-            <Text fontSize={"md"}>{parts[1]}</Text>
+            <Text color={"lightText"} fontSize={"md"}>
+              Placeholder
+            </Text>
           </Box>
-          <Text style={styles.text}> {parts[2]}</Text>
-        </>
+          {parts[1].split(" ").map((word) => (
+            <Text key={word} fontSize={"md"}>
+              {word}{" "}
+            </Text>
+          ))}
+        </Box>
       );
     }
     return <Text>{text}</Text>;
+  };
+
+  const handleAnswersChange = (values: string[]) => {
+    setGroupValues(values);
+    dispatch(changeResponse(values));
   };
 
   return (
     <Box>
       <Box flexDir={"row"} alignItems={"center"} my={3}>
         <Listen bordered />
-        {renderText(questionText)}
+        {renderText(question.label)}
       </Box>
       {/*
       <HStack space={3}>
@@ -65,18 +79,18 @@ const QcmQuiz: React.FC<indexProps> = ({ question, answers }) => {
           </TouchableOpacity>
         ))}
       </HStack> */}
-      <Checkbox.Group onChange={setGroupValues} value={groupValues}>
-        {answers.map((answer) => (
+      <Checkbox.Group onChange={handleAnswersChange} value={groupValues}>
+        {_.values(answers.byId).map((answer) => (
           <Box
-            key={answer.answerText}
+            key={answer.label}
             bgColor={"background.level1"}
             p="5"
             w="95%"
             my="1"
             margin={"auto"}
             borderRadius={"lg"}>
-            <Checkbox colorScheme={"green"} value={answer.answerText}>
-              <Text fontSize={"lg"}>{answer.answerText}</Text>
+            <Checkbox colorScheme={"green"} value={answer.label}>
+              <Text fontSize={"lg"}>{answer.label}</Text>
             </Checkbox>
           </Box>
         ))}
@@ -90,5 +104,6 @@ export default QcmQuiz;
 const styles = StyleSheet.create({
   text: {
     fontSize: 20,
+    marginVertical: 4,
   },
 });

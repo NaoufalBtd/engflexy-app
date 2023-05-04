@@ -6,7 +6,7 @@ import { NativeBaseProvider } from "native-base";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import { Provider as ReduxProvider } from "react-redux";
-import { store } from "../src/store";
+import { store } from "../src/store/store";
 import nativeBaseTheme from "../src/theme";
 
 export { ErrorBoundary } from "expo-router";

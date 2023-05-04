@@ -1,12 +1,12 @@
-export type QnAnswer = {
+export type QnResponse = {
   id: number;
   label: string;
   isCorrect: boolean;
   questionId: number;
 };
 
-export type QnAnswers = {
+export type QnResponses = {
   allIds: number[];
-  byId: { [key: string]: QnAnswer };
+  byId: { [key: string]: QnResponse };
   correctAnswersIds: number[];
 };

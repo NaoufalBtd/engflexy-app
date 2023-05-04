@@ -1,28 +1,32 @@
+import { FontAwesome } from "@expo/vector-icons";
 import {
   Box,
   Button,
   HStack,
+  Icon,
   Progress,
   ScrollView,
   Text,
   View,
 } from "native-base";
 import React from "react";
+import { QuestionStatus } from "../../constants/Quiz";
 import { useAppDispatch } from "../../hooks/stateHooks";
-import { nextQuestion, previousQuestion } from "../../reducers/quizReducer";
+import { nextQuestion } from "../../store/reducers/quizReducer";
 import { calculatePercentage } from "../../utils";
-import BackButton from "../elements/BackButton";
 
 interface QuizLayoutProps {
   children: React.ReactNode;
   qnNumbers: number;
   currQnNumber: number;
+  questionStatus: QuestionStatus;
 }
 
 const QuizLayout: React.FC<QuizLayoutProps> = ({
   children,
   qnNumbers,
   currQnNumber,
+  questionStatus,
 }) => {
   const per = calculatePercentage(currQnNumber, qnNumbers);
   const dispatch = useAppDispatch();
@@ -30,8 +34,8 @@ const QuizLayout: React.FC<QuizLayoutProps> = ({
   const handleNext = () => {
     dispatch(nextQuestion());
   };
-  const handlePrevious = () => {
-    dispatch(previousQuestion());
+  const handleSubmit = () => {
+    // dispatch(());
   };
 
   return (
@@ -45,11 +49,16 @@ const QuizLayout: React.FC<QuizLayoutProps> = ({
         flexDir={"row"}
         alignItems={"center"}
         px={3}
+        mt={1}
+        mb={3}
         justifyContent={"space-between"}>
-        <BackButton />
+        <Box flex={1} />
         <Progress value={per} w={"3/5"} />
+        <Box flex={1} />
         <Box bgColor={"brand.primary"} p="3" borderRadius={"lg"} shadow={7}>
-          {currQnNumber}/{qnNumbers}
+          <Text fontSize={"md"}>
+            {currQnNumber}/{qnNumbers}
+          </Text>
         </Box>
       </Box>
       <Box
@@ -62,15 +71,36 @@ const QuizLayout: React.FC<QuizLayoutProps> = ({
         p="5">
         <ScrollView>{children}</ScrollView>
       </Box>
-      <Box mt="4">
-        <HStack justifyContent={"center"} space={5}>
-          <Button variant={"outline"} onPress={handleNext}>
-            <Text>Previous</Text>
-          </Button>
-          <Button variant={"subtle"} onPress={handlePrevious}>
+      <Box my="4">
+        {[
+          QuestionStatus.AnsweredCorrectly,
+          QuestionStatus.AnsweredIncorrectly,
+        ].includes(questionStatus) && (
+          <Button variant={"subtle"} onPress={handleSubmit}>
             <Text>Next</Text>
           </Button>
-        </HStack>
+        )}
+        {questionStatus === QuestionStatus.NotAnswered && (
+          <Button onPress={handleSubmit}>
+            <HStack space={2}>
+              <Text>DONT'T KNOW</Text>
+              <Icon as={FontAwesome} name={"question"} ml={2} />
+            </HStack>
+          </Button>
+        )}
+        {questionStatus === QuestionStatus.InProgress && (
+          <Button onPress={handleSubmit}>
+            <HStack space={2}>
+              <Text>Check Answer</Text>
+              <Icon
+                as={FontAwesome}
+                name={"check"}
+                size={"md"}
+                color={"white"}
+              />
+            </HStack>
+          </Button>
+        )}
       </Box>
     </View>
   );

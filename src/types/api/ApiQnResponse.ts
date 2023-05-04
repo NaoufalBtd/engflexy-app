@@ -1,8 +1,8 @@
 import { ApiQuestion } from "./ApiQuestion";
 
-export type ApiQnAnswer = {
+export type ApiQnResponse = {
   id: number;
-  etatReponse: "true" | "false";
+  etatReponse: "true" | "false" | string;
   lib: string;
   numero: number;
   ref: string | null;

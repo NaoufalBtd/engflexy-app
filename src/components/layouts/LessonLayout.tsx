@@ -1,4 +1,4 @@
-import { Box } from "native-base";
+import { Box, Button, Text } from "native-base";
 import { InterfaceViewProps } from "native-base/lib/typescript/components/basic/View/types";
 import React, { ComponentType } from "react";
 import { useWindowDimensions } from "react-native";
@@ -52,8 +52,21 @@ const LessonLayout: React.FC<LessonTemplateProps> = ({
         initialLayout={{ width }}
         swipeEnabled={false}
         renderTabBar={(props) => (
-          <Box bgColor={"background.body"} h={100}>
-            <Box flex={1} />
+          <Box bgColor={"background.body"}>
+            <Box flexDir={"row"}>
+              <Box flex={1} />
+
+              <Button
+                rounded={"md"}
+                variant={"ghost"}
+                mx={5}
+                my={1}
+                textAlign={"right"}>
+                <Text color={"blue.500"} fontSize={"xl"} fontWeight={"bold"}>
+                  Exit
+                </Text>
+              </Button>
+            </Box>
             <TabBar
               indicatorStyle={{ backgroundColor: colors.brand.primary }}
               activeColor="white"

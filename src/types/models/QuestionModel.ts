@@ -16,7 +16,7 @@ export type Questions = {
 export type QuestionType = {
   id: number;
   ref: string | null;
-  lib: string;
+  label: string;
 };
 
 export type QuestionTypes = {

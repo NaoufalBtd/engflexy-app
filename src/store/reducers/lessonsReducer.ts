@@ -1,9 +1,9 @@
 // redux toolkit lessonReducer boilerplate
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import cours from "../../assets/mock/cours.json";
-import { ApiLesson } from "../types/api/ApiLesson";
-import { Lesson, Lessons } from "../types/models/lessonsModel";
-import { normalizeLessons } from "../utils/normalizeUtils";
+import cours from "../../../assets/mock/cours.json";
+import { ApiLesson } from "../../types/api/ApiLesson";
+import { Lesson, Lessons } from "../../types/models/lessonsModel";
+import { normalizeLessons } from "../../utils/normalizeUtils";
 
 interface LessonsState {
   lesson: Lesson | null;
