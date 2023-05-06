@@ -77,6 +77,74 @@ const nativeBaseTheme = extendTheme({
         // italic: 'Syne-BoldItalic',
       },
     },
+    Poppins: {
+      100: {
+        normal: "Poppins-Thin",
+        italic: "Poppins-ThinItalic",
+      },
+      200: {
+        normal: "Poppins-ExtraLight",
+        italic: "Poppins-ExtraLightItalic",
+      },
+      300: {
+        normal: "Poppins-Light",
+        italic: "Poppins-LightItalic",
+      },
+      400: {
+        normal: "Poppins",
+        italic: "Poppins-Italic",
+      },
+      500: {
+        normal: "Poppins-Medium",
+        italic: "Poppins-MediumItalic",
+      },
+      600: {
+        normal: "Poppins-SemiBold",
+        italic: "Poppins-SemiBoldItalic",
+      },
+      700: {
+        normal: "Poppins-Bold",
+        italic: "Poppins-BoldItalic",
+      },
+      800: {
+        normal: "Poppins-ExtraBold",
+        italic: "Poppins-ExtraBoldItalic",
+      },
+    },
+    overpass: {
+      100: {
+        normal: "Overpass-Thin",
+        italic: "Overpass-ThinItalic",
+      },
+      200: {
+        normal: "Overpass-Light",
+        italic: "Overpass-LightItalic",
+      },
+      300: {
+        normal: "Overpass-Light",
+        italic: "Overpass-LightItalic",
+      },
+      400: {
+        normal: "Overpass",
+        italic: "Overpass-Italic",
+      },
+      500: {
+        normal: "Overpass-SemiBold",
+        italic: "Overpass-SemiBoldItalic",
+      },
+      600: {
+        normal: "Overpass-Bold",
+        italic: "Overpass-BoldItalic",
+      },
+      700: {
+        normal: "Overpass-ExtraBold",
+        italic: "Overpass-ExtraBoldItalic",
+      },
+      800: {
+        normal: "Overpass-ExtraBold",
+        italic: "Overpass-ExtraBoldItalic",
+      },
+    },
   },
 
   // Make sure values below matches any of the keys in `fontConfig`
@@ -89,9 +157,16 @@ const nativeBaseTheme = extendTheme({
   colors: {
     background: {
       surface: "#2e2d62",
-      body: "#131318",
+      body: "#0A043C",
       level1: "#393884",
       level2: "#4e4d8d",
+      level3: "#5a5a72",
+    },
+    text: {
+      primary: "#EBEBEF",
+      secondary: "#B9B9C6",
+      tertiary: "#8F8FA3",
+      link: "6FB6FF",
     },
     // background: {
     //   surface: "#09090D",

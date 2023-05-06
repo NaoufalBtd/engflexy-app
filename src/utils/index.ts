@@ -6,3 +6,7 @@ export const calculatePercentage = (index: number, length: number) => {
   const per = (index / length) * 100;
   return Math.round(per);
 };
+
+export const getAspectRatio = (width: number, height: number) => {
+  return width / height;
+};

@@ -9,12 +9,14 @@ interface LessonsState {
   lesson: Lesson | null;
   lessons: Lessons;
   lessonIndex: number;
+  homeworkIndex: number;
 }
 
 const initialState: LessonsState = {
   lesson: null,
   lessons: normalizeLessons(cours),
   lessonIndex: 0,
+  homeworkIndex: 0,
 };
 
 export const lessonsSlice = createSlice({

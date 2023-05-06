@@ -74,7 +74,9 @@ const ScheduleTemplate = () => {
               {meet.profName}
             </Badge>
           </HStack>
-          <Text fontSize={"md"}>{meet.day}</Text>
+          <Text color={"font.primary"} fontSize={"md"}>
+            {meet.day}
+          </Text>
         </Box>
       </TouchableOpacity>
     );
@@ -115,8 +117,11 @@ const ScheduleTemplate = () => {
       onScrollEndDrag={() => console.log("onScrollEndDrag")}
       theme={{
         reservationsBackgroundColor: theme.colors.background.surface,
-        backgroundColor: theme.colors.background.level1,
+        // backgroundColor: theme.colors.background.level1,
         calendarBackground: theme.colors.background.level1,
+        dayTextColor: theme.colors.text.primary,
+        agendaDayNumColor: theme.colors.text.primary,
+        agendaDayTextColor: theme.colors.text.primary,
       }}
     />
   );

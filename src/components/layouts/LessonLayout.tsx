@@ -4,6 +4,7 @@ import React, { ComponentType } from "react";
 import { useWindowDimensions } from "react-native";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 import { useAppTheme } from "../../theme";
+import { alpha } from "../../utils/uiUtils";
 import BaseLayout from "./BaseLayout";
 
 interface LessonTemplateProps extends InterfaceViewProps {
@@ -52,7 +53,7 @@ const LessonLayout: React.FC<LessonTemplateProps> = ({
         initialLayout={{ width }}
         swipeEnabled={false}
         renderTabBar={(props) => (
-          <Box bgColor={"background.body"}>
+          <Box bgColor={alpha(colors.background.body, 0.6)}>
             <Box flexDir={"row"}>
               <Box flex={1} />
 

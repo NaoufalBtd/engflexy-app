@@ -6,6 +6,8 @@ import {
   nextLesson,
   previousLesson,
 } from "../../store/reducers/lessonsReducer";
+import { useAppTheme } from "../../theme";
+import { alpha } from "../../utils/uiUtils";
 
 interface LessonSectionLayoutProps {
   children: React.ReactNode;
@@ -23,6 +25,7 @@ const LessonSectionLayout: React.FC<LessonSectionLayoutProps> = ({
   children,
 }) => {
   const dispatch = useAppDispatch();
+  const { colors } = useAppTheme();
   const handleNext = () => {
     console.log("next");
     dispatch(nextLesson());
@@ -49,7 +52,7 @@ const LessonSectionLayout: React.FC<LessonSectionLayoutProps> = ({
           p={5}
           flex={1}
           flexDir={"row"}
-          bgColor={"primary.600"}>
+          bgColor={alpha(colors.background.level2, 0.9)}>
           <Icon
             as={FontAwesome}
             name="arrow-left"
@@ -64,7 +67,7 @@ const LessonSectionLayout: React.FC<LessonSectionLayoutProps> = ({
           justifyContent={"flex-end"}
           flexDir="row"
           flex="1"
-          bgColor={"primary.700"}
+          bgColor={alpha(colors.background.level1, 0.9)}
           onPress={handleNext}>
           <Text>Next</Text>
           <Icon

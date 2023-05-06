@@ -37,11 +37,6 @@ const PracticeTemplate: React.FC<PracticeTemplateProps> = () => {
   } = useAppSelector((state) => state.quiz);
   const dispatch = useAppDispatch();
 
-  // console.log("---------- currQuestionType ----------", currQuestionType);
-  // console.log("---------- currQuestion ----------", currQuestion);
-  // console.log("---------- loaded ----------", loaded);
-  console.log("---------- currQuestionStatus ----------", currQuestionStatus);
-
   useEffect(() => {
     dispatch(fetchQuiz());
   }, []);

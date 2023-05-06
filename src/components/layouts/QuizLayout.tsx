@@ -30,6 +30,11 @@ const QuizLayout: React.FC<QuizLayoutProps> = ({
 }) => {
   const per = calculatePercentage(currQnNumber, qnNumbers);
   const dispatch = useAppDispatch();
+  const isLastQn = currQnNumber === qnNumbers;
+  const answered = [
+    QuestionStatus.AnsweredCorrectly,
+    QuestionStatus.AnsweredIncorrectly,
+  ].includes(questionStatus);
 
   const handleNext = () => {
     dispatch(nextQuestion());
@@ -72,10 +77,11 @@ const QuizLayout: React.FC<QuizLayoutProps> = ({
         <ScrollView>{children}</ScrollView>
       </Box>
       <Box my="4">
-        {[
-          QuestionStatus.AnsweredCorrectly,
-          QuestionStatus.AnsweredIncorrectly,
-        ].includes(questionStatus) && (
+        {answered && isLastQn ? (
+          <Button>
+            <Text>Finish</Text>
+          </Button>
+        ) : (
           <Button variant={"subtle"} onPress={handleSubmit}>
             <Text>Next</Text>
           </Button>

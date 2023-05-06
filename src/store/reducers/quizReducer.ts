@@ -2,6 +2,7 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { QuestionStatus } from "../../constants/Quiz";
+import { QuizQnAnswer } from "../../types/forms/QuizQnAnswer";
 import { QnResponses } from "../../types/models/QnResponseModel";
 import {
   Question,
@@ -19,7 +20,7 @@ export interface QuizState {
   currQuestionType: QuestionType | null;
   currQuestionStatus: QuestionStatus;
   responses: QnResponses | null;
-  answer: string[];
+  answers: QuizQnAnswer[];
   // solutionShown: boolean;
   // currQuestionAnswered: boolean;
   loaded: boolean;
@@ -42,7 +43,7 @@ const initialState: QuizState = {
   responses: null,
   currQuestionType: null,
   questionIndex: 0,
-  answer: [],
+  answers: [],
   currQuestionStatus: QuestionStatus.NotAnswered,
   loaded: false,
   error: null,
@@ -58,8 +59,9 @@ export const quizSlice = createSlice({
       state.currQuestionStatus =
         res.length > 0 ? QuestionStatus.InProgress : QuestionStatus.NotAnswered;
     },
-    submitResponse: (state) => {
+    submitAnswer: (state, action: PayloadAction<QuizQnAnswer>) => {
       //todo: handle response submission
+      state.answers = [...state.answers, action.payload];
     },
     nextQuestion: (state) => {
       if (

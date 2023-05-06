@@ -1,7 +1,9 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Tabs } from "expo-router";
+import { Icon } from "native-base";
 import { useColorScheme } from "react-native";
 import Colors from "../../src/constants/Colors";
+import { useAppTheme } from "../../src/theme";
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
@@ -20,10 +22,14 @@ function TabBarIcon(props: {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const { colors } = useAppTheme();
 
   return (
     <Tabs
       screenOptions={{
+        tabBarStyle: {
+          backgroundColor: colors.background.level1,
+        },
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
       }}>
       <Tabs.Screen
@@ -38,10 +44,21 @@ export default function TabLayout() {
         name="home"
         options={{
           headerShown: false,
+          tabBarIcon: ({ color }) => (
+            <Icon as={FontAwesome} size={"md"} name="home" color={color} />
+          ),
         }}
       />
 
-      <Tabs.Screen name="Schedule" />
+      <Tabs.Screen
+        name="Schedule"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color }) => (
+            <Icon as={FontAwesome} size={"md"} name="calendar" color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }

@@ -4,6 +4,7 @@ import React from "react";
 import { useAppSelector } from "../../hooks/stateHooks";
 import LessonLayout from "../layouts/LessonLayout";
 import LessonSectionLayout from "../layouts/LessonSectionLayout";
+import ChatTemplate from "./ChatTemplate";
 import ArticleTemplate from "./LessonTemplates/ArticleTemplate";
 import PracticeTemplate from "./LessonTemplates/PracticeTemplate";
 import VocabularyTemplate from "./LessonTemplates/VocabularyTemplate";
@@ -18,10 +19,13 @@ const LESSONS_SECTIONS_CODE = [
   { title: "Discussion", component: ArticleTemplate },
 ];
 const LessonTemplate: React.FC<LessonTemplateProps> = () => {
-  const { lessons, lessonIndex } = useAppSelector((state) => state.lessons);
+  const { lessons, lessonIndex, homeworkIndex } = useAppSelector(
+    (state) => state.lessons
+  );
   const Template = LESSONS_SECTIONS_CODE[lessonIndex].component;
-  const lessonData = _.find(
-    _.values(lessons.byId),
+  const lessonsData = _.values(lessons.byId);
+  const data = _.find(
+    lessonsData,
     (lesson) =>
       lesson.categorySection.label === LESSONS_SECTIONS_CODE[lessonIndex].title
   );
@@ -32,12 +36,12 @@ const LessonTemplate: React.FC<LessonTemplateProps> = () => {
       h={"full"}
       lessonTemplate={() => (
         <LessonSectionLayout>
-          <Template lesson={lessonData} />
+          <Template lesson={data} />
         </LessonSectionLayout>
       )}
-      homeWorkTemplate={() => <Text>Home Work</Text>}
+      homeWorkTemplate={() => <LessonSectionLayout></LessonSectionLayout>}
       dictionaryTemplate={() => <Text>Dictionary</Text>}
-      chatTemplate={() => <Text>Chat</Text>}
+      chatTemplate={() => <ChatTemplate />}
     />
   );
 };

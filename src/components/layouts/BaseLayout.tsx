@@ -14,7 +14,7 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({
 }) => {
   const WrapperView = scrollable ? ScrollView : View;
   return (
-    <WrapperView bg="amber.100" flex={1} {...props}>
+    <WrapperView bg="background.surface" flex={1} {...props}>
       <StatusBar hidden={true} backgroundColor="blue" />
       {children}
     </WrapperView>

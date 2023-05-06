@@ -10,7 +10,7 @@ const ComingCourseWidget: React.FC<indexProps> = () => {
   return (
     <Box>
       <Box flexDir={"row"} justifyContent={"space-between"}>
-        <Heading>Next Course</Heading>
+        <Heading>Next Course whg</Heading>
         <CountDown
           until={10}
           // onFinish={() => alert("finished")}
