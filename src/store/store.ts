@@ -7,7 +7,6 @@ import { persistReducer } from "redux-persist";
 import authReducer from "./reducers/authReducer";
 import lessonsReducer from "./reducers/lessonsReducer";
 import quizReducer from "./reducers/quizReducer";
-import userReducer from "./reducers/userReducer";
 
 const persistConfig = {
   key: "root",
@@ -15,15 +14,8 @@ const persistConfig = {
   whitelist: ["auth"],
 };
 
-const persistedReducers = combineReducers({
-  auth: authReducer,
-  user: userReducer,
-});
-
-const persistedReducer = persistReducer(persistConfig, persistedReducers);
-
 const rootReducer = combineReducers({
-  persistedReducer,
+  auth: persistReducer(persistConfig, authReducer),
   lessons: lessonsReducer,
   quiz: quizReducer,
 });

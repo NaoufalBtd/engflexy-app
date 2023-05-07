@@ -1,10 +1,10 @@
 import React from "react";
 import LoginTemplate from "../../src/components/templates/LoginTemplate";
 
-interface PlanningProps {}
+interface loginProps {}
 
-const two: React.FC<PlanningProps> = () => {
+const login: React.FC<loginProps> = () => {
   return <LoginTemplate />;
 };
 
-export default two;
+export default login;

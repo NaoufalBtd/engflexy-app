@@ -88,6 +88,7 @@ function RootLayoutNav() {
               <Stack.Screen name="index" options={{ headerShown: false }} />
               <Stack.Screen name="modal" options={{ presentation: "modal" }} />
               <Stack.Screen name="course" options={{ headerShown: false }} />
+              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
               <Stack.Screen
                 name="lessonsList"
                 options={{ headerShown: false }}

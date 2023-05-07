@@ -1,24 +1,78 @@
+import { AxiosError } from "axios";
+import { passwordStrength } from "check-password-strength";
+import { Link } from "expo-router";
 import {
   Box,
   Button,
+  FormControl,
   Heading,
   ScrollView,
   Select,
   Text,
   VStack,
 } from "native-base";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import PhoneInput from "react-native-phone-number-input";
+import { useAppDispatch } from "../../hooks/stateHooks";
+import { ApiParcours } from "../../types/api/ApiPatcours";
+import { RegisterForm } from "../../types/forms/RegisterForm";
+import { postFetcher } from "../../utils/serverUtils";
 import BackButton from "../elements/BackButton";
 import Input from "../elements/Input";
 import BaseLayout from "../layouts/BaseLayout";
+import PwdStrengthIndicator from "../modules/PwdStrengthIndicator";
 
 interface RegisterTemplateProps {}
 
+const inputWidth = {
+  base: "75%",
+  md: "25%",
+};
+
 const RegisterTemplate: React.FC<RegisterTemplateProps> = () => {
-  const inputWidth = {
-    base: "75%",
-    md: "25%",
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [level, setLevel] = useState<ApiParcours["id"]>(0);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<null | string>(null);
+  const [disabled, setDisabled] = useState(true);
+  const [showPwdIndicator, setShowPwdIndicator] = useState(false);
+  const dispatch = useAppDispatch();
+  const pwdStrength = passwordStrength(password);
+  const handleRegister = async () => {
+    setLoading(true);
+    try {
+      await postFetcher<RegisterForm>("url", {
+        nom: firstName,
+        prenom: lastName,
+        username: email,
+        password: password,
+        numero: phoneNumber,
+        parcours: {
+          id: level,
+        },
+      });
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        setError(err.response?.data.message);
+      }
+    }
+    setLoading(false);
   };
+
+  const isFormValid = () => {
+    if (!firstName || !lastName || !email || !password || !level) return false;
+    return true;
+  };
+
+  useEffect(() => {
+    isFormValid() ? setDisabled(false) : setDisabled(true);
+  }, [firstName, lastName, email, password, level]);
+
   return (
     <BaseLayout>
       <Box px={5} py={4}>
@@ -38,7 +92,7 @@ const RegisterTemplate: React.FC<RegisterTemplateProps> = () => {
             fontSize={"xl"}
             fontWeight={"bold"}
             textAlign={"center"}
-            color={"brand.primary"}>
+            color={"brand.secondary"}>
             Let's get started
           </Heading>
           <Text textAlign={"center"}>
@@ -46,29 +100,79 @@ const RegisterTemplate: React.FC<RegisterTemplateProps> = () => {
           </Text>
         </Box>
         <Box>
-          <VStack mx={"auto"} space={3}>
-            <Input placeholder="Full Name" w={inputWidth} />
-            <Input placeholder="Email" w={inputWidth} />
-            <Input placeholder="Phone Number" w={inputWidth} />
-            <Input placeholder="Password" w={inputWidth} />
-            <Select
-              variant="filled"
-              w={inputWidth}
-              placeholder="Select Your Level"
-              minWidth="64">
-              <Select.Item label="Beginner" value="1" />
-              <Select.Item label="Intermediate" value="ts" />
-            </Select>
-          </VStack>
+          <FormControl
+            w={{
+              base: "100%",
+              md: "25%",
+            }}>
+            <VStack mx={"auto"} space={3}>
+              <Input
+                placeholder="First Name"
+                w={inputWidth}
+                onChangeText={(value) => setFirstName(value)}
+              />
+              <Input
+                placeholder="Last Name"
+                w={inputWidth}
+                onChangeText={(value) => setLastName(value)}
+              />
+
+              <Input placeholder="Email" w={inputWidth} />
+              <Input placeholder="Phone Number" w={inputWidth} />
+              <PhoneInput
+                containerStyle={{
+                  backgroundColor: "black",
+                  borderRadius: 10,
+                  width: "75%",
+                }}
+                textContainerStyle={{
+                  backgroundColor: "black",
+                  borderRadius: 10,
+                }}
+                textInputStyle={{ color: "white" }}
+                codeTextStyle={{ color: "white" }}
+                value={phoneNumber}
+                defaultCode="MA"
+                layout="first"
+                withShadow
+              />
+              <Input
+                placeholder="Password"
+                onFocus={() => setShowPwdIndicator(true)}
+                onBlur={() => !password.length && setShowPwdIndicator(false)}
+                onChangeText={(value) => setPassword(value)}
+                w={inputWidth}
+              />
+              <PwdStrengthIndicator
+                shown={showPwdIndicator}
+                pwdStrength={pwdStrength}
+              />
+              <Select
+                variant="filled"
+                w={inputWidth}
+                placeholder="Select Your Level"
+                minWidth="64">
+                <Select.Item label="Beginner" value="beginner" />
+                <Select.Item label="Intermediate" value="intermediate" />
+              </Select>
+            </VStack>
+          </FormControl>
           <Box mt={5} mx={"auto"} w={inputWidth}>
-            <Button>Sign Up</Button>
+            <Button
+              isLoading={loading}
+              onPress={handleRegister}
+              isDisabled={!disabled}>
+              Sign Up
+            </Button>
           </Box>
           <Box my={3}>
             <Text textAlign={"center"}>
               Or{" "}
-              <Text fontWeight={"bold"} color={"blue.500"}>
-                Login To Your Account
-              </Text>
+              <Link href="/login" replace>
+                <Text fontWeight={"bold"} color={"blue.500"}>
+                  Login To Your Account
+                </Text>
+              </Link>
             </Text>
           </Box>
         </Box>

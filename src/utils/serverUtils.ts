@@ -21,9 +21,9 @@ export const getFetcher = async <T>(url: string, withAuth?: boolean) => {
   return axiosInstance.get<T>(url);
 };
 
-export const postFetcher = async <T>(url: string, data: any) => {
+export const postFetcher = async <D, R = any>(url: string, data: D) => {
   const axiosInstance = await getAxiosInstance();
-  return axiosInstance.post<T>(url, data);
+  return axiosInstance.post<R>(url, data);
 };
 
 export const putFetcher = async <T>(url: string, data: any) => {

@@ -1,9 +1,9 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { AxiosError } from "axios";
-import { useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import {
   Box,
   Button,
+  FormControl,
   HStack,
   Heading,
   Icon,
@@ -12,12 +12,13 @@ import {
   ScrollView,
   Stack,
   Text,
+  WarningOutlineIcon,
 } from "native-base";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SvgXml } from "react-native-svg";
 import login from "../../../assets/svg/login.svg";
-import { useAppDispatch } from "../../hooks/stateHooks";
-import { postFetcher } from "../../utils/serverUtils";
+import { useAppDispatch, useAppSelector } from "../../hooks/stateHooks";
+import { loginStudent } from "../../store/thunks/login";
 
 interface LoginTemplateProps {}
 
@@ -27,40 +28,27 @@ const LoginTemplate: React.FC<LoginTemplateProps> = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<null | string>(null);
+  const { loading, isAuthenticated, isError } = useAppSelector(
+    (state) => state.auth
+  );
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const dispatch = useAppDispatch();
   const route = useRouter();
 
-  const handleLogin = async () => {
-    const url = "http://192.168.0.106:8036/etudiant/user/login";
-    try {
-      const res = await postFetcher<{
-        token: string;
-      }>(url, {
-        username,
-        password,
-      });
+  useEffect(() => {
+    if (username && password) setIsFormValid(true);
+    else setIsFormValid(false);
+  }, [username, password]);
 
-      dispatch({
-        type: login,
-        payload: {
-          username,
-          // token: res.data.token,
-        },
-      });
-      route.replace("/home");
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        setError(error.response?.data.message);
-      }
-    }
+  const handleLogin = () => {
+    dispatch(loginStudent({ username, password }));
   };
   const togglePassword = () => {
     setShowPassword(!showPassword);
   };
 
+  if (isAuthenticated) route.replace("/(tabs)");
   return (
     <ScrollView
       flex={1}
@@ -85,50 +73,56 @@ const LoginTemplate: React.FC<LoginTemplateProps> = () => {
           Login
         </Heading>
         <Stack space={4} alignItems={"center"}>
-          <Input
-            variant="filled"
-            value={username}
-            onChangeText={setUsername}
-            // placeholderTextColor={"muted.400"}
+          <FormControl
             w={{
               base: "75%",
               md: "25%",
             }}
-            InputLeftElement={
-              <Icon as={FontAwesome} name="user" size={5} ml="2" />
-            }
-            placeholder="Name"
-          />
-          <Input
-            variant="filled"
-            w={{
-              base: "75%",
-              md: "25%",
-            }}
-            type={showPassword ? "text" : "password"}
-            value={password}
-            onChangeText={setPassword}
-            InputRightElement={
-              <Pressable onPress={togglePassword}>
-                <Icon
-                  as={FontAwesome}
-                  name={showPassword ? "eye" : "eye-slash"}
-                  size={5}
-                  mr="2"
-                  color="muted.400"
-                />
-              </Pressable>
-            }
-            placeholder="Password"
-          />
+            isRequired
+            isInvalid={isError}>
+            <Input
+              variant="filled"
+              value={username}
+              onChangeText={setUsername}
+              mb={3}
+              InputLeftElement={
+                <Icon as={FontAwesome} name="user" size={5} ml="2" />
+              }
+              placeholder="Name"
+            />
+            <Input
+              variant="filled"
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChangeText={setPassword}
+              InputRightElement={
+                <Pressable onPress={togglePassword}>
+                  <Icon
+                    as={FontAwesome}
+                    name={showPassword ? "eye" : "eye-slash"}
+                    size={5}
+                    mr="2"
+                    color="muted.400"
+                  />
+                </Pressable>
+              }
+              placeholder="Password"
+            />
+            <FormControl.ErrorMessage
+              leftIcon={<WarningOutlineIcon size="xs" />}>
+              The username or password is incorrect
+            </FormControl.ErrorMessage>
+          </FormControl>
           <HStack px="5">
             <Box flex={1} />
             <Text color={"white"}> Forgot Password</Text>
           </HStack>
           <Box width={"full"}>
             <Button
+              isLoading={loading}
               onPress={handleLogin}
               borderRadius={"lg"}
+              disabled={!isFormValid}
               mx="auto"
               w={{ base: "3/4", md: "1/3" }}>
               Login
@@ -137,7 +131,10 @@ const LoginTemplate: React.FC<LoginTemplateProps> = () => {
           <Text>Or</Text>
           <Box>
             <Text>
-              New To EngFlexy? <Text color={"blue.300"}>Register</Text>
+              New To EngFlexy?{" "}
+              <Link href={"/register"} asChild>
+                <Text color={"blue.300"}>Register</Text>
+              </Link>
             </Text>
           </Box>
         </Stack>
