@@ -8,3 +8,8 @@
 - try to find a way to fix image aspect ration probelm in article template #fixed
 
 - complete the chat
+
+------------------------ libraries contribution
+
+- react-native-calendar: add a type for missing property
+- react-tooltip: update the documentation

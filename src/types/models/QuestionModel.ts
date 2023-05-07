@@ -1,3 +1,5 @@
+import { QnsTypes } from "../../constants/Quiz";
+
 export type Question = {
   id: number;
   ref: string | null;
@@ -16,7 +18,7 @@ export type Questions = {
 export type QuestionType = {
   id: number;
   ref: string | null;
-  label: string;
+  label: QnsTypes;
 };
 
 export type QuestionTypes = {

@@ -160,7 +160,7 @@ const nativeBaseTheme = extendTheme({
       body: "#0A043C",
       level1: "#393884",
       level2: "#4e4d8d",
-      level3: "#5a5a72",
+      level3: "white",
     },
     text: {
       primary: "#EBEBEF",

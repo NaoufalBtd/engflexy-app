@@ -1,9 +1,9 @@
 // quizReducer redux toolkit boilerplate
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { QuestionStatus } from "../../constants/Quiz";
-import { QuizQnAnswer } from "../../types/forms/QuizQnAnswer";
-import { QnResponses } from "../../types/models/QnResponseModel";
+import _ from "lodash";
+import { QnsTypes, QuestionStatus } from "../../constants/Quiz";
+import { QnResponse, QnResponses } from "../../types/models/QnResponseModel";
 import {
   Question,
   Questions,
@@ -20,7 +20,7 @@ export interface QuizState {
   currQuestionType: QuestionType | null;
   currQuestionStatus: QuestionStatus;
   responses: QnResponses | null;
-  answers: QuizQnAnswer[];
+  answers: QnResponse["id"][] | string;
   // solutionShown: boolean;
   // currQuestionAnswered: boolean;
   loaded: boolean;
@@ -53,15 +53,23 @@ export const quizSlice = createSlice({
   name: "quiz",
   initialState,
   reducers: {
-    changeResponse: (state, action: PayloadAction<string[]>) => {
+    changeResponse: (state, action: PayloadAction<QnResponse["id"][]>) => {
       const res = action.payload;
-      state.answer = res;
+      state.answers = res;
       state.currQuestionStatus =
         res.length > 0 ? QuestionStatus.InProgress : QuestionStatus.NotAnswered;
     },
-    submitAnswer: (state, action: PayloadAction<QuizQnAnswer>) => {
+    submitAnswer: (state) => {
       //todo: handle response submission
-      state.answers = [...state.answers, action.payload];
+      const { currQuestionType: qnType, answers, responses } = state;
+      if (qnType?.label === QnsTypes.qcm && answers instanceof Array) {
+        state.currQuestionStatus = _.isEqual(
+          answers,
+          responses?.correctAnswersIds
+        )
+          ? QuestionStatus.AnsweredCorrectly
+          : QuestionStatus.AnsweredIncorrectly;
+      }
     },
     nextQuestion: (state) => {
       if (
@@ -113,7 +121,7 @@ export const quizSlice = createSlice({
   },
 });
 
-export const { nextQuestion, previousQuestion, changeResponse } =
+export const { nextQuestion, previousQuestion, changeResponse, submitAnswer } =
   quizSlice.actions;
 
 //todo: create a separate file for async thunks actions

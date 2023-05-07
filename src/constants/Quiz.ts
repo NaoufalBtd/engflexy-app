@@ -11,3 +11,10 @@ export enum QuestionStatus {
   AnsweredIncorrectly = 3,
   NeedsAssistance = 4,
 }
+
+export enum QnsTypes {
+  qcm = "Choose the correct alternative",
+  fillBlank = "Write the correct form",
+  correctMistake = "Correct the mistake",
+  dragAndDrop = "Drag and drop",
+}

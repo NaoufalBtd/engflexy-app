@@ -1,3 +1,5 @@
+import { QnsTypes } from "../../constants/Quiz";
+
 export type ApiQuestion = {
   id: number;
   ref: string | null;
@@ -8,6 +10,6 @@ export type ApiQuestion = {
   typeDeQuestion: {
     id: number;
     ref: string | null;
-    lib: string;
+    lib: QnsTypes;
   };
 };

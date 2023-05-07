@@ -12,7 +12,7 @@ import {
 import React from "react";
 import { QuestionStatus } from "../../constants/Quiz";
 import { useAppDispatch } from "../../hooks/stateHooks";
-import { nextQuestion } from "../../store/reducers/quizReducer";
+import { nextQuestion, submitAnswer } from "../../store/reducers/quizReducer";
 import { calculatePercentage } from "../../utils";
 
 interface QuizLayoutProps {
@@ -40,7 +40,7 @@ const QuizLayout: React.FC<QuizLayoutProps> = ({
     dispatch(nextQuestion());
   };
   const handleSubmit = () => {
-    // dispatch(());
+    dispatch(submitAnswer());
   };
 
   return (
@@ -77,11 +77,12 @@ const QuizLayout: React.FC<QuizLayoutProps> = ({
         <ScrollView>{children}</ScrollView>
       </Box>
       <Box my="4">
-        {answered && isLastQn ? (
+        {answered && isLastQn && (
           <Button>
             <Text>Finish</Text>
           </Button>
-        ) : (
+        )}
+        {answered && !isLastQn && (
           <Button variant={"subtle"} onPress={handleSubmit}>
             <Text>Next</Text>
           </Button>
