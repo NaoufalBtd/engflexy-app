@@ -36,7 +36,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
         </Box>
       </TouchableOpacity>
       <Collapse isOpen={open}>
-        <Box bgColor={alpha(colors.background.body, 0.6)} p={3}>
+        <Box bgColor={alpha(colors.background.level1, 0.8)} p={3}>
           {children}
         </Box>
       </Collapse>

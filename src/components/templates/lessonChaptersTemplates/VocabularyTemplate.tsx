@@ -4,20 +4,25 @@ import {
   Button,
   Divider,
   HStack,
-  Heading,
   Icon,
-  Progress,
   ScrollView,
   Text,
   View,
 } from "native-base";
 import React, { useState } from "react";
-import vocData from "../../../../assets/mock/voc.json";
+import useSWR from "swr";
+import { getVocabulary } from "../../../constants/ApiUrls";
+import { ApiVocabulary } from "../../../types/api/ApiVocabulary";
 import { LessonChapter } from "../../../types/models/lessonChapterModel";
-import { calculatePercentage, isLastIndex } from "../../../utils";
+import { isLastIndex } from "../../../utils";
+import { getFetcher } from "../../../utils/serverUtils";
 import AccordionItem from "../../elements/AccordionItem";
-import BlurredVoc from "../../modules/BlurredVoc";
-import VocBox from "../../modules/VocBox";
+import Listen from "../../elements/Listen";
+import ErrorBox from "../../modules/ErrorBox";
+import ProgressBar from "../../modules/ProgressBar";
+import BlurredVoc from "../../modules/Vocabulary/BlurredVoc";
+import VocBox from "../../modules/Vocabulary/VocBox";
+import VocSkeleton from "../../modules/Vocabulary/VocSkeleton";
 
 interface learnWordsProps {
   lesson: LessonChapter;
@@ -26,10 +31,27 @@ interface learnWordsProps {
 const VocabularyTemplate: React.FC<learnWordsProps> = ({ lesson }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [index, setIndex] = useState(0);
+  const {
+    isLoading,
+    error,
+    data: res,
+  } = useSWR(getVocabulary(lesson.id), getFetcher<ApiVocabulary[]>);
+  const vocData = res?.data;
+
+  if (isLoading) return <VocSkeleton />;
+  if (error || !vocData)
+    return (
+      <Box
+        h="full"
+        alignItems={"center"}
+        flexDir={"row"}
+        justifyContent={"center"}>
+        <ErrorBox />
+      </Box>
+    );
+
   const vocsNumber = vocData.length;
   const currentVoc = vocData[index];
-  // const quizId  = lesson.id;
-  //todo getData from backend https://engflexy.ma/app/admin/sectionItem/sectionId/${quizId}
 
   const handleFlip = () => {
     setIsFlipped(true);
@@ -51,14 +73,7 @@ const VocabularyTemplate: React.FC<learnWordsProps> = ({ lesson }) => {
           alignItems={"center"}
           justifyContent={"space-between"}>
           <Box w="3/4" mx="auto">
-            <Heading textAlign="center" fontStyle="italic" color="primary.400">
-              {index} in row
-            </Heading>
-            <Progress
-              size="md"
-              colorScheme={"primary"}
-              value={calculatePercentage(index, vocsNumber)}
-            />
+            <ProgressBar index={index} length={vocsNumber} />
           </Box>
         </Box>
       </Box>
@@ -85,10 +100,15 @@ const VocabularyTemplate: React.FC<learnWordsProps> = ({ lesson }) => {
                 <AccordionItem title="Synonyms">
                   <Box flexDir={"row"} flexWrap={"wrap"}>
                     {currentVoc.synonyms.map((synonym, index) => (
-                      <Box key={synonym} flexDir={"row"}>
+                      <Box key={synonym} flexDir={"row"} alignItems={"center"}>
                         <Text mr="1">{synonym}</Text>
-                        <FontAwesome name="volume-up" size={24} color="black" />
-                        <Divider orientation="vertical" mx={2} />
+                        <Listen word={synonym} color="primary.400" />
+                        <Divider
+                          h={5}
+                          orientation="vertical"
+                          colorScheme={"blue"}
+                          mx={2}
+                        />
                       </Box>
                     ))}
                   </Box>

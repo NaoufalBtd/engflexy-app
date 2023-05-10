@@ -2,9 +2,9 @@ import { BlurView } from "expo-blur";
 import { Box, HStack, Heading, Image } from "native-base";
 import React from "react";
 import { StyleSheet } from "react-native";
-import { useAppTheme } from "../../theme";
-import { alpha } from "../../utils/uiUtils";
-import Listen from "../elements/Listen";
+import { useAppTheme } from "../../../theme";
+import { alpha } from "../../../utils/uiUtils";
+import Listen from "../../elements/Listen";
 
 interface BlurredVocProps {
   imageUri: string;
@@ -32,7 +32,7 @@ const BlurredVoc: React.FC<BlurredVocProps> = ({
           bgColor={alpha(colors.background.level1, 0.5)}>
           <HStack space={4} alignItems={"center"}>
             <Heading>{transcription}</Heading>
-            <Listen />
+            <Listen word={word} color={"primary.400"} />
           </HStack>
           <Heading textAlign={"center"} fontSize={"3xl"}>
             {word}

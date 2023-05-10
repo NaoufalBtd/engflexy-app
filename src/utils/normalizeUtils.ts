@@ -2,6 +2,7 @@ import { ApiLesson } from "../types/api/ApiLesson";
 import { ApiLessonChapter } from "../types/api/ApiLessonChapter";
 import { ApiQnResponse } from "../types/api/ApiQnResponse";
 import { ApiQuestion } from "../types/api/ApiQuestion";
+import { ApiVocabulary } from "../types/api/ApiVocabulary";
 import { QnResponse, QnResponses } from "../types/models/QnResponseModel";
 import {
   Question,
@@ -9,6 +10,7 @@ import {
   QuestionTypes,
   Questions,
 } from "../types/models/QuestionModel";
+import { Vocabularies, Vocabulary } from "../types/models/VocabularyModel";
 import { LessonChapter } from "../types/models/lessonChapterModel";
 import { Lesson, Lessons } from "../types/models/lessonModel";
 
@@ -119,5 +121,24 @@ export const normalizeQnsTypes = (
     return acc;
   }, {} as { [key: string]: QuestionType });
 
+  return { allIds, byId };
+};
+
+export const normalizeVocs = (vocs: ApiVocabulary[]): Vocabularies => {
+  const allIds: number[] = [];
+  const byId = vocs.reduce((acc, voc) => {
+    acc[voc.id] = {
+      image: voc.imageUrl,
+      id: voc.id,
+      response: voc.response,
+      transcription: voc.transcription,
+      translation: voc.translation,
+      synonyms: voc.synonyms,
+      explanation: voc.explanation,
+      example: voc.example,
+    };
+    allIds.push(voc.id);
+    return acc;
+  }, {} as Record<number, Vocabulary>);
   return { allIds, byId };
 };

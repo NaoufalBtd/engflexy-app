@@ -11,3 +11,6 @@ export const getLessonsUrl = (courseId: string) =>
   `${BASE_URL}/prof/cours/parcours/id/${courseId}`;
 export const getChaptersUrl = (lessonId: string) =>
   `${BASE_URL}/prof/section/cours/id/${lessonId}`;
+
+export const getVocabulary = (chapterId: number) =>
+  `${BASE_URL}/admin/sectionItem/sectionId/${chapterId}`;

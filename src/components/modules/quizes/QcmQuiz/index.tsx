@@ -98,7 +98,7 @@ const QcmQuiz: React.FC<indexProps> = ({ question, answers }) => {
   return (
     <Box>
       <Box flexDir={"row"} alignItems={"center"} my={3}>
-        <Listen bordered />
+        <Listen bordered word={question.label} />
         {renderText(question.label)}
       </Box>
       {/*

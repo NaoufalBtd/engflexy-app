@@ -12,7 +12,7 @@ interface LessonChaptersTemplateProps {}
 
 const LESSONS_SECTIONS_CODE = [
   { title: "Warm up", component: ArticleTemplate },
-  { title: "vocabulary", component: VocabularyTemplate },
+  { title: "Vocabulary", component: VocabularyTemplate },
   { title: "Get to know", component: ArticleTemplate },
   { title: "Let's practice", component: PracticeTemplate },
   { title: "Discussion", component: ArticleTemplate },
@@ -26,20 +26,21 @@ const LessonChaptersTemplate: React.FC<LessonChaptersTemplateProps> = () => {
     error,
   } = useAppSelector((state) => state.lessons);
 
+  const renderError = () => (
+    <Box
+      h="full"
+      alignItems={"center"}
+      flexDir={"row"}
+      justifyContent={"center"}>
+      <ErrorBox />
+    </Box>
+  );
+
   if (isLoading) {
     return <Text>Loading ...</Text>;
   }
-
   if (error || !chapters) {
-    return (
-      <Box
-        h="full"
-        alignItems={"center"}
-        flexDir={"row"}
-        justifyContent={"center"}>
-        <ErrorBox />
-      </Box>
-    );
+    return renderError();
   }
 
   const Template = LESSONS_SECTIONS_CODE[lessonIndex].component;
@@ -49,6 +50,7 @@ const LessonChaptersTemplate: React.FC<LessonChaptersTemplateProps> = () => {
     (lesson) =>
       lesson.categorySection.label === LESSONS_SECTIONS_CODE[lessonIndex].title
   );
+  if (!data) return renderError();
 
   return (
     <LessonContainerLayout>

@@ -1,6 +1,6 @@
 import { Box, HStack, Heading, Image, Text } from "native-base";
 import React from "react";
-import Listen from "../elements/Listen";
+import Listen from "../../elements/Listen";
 
 interface VocBoxProps {
   transcription: string;
@@ -31,7 +31,7 @@ const VocBox: React.FC<VocBoxProps> = ({
         <Box mx={"auto"}></Box>
         <HStack alignItems={"center"} space={1}>
           <Text fontSize="md">{transcription}</Text>
-          <Listen />
+          <Listen word={word} />
         </HStack>
         <Heading>{word}</Heading>
 
