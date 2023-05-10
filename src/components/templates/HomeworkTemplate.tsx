@@ -2,9 +2,9 @@ import _ from 'lodash';
 import React from 'react';
 import { useAppSelector } from '../../hooks/stateHooks';
 import LessonLayout from '../layouts/LessonLayout';
-import ArticleTemplate from './LessonTemplates/ArticleTemplate';
-import PracticeTemplate from './LessonTemplates/PracticeTemplate';
-import VocabularyTemplate from './LessonTemplates/VocabularyTemplate';
+import ArticleTemplate from './lessonChaptersTemplates/ArticleTemplate';
+import PracticeTemplate from './lessonChaptersTemplates/PracticeTemplate';
+import VocabularyTemplate from './lessonChaptersTemplates/VocabularyTemplate';
 
 interface HomeworkTemplateProps {
 
@@ -49,7 +49,7 @@ const homeworkSections = [{
 ]
 
 const HomeworkTemplate: React.FC<HomeworkTemplateProps> = () => {
-  const { lessons, homeworkIndex } = useAppSelector((state) => state.lessons);
+  const { chapters: lessons, homeworkIndex } = useAppSelector((state) => state.lessons);
   const Template = homeworkSections[homeworkIndex].component;
   const lessonsData = _.values(lessons.byId);
   const lesson = _.find(lessonsData, (lesson) => lesson.categorySection.label === homeworkSections[homeworkIndex].title);

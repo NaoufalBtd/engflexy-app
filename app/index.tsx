@@ -1,12 +1,12 @@
 import { useRouter } from "expo-router";
 import React from "react";
-import LessonTemplate from "../src/components/templates/LessonTemplate";
+import HomeTemplate from "../src/components/templates/HomeTemplate";
 
 interface indexProps {}
 
 const index: React.FC<indexProps> = () => {
   const route = useRouter();
-  return <LessonTemplate />;
+  return <HomeTemplate />;
 };
 
 export default index;

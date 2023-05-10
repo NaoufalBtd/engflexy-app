@@ -1,4 +1,4 @@
-type ApiError = {
-  message: string;
-  error: string;
+export type ApiReqError = {
+  message: string | null;
+  code: string | null;
 };

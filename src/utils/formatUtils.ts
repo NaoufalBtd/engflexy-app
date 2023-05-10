@@ -1,5 +1,7 @@
+import { ApiParcours } from "../types/api/ApiParcours";
 import { ApiUser } from "../types/api/ApiUser";
 import { UserModel } from "../types/models/UserModel";
+import { toCamelCase } from "./textUtils";
 
 export const formatUser = (user: ApiUser): UserModel => ({
   ...user,
@@ -10,3 +12,13 @@ export const formatUser = (user: ApiUser): UserModel => ({
   phoneNumber: user.numero,
   city: user.ville,
 });
+
+export const formatCourse = (data: ApiParcours[]) => {
+  return data.map((parcours) => ({
+    id: parcours.id,
+    code: parcours.code,
+    label: parcours.libelle,
+    lessonsNumber: parcours.numeroCours,
+    title: toCamelCase(parcours.libelle.replace(/\d /g, "")),
+  }));
+};

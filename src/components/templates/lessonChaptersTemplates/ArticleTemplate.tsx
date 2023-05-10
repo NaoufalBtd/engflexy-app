@@ -3,10 +3,10 @@ import { Box, Factory, Heading } from "native-base";
 import React, { useEffect, useState } from "react";
 import { Image as RImage } from "react-native";
 import RenderHtml from "react-native-render-html";
-import { Lesson } from "../../../types/models/lessonsModel";
+import { LessonChapter } from "../../../types/models/lessonChapterModel";
 
 interface ArticleTemplateProps {
-  lesson: Lesson;
+  lesson: LessonChapter;
 }
 
 const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ lesson }) => {

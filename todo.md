@@ -9,6 +9,10 @@
 
 - complete the chat
 
+------------------------ meeting notes
+i need an api that show all parcours for free student pack
+i need an api that show only the auth lessons for the specfic parcours
+
 ------------------------ libraries contribution
 
 - react-native-calendar: add a type for missing property

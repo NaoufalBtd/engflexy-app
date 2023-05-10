@@ -1,19 +1,15 @@
+import { ApiParcours } from "./ApiParcours";
+
 export type ApiLesson = {
   id: number;
-  code: string | null;
+  code: string;
   libelle: string;
-  urlImage: string | null;
-  urlImage2: string | null;
-  urlImage3: string | null;
-  urlVideo: string | null;
-  contenu: string | null;
-  questions: any;
-  indicationProf: null;
+  image: string;
+  etatCours: string;
+  nombreLinkEnCours: number;
+  nombreLinkFinalise: number;
+  nombreSectionEnCours: number;
+  nombreSectionFinalise: number;
   numeroOrder: number;
-  content: number;
-  categorieSection: {
-    id: number;
-    code: string;
-    libelle: string;
-  };
+  parcours: ApiParcours;
 };

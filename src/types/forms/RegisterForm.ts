@@ -1,4 +1,4 @@
-import { ApiParcours } from "../api/ApiPatcours";
+import { ApiParcours } from "../api/ApiParcours";
 import { requireOnly } from "../utilities";
 
 export type RegisterForm = {

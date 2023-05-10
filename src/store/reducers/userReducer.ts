@@ -1,11 +1,14 @@
 // redux toolkit userReducer boilerplate
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { UserModel } from "../../types/models/UserModel";
+import { loginStudent } from "../thunks/login";
 
 const initialState = {
   username: "",
   name: "",
   email: "",
   userId: "",
+  user: null as UserModel | null,
 };
 
 type UserState = typeof initialState;
@@ -19,15 +22,14 @@ export const userSlice = createSlice({
       state.email = action.payload.email;
       state.userId = action.payload.userId;
     },
-    login: (state, { payload }: PayloadAction<UserState>) => {
-      state = {
-        ...state,
-        ...payload,
-      };
-    },
+  },
+  extraReducers(builder) {
+    builder.addCase(loginStudent.fulfilled, (state, action) => {
+      state.user = action.payload;
+    });
   },
 });
 
-export const { setUser, login } = userSlice.actions;
+export const { setUser } = userSlice.actions;
 
 export default userSlice.reducer;

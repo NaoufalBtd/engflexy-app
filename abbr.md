@@ -1,1 +1,5 @@
 - Voc: Vocabulary
+- qn: question
+- ch: chapter
+- req: request
+- res: response

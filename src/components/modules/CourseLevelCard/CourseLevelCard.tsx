@@ -3,12 +3,15 @@ import { Box, Heading } from "native-base";
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import { SvgXml } from "react-native-svg";
+import { useAppDispatch } from "../../../hooks/stateHooks";
+import { fetchLessons } from "../../../store/thunks/lessonsThunks";
 
 interface CourseLevelCardProps {
   svg: string;
   title: string;
   width: number;
   bgColor: string;
+  id: number;
 }
 
 const CourseLevelCard: React.FC<CourseLevelCardProps> = ({
@@ -16,11 +19,14 @@ const CourseLevelCard: React.FC<CourseLevelCardProps> = ({
   title,
   width,
   bgColor,
+  id,
 }) => {
   const route = useRouter();
+  const dispatch = useAppDispatch();
+
   const handlePress = () => {
-    route.push("/lessonsList");
-    console.log("pressed");
+    dispatch(fetchLessons(id.toString()));
+    route.push("/list");
   };
   return (
     <TouchableOpacity onPress={handlePress}>

@@ -5,4 +5,5 @@ export type ApiParcours = {
   code: string;
   dateCreation: string | null;
   datePublication: string | null;
+  numeroCours: number;
 };

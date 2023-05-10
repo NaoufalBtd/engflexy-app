@@ -1,3 +1,9 @@
+import IntermediateSvg from "../../assets/svg/book_lover.svg";
+import AdvancedSvg from "../../assets/svg/books.svg";
+import PreIntermediateSvg from "../../assets/svg/education.svg";
+import ElementarySvg from "../../assets/svg/reading_book.svg";
+import UpperIntermediateSvg from "../../assets/svg/sharing_knowledge.svg";
+import { Parcours } from "../constants/Parours";
 import { QuestionStatus } from "../constants/Quiz";
 
 export const alpha = (color: string, opacity: number) => {
@@ -27,7 +33,6 @@ export const quizAnswerFeedbackColor = (
   }
 };
 
-//todo: complete this function - we stop in enteredAnswers and i still struggling to define the name
 export const getQcmCheckboxColor = (
   answerId: number,
   correctAnswersIds: number[],
@@ -40,4 +45,32 @@ export const getQcmCheckboxColor = (
   } else {
     return "background.surface";
   }
+};
+
+export const getSvgIconByParcours = (parcours: string) => {
+  let svgIcon = "";
+  switch (parcours) {
+    case Parcours.ELEMENTARY:
+      return ElementarySvg;
+      break;
+    case Parcours.PRE_INTERMEDIATE:
+      svgIcon = PreIntermediateSvg;
+      break;
+    case Parcours.INTERMEDIATE:
+      svgIcon = IntermediateSvg;
+      break;
+    case Parcours.UPPER_INTERMEDIATE:
+      svgIcon = UpperIntermediateSvg;
+      break;
+    case Parcours.ADVANCED:
+      svgIcon = AdvancedSvg;
+      break;
+    case Parcours.BAC:
+      svgIcon = IntermediateSvg;
+      break;
+    default:
+      svgIcon = IntermediateSvg;
+  }
+
+  return svgIcon;
 };

@@ -2,14 +2,11 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Box, HStack, Icon, Pressable, ScrollView, Text } from "native-base";
 import React from "react";
 import { useAppDispatch } from "../../hooks/stateHooks";
-import {
-  nextLesson,
-  previousLesson,
-} from "../../store/reducers/lessonsReducer";
+import { nextLesson, previousLesson } from "../../store/reducers/lessonReducer";
 import { useAppTheme } from "../../theme";
 import { alpha } from "../../utils/uiUtils";
 
-interface LessonSectionLayoutProps {
+interface LessonContainerLayoutProps {
   children: React.ReactNode;
   previous?: {
     title: string;
@@ -21,7 +18,7 @@ interface LessonSectionLayoutProps {
   };
 }
 
-const LessonSectionLayout: React.FC<LessonSectionLayoutProps> = ({
+const LessonContainerLayout: React.FC<LessonContainerLayoutProps> = ({
   children,
 }) => {
   const dispatch = useAppDispatch();
@@ -83,4 +80,4 @@ const LessonSectionLayout: React.FC<LessonSectionLayoutProps> = ({
   );
 };
 
-export default LessonSectionLayout;
+export default LessonContainerLayout;

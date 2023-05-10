@@ -124,7 +124,6 @@ export const quizSlice = createSlice({
 export const { nextQuestion, previousQuestion, changeResponse, submitAnswer } =
   quizSlice.actions;
 
-//todo: create a separate file for async thunks actions
 type FetchQuiz = {
   quiz: Questions;
   responses: QnResponses;

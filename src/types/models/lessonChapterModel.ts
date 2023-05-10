@@ -1,9 +1,9 @@
-export type Lessons = {
+export type LessonChapters = {
   allIds: number[];
-  byId: { [key: string]: Lesson };
+  byId: { [key: string]: LessonChapter };
 };
 
-export type Lesson = {
+export type LessonChapter = {
   id: number;
   code: string | null;
   label: string;

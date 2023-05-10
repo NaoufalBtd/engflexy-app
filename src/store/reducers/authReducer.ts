@@ -33,6 +33,7 @@ export const authSlice = createSlice({
       state.user = action.payload;
     });
     builder.addCase(loginStudent.rejected, (state, action) => {
+      console.log(action.error.message);
       state.loading = false;
       state.isError = true;
     });

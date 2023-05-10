@@ -7,3 +7,10 @@ export const formatHtml = (html: string) => {
   html = html.replace(/ /g, "&nbsp;");
   return html;
 };
+
+export const toCamelCase = (str: string) => {
+  return str
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};

@@ -31,10 +31,8 @@ module.exports = {
     },
   },
   rules: {
-    // Your custom rules go here
-    //react must be in scope when using jsx
     "react/react-in-jsx-scope": "off",
-    //no empty interface
     "@typescript-eslint/no-empty-interface": "warn",
+    "react/no-unescaped-entities": "off",
   },
 };

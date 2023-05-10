@@ -13,14 +13,14 @@ import {
 } from "native-base";
 import React, { useState } from "react";
 import vocData from "../../../../assets/mock/voc.json";
-import { Lesson } from "../../../types/models/lessonsModel";
+import { LessonChapter } from "../../../types/models/lessonChapterModel";
 import { calculatePercentage, isLastIndex } from "../../../utils";
 import AccordionItem from "../../elements/AccordionItem";
 import BlurredVoc from "../../modules/BlurredVoc";
 import VocBox from "../../modules/VocBox";
 
 interface learnWordsProps {
-  lesson: Lesson;
+  lesson: LessonChapter;
 }
 
 const VocabularyTemplate: React.FC<learnWordsProps> = ({ lesson }) => {

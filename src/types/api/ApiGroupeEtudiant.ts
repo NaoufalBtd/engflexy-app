@@ -1,5 +1,5 @@
 import { ApiEtudiant } from "./ApiEtudiant";
-import { ApiParcours } from "./ApiPatcours";
+import { ApiParcours } from "./ApiParcours";
 import { ApiProf } from "./ApiProf";
 
 export type ApiGroupeEtudiant = {

@@ -1,4 +1,5 @@
 import { ApiLesson } from "../types/api/ApiLesson";
+import { ApiLessonChapter } from "../types/api/ApiLessonChapter";
 import { ApiQnResponse } from "../types/api/ApiQnResponse";
 import { ApiQuestion } from "../types/api/ApiQuestion";
 import { QnResponse, QnResponses } from "../types/models/QnResponseModel";
@@ -8,11 +9,35 @@ import {
   QuestionTypes,
   Questions,
 } from "../types/models/QuestionModel";
-import { Lesson } from "../types/models/lessonsModel";
+import { LessonChapter } from "../types/models/lessonChapterModel";
+import { Lesson, Lessons } from "../types/models/lessonModel";
 
-export const normalizeLessons = (lessons: ApiLesson[]) => {
+export const normalizeLessons = (lessons: ApiLesson[]): Lessons => {
   const allIds: number[] = [];
   const byId = lessons.reduce((acc, lesson) => {
+    acc[lesson.id] = {
+      id: lesson.id,
+      code: lesson.code,
+      label: lesson.libelle,
+      image: lesson.image,
+      courseState: lesson.etatCours,
+      numberOfLinksInProgress: lesson.nombreLinkEnCours,
+      numberOfLinksCompleted: lesson.nombreLinkFinalise,
+      numberOfSectionsInProgress: lesson.nombreSectionEnCours,
+      numberOfSectionsCompleted: lesson.nombreSectionFinalise,
+      orderNumber: lesson.numeroOrder,
+      courseId: lesson.parcours.id,
+    };
+    allIds.push(lesson.id);
+    return acc;
+  }, {} as Record<number, Lesson>);
+
+  return { allIds, byId };
+};
+
+export const normalizeLessonChapters = (ch: ApiLessonChapter[]) => {
+  const allIds: number[] = [];
+  const byId = ch.reduce((acc, lesson) => {
     acc[lesson.id] = {
       id: lesson.id,
       code: lesson.code,
@@ -34,7 +59,7 @@ export const normalizeLessons = (lessons: ApiLesson[]) => {
     };
     allIds.push(lesson.id);
     return acc;
-  }, {} as { [key: string]: Lesson });
+  }, {} as { [key: string]: LessonChapter });
 
   return { allIds, byId };
 };

@@ -13,8 +13,9 @@ import {
 } from "native-base";
 import React, { useEffect, useState } from "react";
 import PhoneInput from "react-native-phone-number-input";
+import { REGISTER_URL } from "../../constants/ApiUrls";
 import { useAppDispatch } from "../../hooks/stateHooks";
-import { ApiParcours } from "../../types/api/ApiPatcours";
+import { ApiParcours } from "../../types/api/ApiParcours";
 import { RegisterForm } from "../../types/forms/RegisterForm";
 import { postFetcher } from "../../utils/serverUtils";
 import BackButton from "../elements/BackButton";
@@ -43,10 +44,11 @@ const RegisterTemplate: React.FC<RegisterTemplateProps> = () => {
   const [showPwdIndicator, setShowPwdIndicator] = useState(false);
   const dispatch = useAppDispatch();
   const pwdStrength = passwordStrength(password);
+
   const handleRegister = async () => {
     setLoading(true);
     try {
-      await postFetcher<RegisterForm>("url", {
+      await postFetcher<RegisterForm>(REGISTER_URL, {
         nom: firstName,
         prenom: lastName,
         username: email,
@@ -57,13 +59,15 @@ const RegisterTemplate: React.FC<RegisterTemplateProps> = () => {
         },
       });
     } catch (err) {
+      console.error(err);
       if (err instanceof AxiosError) {
         setError(err.response?.data.message);
+      } else {
+        setError("An error occured, please try again later");
       }
     }
     setLoading(false);
   };
-
   const isFormValid = () => {
     if (!firstName || !lastName || !email || !password || !level) return false;
     return true;

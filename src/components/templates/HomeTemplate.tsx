@@ -1,21 +1,26 @@
 import { Box, Heading, Image, ScrollView, Text } from "native-base";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import useSWR from "swr";
 import IntermediateSvg from "../../../assets/svg/book_lover.svg";
 import AdvancedSvg from "../../../assets/svg/books.svg";
 import PreIntermediateSvg from "../../../assets/svg/education.svg";
 import ElementarySvg from "../../../assets/svg/reading_book.svg";
 import UpperIntermediateSvg from "../../../assets/svg/sharing_knowledge.svg";
+import { PARCOURS_URL } from "../../constants/ApiUrls";
+import { getFetcher } from "../../utils/serverUtils";
 import NumericShowcaseBox from "../elements/NumericShowcaseBox";
 import ComingCourseWidget from "../modules/ComingCourseWidget";
-import CourseLevelCard from "../modules/CourseLevelCard";
 import LessonCard from "../modules/LessonCard";
+import FreePackDashboardTemplate from "./DashboardsTemplates/FreePackDashboardTemplate";
 
 interface homeProps {}
 
 const HomeTemplate: React.FC<homeProps> = () => {
   const [screenWidth, setScreenWidth] = useState(0);
-
+  console.log("the url: ", PARCOURS_URL);
+  const { data, error, isLoading } = useSWR(PARCOURS_URL, getFetcher);
+  console.log("data is: ", data?.data);
   const courseData = [
     {
       title: "Elementary",
@@ -94,26 +99,7 @@ const HomeTemplate: React.FC<homeProps> = () => {
         <Box px="2">
           <ComingCourseWidget />
         </Box>
-        <Box px={2} my={3}>
-          <Heading mb={2}>
-            Jump to <Heading color="primary.500">Course</Heading>
-          </Heading>
-          <ScrollView
-            w="full"
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}>
-            {courseData.map((item, idx) => (
-              <Box key={idx} mx={2}>
-                <CourseLevelCard
-                  title={item.title}
-                  svg={item.svg}
-                  width={screenWidth * 0.6}
-                  bgColor={item.bg}
-                />
-              </Box>
-            ))}
-          </ScrollView>
-        </Box>
+        <FreePackDashboardTemplate />
         <Box py="10">
           <LessonCard title="Lesson 1" subtitle="Lorem ipsum dolor sit amet" />
         </Box>

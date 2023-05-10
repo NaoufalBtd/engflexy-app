@@ -26,7 +26,7 @@ const LoginTemplate: React.FC<LoginTemplateProps> = () => {
   const [boxWidth, setBoxWidth] = useState(0);
   const [screenHeight, setScreenHeight] = useState(0);
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { loading, isAuthenticated, isError } = useAppSelector(
     (state) => state.auth
@@ -37,18 +37,18 @@ const LoginTemplate: React.FC<LoginTemplateProps> = () => {
   const route = useRouter();
 
   useEffect(() => {
-    if (username && password) setIsFormValid(true);
+    if (email && password) setIsFormValid(true);
     else setIsFormValid(false);
-  }, [username, password]);
+  }, [email, password]);
 
   const handleLogin = () => {
-    dispatch(loginStudent({ username, password }));
+    dispatch(loginStudent({ email, password }));
   };
   const togglePassword = () => {
     setShowPassword(!showPassword);
   };
 
-  if (isAuthenticated) route.replace("/(tabs)");
+  if (isAuthenticated) route.replace("home");
   return (
     <ScrollView
       flex={1}
@@ -82,8 +82,8 @@ const LoginTemplate: React.FC<LoginTemplateProps> = () => {
             isInvalid={isError}>
             <Input
               variant="filled"
-              value={username}
-              onChangeText={setUsername}
+              value={email}
+              onChangeText={setEmail}
               mb={3}
               InputLeftElement={
                 <Icon as={FontAwesome} name="user" size={5} ml="2" />
@@ -110,7 +110,7 @@ const LoginTemplate: React.FC<LoginTemplateProps> = () => {
             />
             <FormControl.ErrorMessage
               leftIcon={<WarningOutlineIcon size="xs" />}>
-              The username or password is incorrect
+              The email or password is incorrect
             </FormControl.ErrorMessage>
           </FormControl>
           <HStack px="5">
