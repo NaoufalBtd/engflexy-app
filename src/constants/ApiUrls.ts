@@ -14,3 +14,11 @@ export const getChaptersUrl = (lessonId: string) =>
 
 export const getVocabulary = (chapterId: number) =>
   `${BASE_URL}/admin/sectionItem/sectionId/${chapterId}`;
+
+// Homework URLs
+export const getHomeworksUrl = (lessonId: number) =>
+  `${BASE_URL}/admin/homeWork/cours/id/${lessonId}`;
+export const getHomeworkQnsUrl = (homeworkId: number) =>
+  `${BASE_URL}/etudiant/homeWorkQST/homework/${homeworkId}`;
+export const getHomeworkQnResponses = (questionId: number) =>
+  `${BASE_URL}/etudiant/homeWorkQSTReponse/homeWorkQST/${questionId}`;

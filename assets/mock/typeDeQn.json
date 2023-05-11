@@ -1,0 +1,16 @@
+[
+  { "id": 2, "ref": "t2", "lib": "Write it up" },
+  { "id": 11675, "ref": "t7", "lib": "Describe what you see" },
+  { "id": 11701, "ref": "t8", "lib": "Read and add new words" },
+  { "id": 6, "ref": "t6", "lib": "Write the correct form" },
+  { "id": 5, "ref": "t5", "lib": "True or False" },
+  { "id": 4, "ref": "t4", "lib": "Correct the mistake" },
+  { "id": 3, "ref": "t3", "lib": "Translate the phrase" },
+  { "id": 1, "ref": "t1", "lib": "Choose the correct alternative" },
+  { "id": 23386, "ref": "t9", "lib": "Watch and add new words" },
+  { "id": 7, "ref": "t10", "lib": "Put words to gap" },
+  { "id": 8, "ref": "t11", "lib": "Put in order" },
+  { "id": 9, "ref": "t12", "lib": "Word By Word" },
+  { "id": 10, "ref": "t13", "lib": "Drag and Drop" },
+  { "id": 12578, "ref": "t14", "lib": "Study the information" }
+]

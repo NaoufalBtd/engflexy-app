@@ -4,13 +4,11 @@ import {
   CHOOSE_CORRECT_FORM,
   CORRECT_MISTAkE,
   WRITE_CORRECT_FORM,
-} from "../../../constants/Quiz";
-import { useAppDispatch, useAppSelector } from "../../../hooks/stateHooks";
-import { fetchQuiz } from "../../../store/thunks/fetchQuiz";
-import QuizLayout from "../../layouts/QuizLayout";
-import QcmTemplate from "../quizTemplates/QcmTemplate";
-
-interface PracticeTemplateProps {}
+} from "../../../../constants/Quiz";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/stateHooks";
+import { fetchQuiz } from "../../../../store/thunks/fetchQuiz";
+import QuizLayout from "../../../layouts/QuizLayout";
+import QcmTemplate from "../../quizTemplates/QcmTemplate";
 
 const quizComp = [
   {
@@ -27,18 +25,22 @@ const quizComp = [
   },
 ];
 
-const PracticeTemplate: React.FC<PracticeTemplateProps> = () => {
+interface PracticeTemplateProps {
+  type: "practice" | "homework";
+}
+
+const PracticeTemplate: React.FC<PracticeTemplateProps> = ({ type }) => {
   const {
     currQuestion,
     currQuestionType,
-    loaded,
-    responses: answers,
+    isLoading,
+    responses,
     currQuestionStatus,
   } = useAppSelector((state) => state.quiz);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchQuiz());
+    dispatch(fetchQuiz(type));
   }, []);
 
   const QuizComponent = quizComp.find(
@@ -50,9 +52,9 @@ const PracticeTemplate: React.FC<PracticeTemplateProps> = () => {
       qnNumbers={1}
       currQnNumber={1}
       questionStatus={currQuestionStatus}>
-      {loaded && <SplashScreen />}
-      {QuizComponent && !loaded && (
-        <QuizComponent question={currQuestion} answers={answers} />
+      {isLoading && <SplashScreen />}
+      {QuizComponent && !isLoading && (
+        <QuizComponent question={currQuestion} answers={responses} />
       )}
     </QuizLayout>
   );

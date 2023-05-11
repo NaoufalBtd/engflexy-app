@@ -1,8 +1,8 @@
 import { Text } from "native-base";
 import React from "react";
-import LessonSectionLayout from "../layouts/LessonContainerLayout";
 import LessonLayout from "../layouts/LessonLayout";
 import ChatTemplate from "./ChatTemplate";
+import HomeworkTemplate from "./HomeworkTemplate";
 import LessonChaptersTemplate from "./LessonChaptersTemplate";
 
 interface LessonTemplateProps {}
@@ -13,7 +13,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = () => {
       bg={"background.surface"}
       h={"full"}
       lessonTemplate={() => <LessonChaptersTemplate />}
-      homeWorkTemplate={() => <LessonSectionLayout></LessonSectionLayout>}
+      homeWorkTemplate={() => <HomeworkTemplate />}
       dictionaryTemplate={() => <Text>Dictionary</Text>}
       chatTemplate={() => <ChatTemplate />}
     />

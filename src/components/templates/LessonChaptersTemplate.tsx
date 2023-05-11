@@ -1,12 +1,18 @@
 import _ from "lodash";
 import { Box, Text } from "native-base";
 import React from "react";
-import { useAppSelector } from "../../hooks/stateHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/stateHooks";
+import {
+  nextChapter,
+  previousChapter,
+  selectNextChapterTitle,
+  selectPreviousChapterTitle,
+} from "../../store/reducers/lessonReducer";
 import LessonContainerLayout from "../layouts/LessonContainerLayout";
 import ErrorBox from "../modules/ErrorBox";
 import ArticleTemplate from "./lessonChaptersTemplates/ArticleTemplate";
-import PracticeTemplate from "./lessonChaptersTemplates/PracticeTemplate";
 import VocabularyTemplate from "./lessonChaptersTemplates/VocabularyTemplate";
+import PracticeTemplate from "./lessonChaptersTemplates/practice/PracticeTemplate";
 
 interface LessonChaptersTemplateProps {}
 
@@ -19,13 +25,12 @@ const LESSONS_SECTIONS_CODE = [
 ];
 
 const LessonChaptersTemplate: React.FC<LessonChaptersTemplateProps> = () => {
-  const {
-    chapters,
-    chapterIndex: lessonIndex,
-    isLoading,
-    error,
-  } = useAppSelector((state) => state.lessons);
-
+  const { chapters, chapterIndex, isLoading, error } = useAppSelector(
+    (state) => state.lessons
+  );
+  const nextChapterTitle = useAppSelector(selectNextChapterTitle);
+  const prevChapterTitle = useAppSelector(selectPreviousChapterTitle);
+  const dispatch = useAppDispatch();
   const renderError = () => (
     <Box
       h="full"
@@ -43,17 +48,33 @@ const LessonChaptersTemplate: React.FC<LessonChaptersTemplateProps> = () => {
     return renderError();
   }
 
-  const Template = LESSONS_SECTIONS_CODE[lessonIndex].component;
+  const Template = LESSONS_SECTIONS_CODE[chapterIndex].component;
   const lessonsData = _.values(chapters.byId);
   const data = _.find(
     lessonsData,
     (lesson) =>
-      lesson.categorySection.label === LESSONS_SECTIONS_CODE[lessonIndex].title
+      lesson.categorySection.label === LESSONS_SECTIONS_CODE[chapterIndex].title
   );
   if (!data) return renderError();
 
   return (
-    <LessonContainerLayout>
+    <LessonContainerLayout
+      next={
+        nextChapterTitle
+          ? {
+              title: nextChapterTitle,
+              action: () => dispatch(nextChapter()),
+            }
+          : undefined
+      }
+      previous={
+        prevChapterTitle
+          ? {
+              title: prevChapterTitle,
+              action: () => dispatch(previousChapter()),
+            }
+          : undefined
+      }>
       <Template lesson={data} />
     </LessonContainerLayout>
   );

@@ -5,6 +5,7 @@ import {
   LessonChapter,
   LessonChapters,
 } from "../../types/models/lessonChapterModel";
+import { RootState } from "../store";
 import { fetchLessonChapters } from "../thunks/lessonsThunks";
 
 interface LessonsState {
@@ -33,7 +34,7 @@ export const lessonsSlice = createSlice({
   name: "lesson",
   initialState,
   reducers: {
-    nextLesson: (state) => {
+    nextChapter: (state) => {
       const { chapters, chapterIndex } = state;
       if (!chapters) return;
 
@@ -43,7 +44,7 @@ export const lessonsSlice = createSlice({
         state.chapter = chapters.byId[chapters.allIds[chapterIndex]];
       }
     },
-    previousLesson: (state) => {
+    previousChapter: (state) => {
       if (state.chapterIndex > 0) state.chapterIndex--;
     },
   },
@@ -77,6 +78,29 @@ export const lessonsSlice = createSlice({
   },
 });
 
-export const { nextLesson, previousLesson } = lessonsSlice.actions;
+export const { nextChapter, previousChapter } = lessonsSlice.actions;
+
+export const selectNextChapterTitle = (state: RootState) => {
+  const { chapters, chapterIndex } = state.lessons;
+  if (!chapters) return null;
+
+  const chaptersLastIndex = chapters.allIds.length - 1;
+  if (chapterIndex < chaptersLastIndex) {
+    return chapters.byId[chapters.allIds[chapterIndex + 1]].label;
+  }
+
+  return null;
+};
+
+export const selectPreviousChapterTitle = (state: RootState) => {
+  const { chapters, chapterIndex } = state.lessons;
+  if (!chapters) return null;
+
+  if (chapterIndex > 0) {
+    return chapters.byId[chapters.allIds[chapterIndex - 1]].label;
+  }
+
+  return null;
+};
 
 export default lessonsSlice.reducer;

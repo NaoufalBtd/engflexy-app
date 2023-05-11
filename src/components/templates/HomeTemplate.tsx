@@ -18,9 +18,7 @@ interface homeProps {}
 
 const HomeTemplate: React.FC<homeProps> = () => {
   const [screenWidth, setScreenWidth] = useState(0);
-  console.log("the url: ", PARCOURS_URL);
   const { data, error, isLoading } = useSWR(PARCOURS_URL, getFetcher);
-  console.log("data is: ", data?.data);
   const courseData = [
     {
       title: "Elementary",

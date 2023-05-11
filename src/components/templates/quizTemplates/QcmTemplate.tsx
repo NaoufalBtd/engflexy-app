@@ -9,13 +9,13 @@ import QcmQuiz from "../../modules/quizes/QcmQuiz";
 interface QcmQuizTemplateProps {
   svg?: string;
   question: Question;
-  answers: QnResponses;
+  responses: QnResponses;
 }
 
 const QcmTemplate: React.FC<QcmQuizTemplateProps> = ({
   svg = svgTest,
   question,
-  answers,
+  responses,
 }) => {
   const [width, setWidth] = React.useState(0);
   return (
@@ -32,7 +32,7 @@ const QcmTemplate: React.FC<QcmQuizTemplateProps> = ({
         </Text> */}
         <Heading fontSize={"lg"}>Choose The Correct Alternative</Heading>
       </Box>
-      <QcmQuiz question={question} answers={answers} />
+      <QcmQuiz question={question} responses={responses} />
     </Box>
   );
 };

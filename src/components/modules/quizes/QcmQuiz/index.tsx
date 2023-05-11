@@ -1,7 +1,6 @@
 import _ from "lodash";
 import { Box, Checkbox, Text, Tooltip } from "native-base";
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
 import { QuestionStatus } from "../../../../constants/Quiz";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/stateHooks";
 import { changeResponse } from "../../../../store/reducers/quizReducer";
@@ -16,14 +15,12 @@ import Listen from "../../../elements/Listen";
 
 interface indexProps {
   question: Question;
-  answers: QnResponses;
+  responses: QnResponses;
 }
 
-const QcmQuiz: React.FC<indexProps> = ({ question, answers }) => {
+const QcmQuiz: React.FC<indexProps> = ({ question, responses }) => {
   const [answerValues, setAnswerValues] = useState<string[]>([]);
-  const { currQuestionStatus, responses } = useAppSelector(
-    (state) => state.quiz
-  );
+  const { currQuestionStatus } = useAppSelector((state) => state.quiz);
   const dispatch = useAppDispatch();
   const borderColor = quizAnswerFeedbackColor(currQuestionStatus);
   const solutionShowed = _.includes(
@@ -116,16 +113,16 @@ const QcmQuiz: React.FC<indexProps> = ({ question, answers }) => {
         ))}
       </HStack> */}
       <Checkbox.Group onChange={handleAnswersChange} value={answerValues}>
-        {_.values(answers.byId).map((answer) => {
+        {_.values(responses.byId).map((response) => {
           const answerColor = getQcmCheckboxColor(
-            answer.id,
+            response.id,
             responses?.correctAnswersIds || [],
             answerValues
           );
           const innerBoxBgColor = alpha(answerColor, 0.4);
           return (
             <Box
-              key={answer.label}
+              key={response.label}
               bgColor={"background.level1"}
               p="5"
               w="95%"
@@ -136,13 +133,13 @@ const QcmQuiz: React.FC<indexProps> = ({ question, answers }) => {
                 h={"full"}
                 w={"full"}
                 borderColor={answerColor}
-                borderWidth={1}
-                bgColor={innerBoxBgColor}>
+                borderWidth={solutionShowed ? 1 : 0}
+                bgColor={solutionShowed ? innerBoxBgColor : undefined}>
                 <Checkbox
                   colorScheme={"green"}
-                  value={answer.id.toString()}
+                  value={response.id.toString()}
                   isDisabled={solutionShowed}>
-                  <Text fontSize={"lg"}>{answer.label}</Text>
+                  <Text fontSize={"lg"}>{response.label}</Text>
                 </Checkbox>
               </Box>
             </Box>
@@ -154,10 +151,3 @@ const QcmQuiz: React.FC<indexProps> = ({ question, answers }) => {
 };
 
 export default QcmQuiz;
-
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 20,
-    marginVertical: 4,
-  },
-});

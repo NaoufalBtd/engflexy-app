@@ -1,8 +1,17 @@
+import { ApiHomework } from "../types/api/ApiHomework";
+import { ApiHomeworkQn } from "../types/api/ApiHomeworkQn";
+import { ApiHomeworkResponse } from "../types/api/ApiHomeworkResponse";
 import { ApiLesson } from "../types/api/ApiLesson";
 import { ApiLessonChapter } from "../types/api/ApiLessonChapter";
 import { ApiQnResponse } from "../types/api/ApiQnResponse";
 import { ApiQuestion } from "../types/api/ApiQuestion";
 import { ApiVocabulary } from "../types/api/ApiVocabulary";
+import {
+  Homework,
+  HomeworkQn,
+  HomeworkQns,
+  Homeworks,
+} from "../types/models/HomeworkModel";
 import { QnResponse, QnResponses } from "../types/models/QnResponseModel";
 import {
   Question,
@@ -141,4 +150,62 @@ export const normalizeVocs = (vocs: ApiVocabulary[]): Vocabularies => {
     return acc;
   }, {} as Record<number, Vocabulary>);
   return { allIds, byId };
+};
+
+export const normalizeHomework = (homeworks: ApiHomework[]): Homeworks => {
+  const allIds: number[] = [];
+  const byId = homeworks.reduce((acc, homework) => {
+    acc[homework.id] = {
+      id: homework.id,
+      label: homework.libelle,
+      imageUrl: homework.urlImage,
+      videoUrl: homework.urlVideo,
+      homeworkTypeId: homework.typeHomeWork.id,
+    };
+    allIds.push(homework.id);
+    return acc;
+  }, {} as Record<number, Homework>);
+  return { allIds, byId };
+};
+
+export const normalizeHomeworkQn = (
+  homeworkQns: ApiHomeworkQn[]
+): HomeworkQns => {
+  const allIds: number[] = [];
+  const byId = homeworkQns.reduce((acc, homeworkQn) => {
+    acc[homeworkQn.id] = {
+      id: homeworkQn.id,
+      label: homeworkQn.libelle,
+      number: homeworkQn.numero,
+      pointRightAnswer: homeworkQn.pointReponseJuste,
+      pointWrongAnswer: homeworkQn.pointReponsefausse,
+      ref: homeworkQn.ref,
+      homeworkId: homeworkQn.homeWork.id,
+    };
+    allIds.push(homeworkQn.id);
+    return acc;
+  }, {} as Record<number, HomeworkQn>);
+  return { allIds, byId };
+};
+
+export const normalizeHomeworkQnResponse = (
+  homeWorkQnResponse: ApiHomeworkResponse[]
+): QnResponses => {
+  const allIds: number[] = [];
+  const correctAnswersIds: number[] = [];
+  const byId = homeWorkQnResponse.reduce((acc, qnAnswer) => {
+    acc[qnAnswer.id] = {
+      id: qnAnswer.id,
+      label: qnAnswer.lib,
+      isCorrect: qnAnswer.etatReponse === "true",
+      questionId: qnAnswer.homeWorkQuestion.id,
+    };
+    allIds.push(qnAnswer.id);
+    if (qnAnswer.etatReponse === "true") {
+      correctAnswersIds.push(qnAnswer.id);
+    }
+    return acc;
+  }, {} as { [key: string]: QnResponse });
+
+  return { allIds, byId, correctAnswersIds };
 };

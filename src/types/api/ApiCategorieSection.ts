@@ -1,9 +1,9 @@
-import { ApiCoursSection } from "./ApiCoursSection";
+import { ApiSuperCategorySection } from "./ApiSuperCategorySection";
 
 export type ApiCategorieSection = {
   id: number;
   code: string;
   libelle: string;
   numeroOrder: number;
-  sections?: ApiCoursSection[];
+  superCategorieSection?: ApiSuperCategorySection;
 };

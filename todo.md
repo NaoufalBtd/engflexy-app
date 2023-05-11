@@ -9,6 +9,9 @@
 
 - complete the chat
 
+---------------------------- last time stop
+i have just finished from adding the homework fetch thunk and completing the homeworkReducer
+
 ------------------------ meeting notes
 i need an api that show all parcours for free student pack
 i need an api that show only the auth lessons for the specfic parcours

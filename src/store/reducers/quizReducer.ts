@@ -23,7 +23,7 @@ export interface QuizState {
   answers: QnResponse["id"][] | string;
   // solutionShown: boolean;
   // currQuestionAnswered: boolean;
-  loaded: boolean;
+  isLoading: boolean;
   error: string | null;
 }
 
@@ -45,7 +45,7 @@ const initialState: QuizState = {
   questionIndex: 0,
   answers: [],
   currQuestionStatus: QuestionStatus.NotAnswered,
-  loaded: false,
+  isLoading: false,
   error: null,
 };
 
@@ -95,7 +95,7 @@ export const quizSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchQuiz.pending, (state) => {
-      state.loaded = true;
+      state.isLoading = true;
       state.error = null;
     });
     builder.addCase(
@@ -110,12 +110,12 @@ export const quizSlice = createSlice({
         state.questions = quiz;
         state.questionsTypes = questionTypes;
         state.currQuestionType = state.questionsTypes.byId[currQn.quizTypeId];
-        state.loaded = false;
+        state.isLoading = false;
         state.error = null;
       }
     );
     builder.addCase(fetchQuiz.rejected, (state, action) => {
-      state.loaded = false;
+      state.isLoading = false;
       state.error = action.error.message || null;
     });
   },
