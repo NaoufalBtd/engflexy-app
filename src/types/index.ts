@@ -4,3 +4,8 @@ export type SharedValues<T extends Record<string, string | number | boolean>> =
   {
     [K in keyof T]: Animated.SharedValue<T[K]>;
   };
+
+export type NormalizedData<T> = {
+  byId: Record<number, T>;
+  allIds: number[];
+};

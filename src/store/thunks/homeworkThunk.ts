@@ -11,6 +11,7 @@ import {
   normalizeHomework,
   normalizeHomeworkQn,
   normalizeHomeworkQnResponse,
+  normalizeQnsTypes,
 } from "../../utils/normalizeUtils";
 import { getFetcher } from "../../utils/serverUtils";
 
@@ -19,6 +20,7 @@ export const fetchHomeworks = createAsyncThunk(
   async (lessonId: number) => {
     const response = await getFetcher<ApiHomework[]>(getHomeworksUrl(lessonId));
     const homeworksData = response.data;
+    console.log("homework Data : ", homeworksData);
 
     const qnRes = await Promise.all(
       homeworksData.map((homework) =>
@@ -26,6 +28,7 @@ export const fetchHomeworks = createAsyncThunk(
       )
     );
     const qnData = qnRes.map((res) => res.data);
+    const qnTypes = qnData.map((qn) => qn.typeDeQuestion);
 
     const responseRes = await Promise.all(
       qnData.map((qn) =>
@@ -38,6 +41,7 @@ export const fetchHomeworks = createAsyncThunk(
       homeworks: normalizeHomework(homeworksData),
       homeworkQns: normalizeHomeworkQn(qnData),
       homeworkResponses: normalizeHomeworkQnResponse(responseData),
+      questionTypes: normalizeQnsTypes(qnTypes),
     };
   }
 );

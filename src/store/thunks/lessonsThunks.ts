@@ -10,9 +10,9 @@ import { getFetcher } from "../../utils/serverUtils";
 
 export const fetchLessons = createAsyncThunk(
   "lessons/fetchLessons",
-  async (courseId: string) => {
+  async (courseId: number) => {
     const res = await getFetcher<ApiLesson[]>(getLessonsUrl(courseId));
-    return normalizeLessons(res.data);
+    return { lessons: normalizeLessons(res.data), courseId };
   }
 );
 

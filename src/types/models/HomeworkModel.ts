@@ -13,7 +13,7 @@ export type Homeworks = {
   byId: Record<number, Homework>;
 };
 
-export interface HomeworkQn extends Omit<Question, "quizTypeId"> {
+export interface HomeworkQn extends Question {
   homeworkId: number;
 }
 

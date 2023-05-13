@@ -1,3 +1,5 @@
+import { NormalizedData } from "../types";
+
 export const isLastIndex = (arr: any[], index: number) => {
   return index === arr.length - 1;
 };
@@ -9,4 +11,11 @@ export const calculatePercentage = (number: number, length: number) => {
 
 export const getAspectRatio = (width: number, height: number) => {
   return width / height;
+};
+
+export const getElementFromNormalizedData = <T>(
+  data: NormalizedData<T>,
+  index: number
+) => {
+  return data.byId[data.allIds[index]];
 };

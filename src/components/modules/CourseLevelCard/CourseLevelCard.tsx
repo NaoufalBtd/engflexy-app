@@ -25,7 +25,7 @@ const CourseLevelCard: React.FC<CourseLevelCardProps> = ({
   const dispatch = useAppDispatch();
 
   const handlePress = () => {
-    dispatch(fetchLessons(id.toString()));
+    dispatch(fetchLessons(id));
     route.push("/list");
   };
   return (

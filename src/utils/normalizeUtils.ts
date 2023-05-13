@@ -6,12 +6,7 @@ import { ApiLessonChapter } from "../types/api/ApiLessonChapter";
 import { ApiQnResponse } from "../types/api/ApiQnResponse";
 import { ApiQuestion } from "../types/api/ApiQuestion";
 import { ApiVocabulary } from "../types/api/ApiVocabulary";
-import {
-  Homework,
-  HomeworkQn,
-  HomeworkQns,
-  Homeworks,
-} from "../types/models/HomeworkModel";
+import { Homework, Homeworks } from "../types/models/HomeworkModel";
 import { QnResponse, QnResponses } from "../types/models/QnResponseModel";
 import {
   Question,
@@ -85,7 +80,7 @@ export const normalizeQuiz = (quiz: ApiQuestion[]): Questions => {
       number: quiz.numero,
       pointRightAnswer: quiz.pointReponseJuste,
       pointWrongAnswer: quiz.pointReponsefausse,
-      quizTypeId: quiz.typeDeQuestion.id,
+      questionTypeId: quiz.typeDeQuestion.id,
     };
     allIds.push(quiz.id);
     return acc;
@@ -170,7 +165,7 @@ export const normalizeHomework = (homeworks: ApiHomework[]): Homeworks => {
 
 export const normalizeHomeworkQn = (
   homeworkQns: ApiHomeworkQn[]
-): HomeworkQns => {
+): Questions => {
   const allIds: number[] = [];
   const byId = homeworkQns.reduce((acc, homeworkQn) => {
     acc[homeworkQn.id] = {
@@ -180,11 +175,11 @@ export const normalizeHomeworkQn = (
       pointRightAnswer: homeworkQn.pointReponseJuste,
       pointWrongAnswer: homeworkQn.pointReponsefausse,
       ref: homeworkQn.ref,
-      homeworkId: homeworkQn.homeWork.id,
+      questionTypeId: homeworkQn.typeDeQuestion.id,
     };
     allIds.push(homeworkQn.id);
     return acc;
-  }, {} as Record<number, HomeworkQn>);
+  }, {} as Record<number, Question>);
   return { allIds, byId };
 };
 

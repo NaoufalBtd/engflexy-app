@@ -7,7 +7,7 @@ export type Question = {
   number: number;
   pointRightAnswer: number;
   pointWrongAnswer: number;
-  quizTypeId: number;
+  questionTypeId: number;
 };
 
 export type Questions = {

@@ -16,7 +16,7 @@ export interface QuizState {
   questions: Questions | null;
   questionIndex: number;
   currQuestion: Question | null;
-  questionsTypes: QuestionTypes;
+  questionsTypes: QuestionTypes | null;
   currQuestionType: QuestionType | null;
   currQuestionStatus: QuestionStatus;
   responses: QnResponses | null;
@@ -30,16 +30,7 @@ export interface QuizState {
 const initialState: QuizState = {
   questions: null,
   currQuestion: null,
-  questionsTypes: {
-    allIds: [1],
-    byId: {
-      1: {
-        id: 1,
-        ref: "t1",
-        label: "Choose the correct alternative",
-      },
-    },
-  },
+  questionsTypes: null,
   responses: null,
   currQuestionType: null,
   questionIndex: 0,
@@ -80,7 +71,8 @@ export const quizSlice = createSlice({
         const currQn = state.questions?.byId[currQnId];
         state.questionIndex++;
         state.currQuestion = currQn;
-        state.currQuestionType = state.questionsTypes.byId[currQn.quizTypeId];
+        state.currQuestionType =
+          state.questionsTypes.byId[currQn.questionTypeId];
       }
     },
     previousQuestion: (state) => {
@@ -89,7 +81,8 @@ export const quizSlice = createSlice({
         const currQn = state.questions.byId[currQnId];
         state.questionIndex--;
         state.currQuestion = currQn;
-        state.currQuestionType = state.questionsTypes.byId[currQn.quizTypeId];
+        state.currQuestionType =
+          state.questionsTypes.byId[currQn.questionTypeId];
       }
     },
   },
@@ -109,7 +102,8 @@ export const quizSlice = createSlice({
         state.responses = answers;
         state.questions = quiz;
         state.questionsTypes = questionTypes;
-        state.currQuestionType = state.questionsTypes.byId[currQn.quizTypeId];
+        state.currQuestionType =
+          state.questionsTypes.byId[currQn.questionTypeId];
         state.isLoading = false;
         state.error = null;
       }

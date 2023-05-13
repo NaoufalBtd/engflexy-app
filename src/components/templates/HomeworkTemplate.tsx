@@ -1,5 +1,6 @@
 import _ from "lodash";
-import React, { useState } from "react";
+import { Text } from "native-base";
+import React, { useEffect } from "react";
 import {
   PHRASEBOOk,
   PRACTICE,
@@ -9,7 +10,12 @@ import {
   WATCH_IT,
   WRITE_UP,
 } from "../../constants/Lesson";
-import { useAppSelector } from "../../hooks/stateHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/stateHooks";
+import {
+  nextHomework,
+  previousHomework,
+} from "../../store/reducers/homeworkReducer";
+import { fetchHomeworks } from "../../store/thunks/homeworkThunk";
 import { isLastIndex } from "../../utils";
 import SurfaceCenter from "../elements/SurfaceCenter";
 import LessonContainerLayout from "../layouts/LessonContainerLayout";
@@ -23,15 +29,16 @@ interface HomeworkTemplateProps {}
 
 const homeworkSections = [
   {
-    title: VOCABULARY,
-    component: VocabularyTemplate,
-    catg: "main",
-  },
-  {
     title: PRACTICE,
     component: HomeworkPractice,
     catg: "main",
   },
+  {
+    title: VOCABULARY,
+    component: VocabularyTemplate,
+    catg: "main",
+  },
+
   {
     title: STUDY_INFO,
     component: ArticleTemplate,
@@ -61,8 +68,13 @@ const homeworkSections = [
 
 const HomeworkTemplate: React.FC<HomeworkTemplateProps> = () => {
   const { chapters: lessons } = useAppSelector((state) => state.lessons);
-  const [homeworkIndex, setHomeworkIndex] = useState(0);
-
+  const { lessonId } = useAppSelector((state) => state.lessons);
+  const { homeworkIndex, homeworks, isLoading } = useAppSelector(
+    (state) => state.homework
+  );
+  const dispatch = useAppDispatch();
+  console.log("courseId", lessonId);
+  console.log("homeworks", homeworks);
   const Template = homeworkSections[homeworkIndex].component;
   const lessonsData = _.values(lessons?.byId);
   const data = _.find(
@@ -71,7 +83,13 @@ const HomeworkTemplate: React.FC<HomeworkTemplateProps> = () => {
       lesson.categorySection.label === homeworkSections[homeworkIndex].title
   );
 
-  if (!data)
+  useEffect(() => {
+    console.log("mounted");
+    lessonId && dispatch(fetchHomeworks(lessonId));
+  }, [lessonId]);
+
+  if (isLoading) return <Text>Loading...</Text>;
+  if (!data || !homeworks)
     return (
       <SurfaceCenter>
         <ErrorBox />
@@ -84,15 +102,15 @@ const HomeworkTemplate: React.FC<HomeworkTemplateProps> = () => {
         homeworkIndex > 0
           ? {
               title: homeworkSections[homeworkIndex - 1]?.title,
-              action: () => setHomeworkIndex(0),
+              action: () => dispatch(nextHomework()),
             }
           : undefined
       }
       next={
-        isLastIndex(homeworkSections, homeworkIndex)
+        !isLastIndex(_.values(homeworks.byId), homeworkIndex)
           ? {
               title: homeworkSections[homeworkIndex + 1]?.title,
-              action: () => setHomeworkIndex(homeworkIndex + 1),
+              action: () => dispatch(previousHomework()),
             }
           : undefined
       }>

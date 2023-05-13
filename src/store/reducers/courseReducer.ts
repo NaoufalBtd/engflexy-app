@@ -9,14 +9,14 @@ export interface CourseState {
   //   byId: Record<number, Course>;
   //   allIds: number[];
   // };
-  selectedCourseId: number | null;
+  courseId: number | null;
   lessons: Lessons | null;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: CourseState = {
-  selectedCourseId: null,
+  courseId: null,
   lessons: null,
   loading: false,
   error: null,
@@ -34,7 +34,8 @@ const courseSlice = createSlice({
     });
     builder.addCase(fetchLessons.fulfilled, (state, action) => {
       state.loading = false;
-      state.lessons = action.payload;
+      state.lessons = action.payload.lessons;
+      state.courseId = action.payload.courseId;
     });
     builder.addCase(fetchLessons.rejected, (state, action) => {
       state.loading = false;
