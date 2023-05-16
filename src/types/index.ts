@@ -9,3 +9,7 @@ export type NormalizedData<T> = {
   byId: Record<number, T>;
   allIds: number[];
 };
+
+export type NullableValue = {
+  [key: string]: any | undefined | null;
+};

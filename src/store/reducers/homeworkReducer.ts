@@ -1,19 +1,12 @@
 // redux toolkit boilre platate homework
 
 import { createSlice } from "@reduxjs/toolkit";
-import { QuestionStatus } from "../../constants/Quiz";
-import { Homeworks } from "../../types/models/HomeworkModel";
-import { QnResponses } from "../../types/models/QnResponseModel";
-import { QuestionTypes, Questions } from "../../types/models/QuestionModel";
-import { fetchHomeworks } from "../thunks/homeworkThunk";
+import { Homework, Homeworks } from "../../types/models/HomeworkModel";
 
 interface HomeworkState {
   homeworks: Homeworks | null;
-  homeworkQuestions: Questions | null;
-  homeworkResponses: QnResponses | null;
-  currQuestionStatus: QuestionStatus;
-  questionsTypes: QuestionTypes | null;
-  homeworkIndex: number;
+  currHomework: Homework | null;
+  // homeworkIndex: number;
   isLoading: boolean;
   error: string | null;
 }
@@ -21,12 +14,9 @@ interface HomeworkState {
 const initialState: HomeworkState = {
   isLoading: false,
   error: null,
-  homeworkIndex: 0,
+  // homeworkIndex: 0,
   homeworks: null,
-  homeworkQuestions: null,
-  homeworkResponses: null,
-  currQuestionStatus: QuestionStatus.NotAnswered,
-  questionsTypes: null,
+  currHomework: null,
 };
 
 const homeworkSlice = createSlice({
@@ -35,48 +25,41 @@ const homeworkSlice = createSlice({
   reducers: {
     clear(state) {
       state.homeworks = null;
-      state.homeworkQuestions = null;
-      state.homeworkResponses = null;
-      state.homeworkIndex = 0;
+      state.currHomework = null;
       state.isLoading = false;
       state.error = null;
     },
+    // changeQuestionStatus(state, action: PayloadAction<QuestionStatus>) {
+    //   state.currQuestionStatus = action.payload;
+    // },
+    // submitAnswer(state) {
+    //   state.answerSubmitted = true;
+    // },
+    // nextQuestion(state) {},
+    // previousQuestion(state) {},
     nextHomework(state) {
-      const { homeworks, homeworkIndex } = state;
-      if (homeworks && homeworkIndex < homeworks.allIds.length - 1) {
-        state.homeworkIndex += 1;
+      const { homeworks, currHomework } = state;
+      if (homeworks && currHomework) {
+        const currHomeworkIndex = homeworks.allIds.indexOf(currHomework.id);
+        if (currHomeworkIndex < homeworks.allIds.length - 1) {
+          const nextHomeworkId = homeworks.allIds[currHomeworkIndex + 1];
+          state.currHomework = homeworks.byId[nextHomeworkId];
+        }
       }
     },
     previousHomework(state) {
-      const { homeworkIndex } = state;
-      if (homeworkIndex > 0) {
-        state.homeworkIndex -= 1;
+      const { homeworks, currHomework } = state;
+      if (homeworks && currHomework) {
+        const currHomeworkIndex = homeworks.allIds.indexOf(currHomework.id);
+        if (currHomeworkIndex > 0) {
+          const previousHomeworkId = homeworks.allIds[currHomeworkIndex - 1];
+          state.currHomework = homeworks.byId[previousHomeworkId];
+        }
       }
     },
   },
-  extraReducers(builder) {
-    builder.addCase(fetchHomeworks.pending, (state) => {
-      state.isLoading = true;
-      state.error = null;
-    });
-    builder.addCase(fetchHomeworks.fulfilled, (state, action) => {
-      const { homeworks, homeworkQns, homeworkResponses } = action.payload;
-      console.log("in extra reducers ", homeworks);
-      state.homeworkQuestions = homeworkQns;
-      state.homeworkResponses = homeworkResponses;
-      state.homeworks = homeworks;
-      state.questionsTypes = action.payload.questionTypes;
-      state.isLoading = false;
-      state.error = null;
-    });
-    builder.addCase(fetchHomeworks.rejected, (state, action) => {
-      console.log("is error--", action.error.message);
-      state.isLoading = false;
-      state.error = action.error.message || null;
-    });
-  },
 });
 
-export const { clear, nextHomework, previousHomework } = homeworkSlice.actions;
+export const {} = homeworkSlice.actions;
 
 export default homeworkSlice.reducer;

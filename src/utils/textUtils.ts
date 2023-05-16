@@ -14,3 +14,17 @@ export const toCamelCase = (str: string) => {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 };
+
+export const generateUniqueId = () => {
+  // Get a timestamp
+  const timestamp = Date.now();
+
+  // Generate a random number
+  const randomNumber = Math.random() * 1000000000;
+
+  // Combine the timestamp and random number
+  const uniqueId = `${timestamp}-${randomNumber}`;
+
+  // Return the unique ID
+  return uniqueId;
+};

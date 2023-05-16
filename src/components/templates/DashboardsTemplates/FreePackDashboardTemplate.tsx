@@ -6,6 +6,7 @@ import { PARCOURS_URL } from "../../../constants/ApiUrls";
 import { ApiParcours } from "../../../types/api/ApiParcours";
 import { formatCourse } from "../../../utils/formatUtils";
 import { getFetcher } from "../../../utils/serverUtils";
+import { generateUniqueId } from "../../../utils/textUtils";
 import { getSvgIconByParcours } from "../../../utils/uiUtils";
 import CourseLevelCard from "../../modules/CourseLevelCard";
 
@@ -43,7 +44,7 @@ const FreePackDashboardTemplate: React.FC<
                 course,
                 idx //todo: filter only free courses
               ) => (
-                <Box key={idx} mx={2}>
+                <Box key={generateUniqueId()} mx={2}>
                   <CourseLevelCard
                     title={course.title}
                     id={course.id}

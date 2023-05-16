@@ -16,6 +16,7 @@ import { ApiVocabulary } from "../../../types/api/ApiVocabulary";
 import { LessonChapter } from "../../../types/models/lessonChapterModel";
 import { isLastIndex } from "../../../utils";
 import { getFetcher } from "../../../utils/serverUtils";
+import { generateUniqueId } from "../../../utils/textUtils";
 import AccordionItem from "../../elements/AccordionItem";
 import Listen from "../../elements/Listen";
 import ErrorBox from "../../modules/ErrorBox";
@@ -25,17 +26,17 @@ import VocBox from "../../modules/Vocabulary/VocBox";
 import VocSkeleton from "../../modules/Vocabulary/VocSkeleton";
 
 interface learnWordsProps {
-  lesson: LessonChapter;
+  chapter: LessonChapter;
 }
 
-const VocabularyTemplate: React.FC<learnWordsProps> = ({ lesson }) => {
+const VocabularyTemplate: React.FC<learnWordsProps> = ({ chapter }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [index, setIndex] = useState(0);
   const {
     isLoading,
     error,
     data: res,
-  } = useSWR(getVocabulary(lesson.id), getFetcher<ApiVocabulary[]>);
+  } = useSWR(getVocabulary(chapter.id), getFetcher<ApiVocabulary[]>);
   const vocData = res?.data;
 
   if (isLoading) return <VocSkeleton />;
@@ -100,7 +101,10 @@ const VocabularyTemplate: React.FC<learnWordsProps> = ({ lesson }) => {
                 <AccordionItem title="Synonyms">
                   <Box flexDir={"row"} flexWrap={"wrap"}>
                     {currentVoc.synonyms.map((synonym, index) => (
-                      <Box key={synonym} flexDir={"row"} alignItems={"center"}>
+                      <Box
+                        key={generateUniqueId()}
+                        flexDir={"row"}
+                        alignItems={"center"}>
                         <Text mr="1">{synonym}</Text>
                         <Listen word={synonym} color="primary.400" />
                         <Divider

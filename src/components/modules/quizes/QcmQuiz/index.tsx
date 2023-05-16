@@ -1,11 +1,12 @@
-import _ from "lodash";
-import { Box, Checkbox, Text, Tooltip } from "native-base";
+import { Box, Checkbox, Text } from "native-base";
 import React, { useState } from "react";
 import { QuestionStatus } from "../../../../constants/Quiz";
-import { useAppDispatch, useAppSelector } from "../../../../hooks/stateHooks";
-import { changeResponse } from "../../../../store/reducers/quizReducer";
-import { QnResponses } from "../../../../types/models/QnResponseModel";
+import { useAppDispatch } from "../../../../hooks/stateHooks";
+import { changeQuestionStatus } from "../../../../store/reducers/lessonQuizReducer";
+import { useAppTheme } from "../../../../theme";
+import { QnResponse } from "../../../../types/models/QnResponseModel";
 import { Question } from "../../../../types/models/QuestionModel";
+import { generateUniqueId } from "../../../../utils/textUtils";
 import {
   alpha,
   getQcmCheckboxColor,
@@ -15,66 +16,77 @@ import Listen from "../../../elements/Listen";
 
 interface indexProps {
   question: Question;
-  responses: QnResponses;
+  responses: QnResponse[];
+  questionStatus: QuestionStatus;
+  answerSubmitted: boolean;
 }
 
-const QcmQuiz: React.FC<indexProps> = ({ question, responses }) => {
-  const [answerValues, setAnswerValues] = useState<string[]>([]);
-  const { currQuestionStatus } = useAppSelector((state) => state.quiz);
+const QcmQuiz: React.FC<indexProps> = ({
+  question,
+  responses,
+  answerSubmitted,
+  questionStatus,
+}) => {
+  const [answersIds, setAnswersIds] = useState<number[]>([]); //ids of the selected answers
+  const { colors } = useAppTheme();
   const dispatch = useAppDispatch();
-  const borderColor = quizAnswerFeedbackColor(currQuestionStatus);
-  const solutionShowed = _.includes(
-    [QuestionStatus.NotAnswered, QuestionStatus.InProgress],
-    currQuestionStatus
+
+  const borderColor = quizAnswerFeedbackColor(
+    questionStatus,
+    answerSubmitted,
+    colors
   );
-  console.log("solution hidden", currQuestionStatus);
 
-  const getCorrectAnswer = () => {
-    if (responses) {
-      const correctAnswerId = responses.correctAnswersIds[0];
-      const correctAnswer = responses.byId[correctAnswerId];
-      return correctAnswer.label;
+  const handleAnswersChange = (isChecked: boolean, responseId: number) => {
+    isChecked ? setAnswersIds([responseId]) : setAnswersIds([]);
+
+    const isCorrect = responses.find((res) => res.id === responseId)?.isCorrect;
+    let qnStatus: QuestionStatus;
+    if (!isChecked) {
+      qnStatus = QuestionStatus.NotAnswered;
+    } else if (isCorrect) {
+      qnStatus = QuestionStatus.AnsweredCorrectly;
+    } else {
+      qnStatus = QuestionStatus.AnsweredIncorrectly;
     }
-    return "";
-  };
 
-  const handleAnswersChange = (values: string[]) => {
-    setAnswerValues(values);
-    const vals = _.map(values, (v) => parseInt(v));
-    dispatch(changeResponse(vals));
+    dispatch(changeQuestionStatus(qnStatus));
   };
 
   const renderText = (text: string) => {
     const regExp = new RegExp("\\.{5}?", "g"); // match the placeholder with 5 dots in a row
     const parts = text.split(regExp);
+    const answer = answersIds.length
+      ? responses.find((res) => res.id === answersIds[0])?.label
+      : "";
 
     if (parts.length > 1) {
       return (
         <Box px={2} flexDir={"row"} alignItems={"center"} flexWrap={"wrap"}>
           {parts[0].split(" ").map((word) => (
-            <Text key={word} fontSize={"md"}>
+            <Text key={generateUniqueId()} fontSize={"md"}>
               {word}{" "}
             </Text>
           ))}
-          <Tooltip
-            placement="top"
-            label={getCorrectAnswer()}
-            isOpen={solutionShowed}>
-            <Box
-              borderWidth={2}
-              borderStyle={solutionShowed ? "solid" : "dashed"}
-              borderColor={borderColor}
-              borderRadius={"md"}
-              p="1"
-              px="3"
-              mx="2">
-              <Text color={"lightText"} fontSize={"md"}>
-                Placeholder
-              </Text>
-            </Box>
-          </Tooltip>
+
+          <Box
+            borderWidth={2}
+            borderStyle={answerSubmitted ? "solid" : "dashed"}
+            borderColor={borderColor}
+            borderRadius={"md"}
+            p="1"
+            px="3"
+            mx="2">
+            <Text
+              textAlign={"center"}
+              color={borderColor}
+              minW={10}
+              fontSize={"md"}>
+              {answer}
+            </Text>
+          </Box>
           {parts[1].split(" ").map((word) => (
-            <Text key={word} fontSize={"md"}>
+            <Text key={generateUniqueId()} fontSize={"md"}>
               {word}{" "}
             </Text>
           ))}
@@ -84,68 +96,47 @@ const QcmQuiz: React.FC<indexProps> = ({ question, responses }) => {
     return <Text>{text}</Text>;
   };
 
-  function getQcmAnswerBorderColor(
-    id: number,
-    correctAnswersIds: number[] | undefined,
-    answerValues: string[]
-  ): import("native-base/lib/typescript/components/types").ColorType {
-    throw new Error("Function not implemented.");
-  }
-
   return (
     <Box>
       <Box flexDir={"row"} alignItems={"center"} my={3}>
         <Listen bordered word={question.label} />
         {renderText(question.label)}
       </Box>
-      {/*
-      <HStack space={3}>
-        {answers.map((answer) => (
-          <TouchableOpacity onPress={}  key={answer.answerText}>
-            <Box
-              px={5}
-              py={3}
-              borderRadius={"lg"}
-              bgColor={"background.level1"}>
-              <Text>{answer.answerText}</Text>
-            </Box>
-          </TouchableOpacity>
-        ))}
-      </HStack> */}
-      <Checkbox.Group onChange={handleAnswersChange} value={answerValues}>
-        {_.values(responses.byId).map((response) => {
-          const answerColor = getQcmCheckboxColor(
-            response.id,
-            responses?.correctAnswersIds || [],
-            answerValues
-          );
+
+      <>
+        {responses.map((response) => {
+          const answerColor = getQcmCheckboxColor(answersIds, response, colors);
           const innerBoxBgColor = alpha(answerColor, 0.4);
           return (
             <Box
-              key={response.label}
-              bgColor={"background.level1"}
-              p="5"
+              key={generateUniqueId()}
+              bgColor={"background.level2"}
               w="95%"
               my="1"
               margin={"auto"}
               borderRadius={"lg"}>
               <Box
-                h={"full"}
+                p="5"
+                borderRadius={"lg"}
                 w={"full"}
                 borderColor={answerColor}
-                borderWidth={solutionShowed ? 1 : 0}
-                bgColor={solutionShowed ? innerBoxBgColor : undefined}>
+                borderWidth={answerSubmitted ? 1 : 0}
+                bgColor={answerSubmitted ? innerBoxBgColor : undefined}>
                 <Checkbox
+                  onChange={(value) => {
+                    handleAnswersChange(value, response.id);
+                  }}
+                  isChecked={answersIds.includes(response.id)}
                   colorScheme={"green"}
                   value={response.id.toString()}
-                  isDisabled={solutionShowed}>
+                  isDisabled={answerSubmitted}>
                   <Text fontSize={"lg"}>{response.label}</Text>
                 </Checkbox>
               </Box>
             </Box>
           );
         })}
-      </Checkbox.Group>
+      </>
     </Box>
   );
 };

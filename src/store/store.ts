@@ -7,8 +7,8 @@ import { persistReducer } from "redux-persist";
 import authReducer from "./reducers/authReducer";
 import courseReducer from "./reducers/courseReducer";
 import homeworkReducer from "./reducers/homeworkReducer";
+import quizReducer from "./reducers/lessonQuizReducer";
 import lessonsReducer from "./reducers/lessonReducer";
-import quizReducer from "./reducers/quizReducer";
 
 const persistConfig = {
   key: "root",
@@ -19,7 +19,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   auth: persistReducer(persistConfig, authReducer),
   lessons: lessonsReducer,
-  quiz: quizReducer,
+  lessonQuiz: quizReducer,
   course: courseReducer,
   homework: homeworkReducer,
 });

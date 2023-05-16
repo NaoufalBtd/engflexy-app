@@ -11,7 +11,7 @@ import { fetchLessonChapters } from "../thunks/lessonsThunks";
 interface LessonsState {
   lessonId: number | null;
   chapter: LessonChapter | null;
-  chapterId: number | null;
+  // chapterId: number | null;
   chapters: LessonChapters | null;
   chapterIndex: number;
   homeworkIndex: number;
@@ -22,7 +22,6 @@ interface LessonsState {
 const initialState: LessonsState = {
   lessonId: null,
   chapter: null,
-  chapterId: null,
   chapters: null,
   chapterIndex: 0,
   homeworkIndex: 0,
@@ -35,16 +34,27 @@ export const lessonsSlice = createSlice({
   initialState,
   reducers: {
     nextChapter: (state) => {
-      const { chapters, chapterIndex } = state;
+      const { chapters, chapter } = state;
       if (!chapters) return;
-
-      const chaptersLastIndex = chapters.allIds.length - 1;
-      if (chapterIndex < chaptersLastIndex) {
-        state.chapterIndex++;
-        state.chapter = chapters.byId[chapters.allIds[chapterIndex]];
+      if (chapter) {
+        const currChapterIndex = chapters.allIds.indexOf(chapter.id);
+        const nextChapterId = chapters.allIds[currChapterIndex + 1];
+        state.chapter = chapters.byId[nextChapterId];
+      } else {
+        state.chapter = chapters.byId[chapters.allIds[0]];
       }
     },
     previousChapter: (state) => {
+      const { chapters, chapter } = state;
+      if (!chapters) return;
+      if (chapter) {
+        const currChapterIndex = chapters.allIds.indexOf(chapter.id);
+        if (currChapterIndex === 0) return;
+        const previousChapterId = chapters.allIds[currChapterIndex - 1];
+        state.chapter = chapters.byId[previousChapterId];
+      } else {
+        state.chapter = chapters.byId[chapters.allIds[0]];
+      }
       if (state.chapterIndex > 0) state.chapterIndex--;
     },
   },
@@ -81,25 +91,31 @@ export const lessonsSlice = createSlice({
 export const { nextChapter, previousChapter } = lessonsSlice.actions;
 
 export const selectNextChapterTitle = (state: RootState) => {
-  const { chapters, chapterIndex } = state.lessons;
-  if (!chapters) return null;
+  const { chapters, chapter } = state.lessons;
 
-  const chaptersLastIndex = chapters.allIds.length - 1;
-  if (chapterIndex < chaptersLastIndex) {
-    return chapters.byId[chapters.allIds[chapterIndex + 1]].label;
+  if (chapters && chapter) {
+    const currChapterIndex = chapters.allIds.indexOf(chapter.id);
+    if (
+      currChapterIndex < chapters.allIds.length - 1 &&
+      currChapterIndex >= 0
+    ) {
+      return chapters.byId[chapters.allIds[currChapterIndex + 1]].label;
+    }
   }
 
   return null;
 };
 
 export const selectPreviousChapterTitle = (state: RootState) => {
-  const { chapters, chapterIndex } = state.lessons;
+  const { chapters, chapter } = state.lessons;
   if (!chapters) return null;
 
-  if (chapterIndex > 0) {
-    return chapters.byId[chapters.allIds[chapterIndex - 1]].label;
+  if (chapter) {
+    const currChapterIndex = chapters.allIds.indexOf(chapter.id);
+    if (currChapterIndex > 0) {
+      return chapters.byId[chapters.allIds[currChapterIndex - 1]].label;
+    }
   }
-
   return null;
 };
 

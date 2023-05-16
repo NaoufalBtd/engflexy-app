@@ -42,8 +42,7 @@ const LessonContainerLayout: React.FC<LessonContainerLayoutProps> = ({
 
   return (
     <Box h="full">
-      <ScrollView h={"90%"}>{children}</ScrollView>
-      <Box flex="1" />
+      <ScrollView flex={1}>{children}</ScrollView>
       <HStack
         height={60}
         w={"full"}
@@ -57,6 +56,7 @@ const LessonContainerLayout: React.FC<LessonContainerLayoutProps> = ({
           p={5}
           flex={1}
           flexDir={"row"}
+          alignItems={"center"}
           bgColor={alpha(colors.background.level2, 0.9)}>
           {previous && (
             <Icon
@@ -64,26 +64,32 @@ const LessonContainerLayout: React.FC<LessonContainerLayoutProps> = ({
               name="arrow-left"
               size={"md"}
               color="white"
-              mx="2"
+              mx="1"
             />
           )}
-          <Text>{previous?.title}</Text>
+          <Text lineBreakMode="tail" noOfLines={1} w={"80%"}>
+            {previous?.title}
+          </Text>
         </Pressable>
         <Pressable
-          p={5}
+          py={5}
+          px={4}
           justifyContent={"flex-end"}
           flexDir="row"
           flex="1"
+          alignItems={"center"}
           bgColor={alpha(colors.background.level1, 0.9)}
           onPress={next?.action}>
-          <Text>{next?.title}</Text>
+          <Text lineBreakMode="tail" noOfLines={1} w={"80%"}>
+            {next?.title}
+          </Text>
           {next && (
             <Icon
               as={FontAwesome}
               name="arrow-right"
               size={"md"}
               color="white"
-              mx="2"
+              mx="1"
             />
           )}
         </Pressable>

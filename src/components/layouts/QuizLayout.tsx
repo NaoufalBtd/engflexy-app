@@ -1,18 +1,7 @@
 import { FontAwesome } from "@expo/vector-icons";
-import {
-  Box,
-  Button,
-  HStack,
-  Icon,
-  Progress,
-  ScrollView,
-  Text,
-  View,
-} from "native-base";
+import { Box, Button, HStack, Icon, Progress, Text, View } from "native-base";
 import React from "react";
 import { QuestionStatus } from "../../constants/Quiz";
-import { useAppDispatch } from "../../hooks/stateHooks";
-import { nextQuestion, submitAnswer } from "../../store/reducers/quizReducer";
 import { calculatePercentage } from "../../utils";
 
 interface QuizLayoutProps {
@@ -20,6 +9,9 @@ interface QuizLayoutProps {
   qnNumbers: number;
   currQnNumber: number;
   questionStatus: QuestionStatus;
+  answerSubmitted?: boolean;
+  onAnswerSubmit?: () => void;
+  onPressNext?: () => void;
 }
 
 const QuizLayout: React.FC<QuizLayoutProps> = ({
@@ -27,28 +19,20 @@ const QuizLayout: React.FC<QuizLayoutProps> = ({
   qnNumbers,
   currQnNumber,
   questionStatus,
+  answerSubmitted,
+  onAnswerSubmit,
+  onPressNext,
 }) => {
   const per = calculatePercentage(currQnNumber, qnNumbers);
-  const dispatch = useAppDispatch();
-  const isLastQn = currQnNumber === qnNumbers;
-  const answered = [
-    QuestionStatus.AnsweredCorrectly,
-    QuestionStatus.AnsweredIncorrectly,
-  ].includes(questionStatus);
 
-  const handleNext = () => {
-    dispatch(nextQuestion());
-  };
-  const handleSubmit = () => {
-    dispatch(submitAnswer());
-  };
+  const isLastQn = currQnNumber === qnNumbers;
 
   return (
     <View
       pt={5}
       display={"flex"}
       flex={1}
-      height={"100%"}
+      height={"full"}
       bgColor={"background.surface"}>
       <Box
         flexDir={"row"}
@@ -67,36 +51,39 @@ const QuizLayout: React.FC<QuizLayoutProps> = ({
         </Box>
       </Box>
       <Box
+        flex={1}
         borderRadius={"3xl"}
-        bgColor={"background.level2"}
+        bgColor={"background.level1"}
         height={"80%"}
         width={"95%"}
         position={"relative"}
         mx={"auto"}
         p="5">
-        <ScrollView>{children}</ScrollView>
+        <Box>{children}</Box>
       </Box>
-      <Box my="4">
-        {answered && isLastQn && (
+      <Box py="2">
+        {answerSubmitted && isLastQn && (
           <Button>
             <Text>Finish</Text>
           </Button>
         )}
-        {answered && !isLastQn && (
-          <Button variant={"subtle"} onPress={handleSubmit}>
+        {answerSubmitted && !isLastQn && (
+          <Button variant={"subtle"} onPress={onPressNext}>
             <Text>Next</Text>
           </Button>
         )}
-        {questionStatus === QuestionStatus.NotAnswered && (
-          <Button onPress={handleSubmit}>
+
+        {!answerSubmitted && questionStatus === QuestionStatus.NotAnswered && (
+          <Button onPress={onAnswerSubmit}>
             <HStack space={2}>
               <Text>DONT'T KNOW</Text>
               <Icon as={FontAwesome} name={"question"} ml={2} />
             </HStack>
           </Button>
         )}
-        {questionStatus === QuestionStatus.InProgress && (
-          <Button onPress={handleSubmit}>
+
+        {!answerSubmitted && questionStatus !== QuestionStatus.NotAnswered && (
+          <Button onPress={onAnswerSubmit}>
             <HStack space={2}>
               <Text>Check Answer</Text>
               <Icon

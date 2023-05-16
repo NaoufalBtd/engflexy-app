@@ -1,8 +1,7 @@
 // quizReducer redux toolkit boilerplate
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import _ from "lodash";
-import { QnsTypes, QuestionStatus } from "../../constants/Quiz";
+import { QuestionStatus } from "../../constants/Quiz";
 import { QnResponse, QnResponses } from "../../types/models/QnResponseModel";
 import {
   Question,
@@ -21,6 +20,7 @@ export interface QuizState {
   currQuestionStatus: QuestionStatus;
   responses: QnResponses | null;
   answers: QnResponse["id"][] | string;
+  answerSubmitted: boolean;
   // solutionShown: boolean;
   // currQuestionAnswered: boolean;
   isLoading: boolean;
@@ -37,13 +37,17 @@ const initialState: QuizState = {
   answers: [],
   currQuestionStatus: QuestionStatus.NotAnswered,
   isLoading: false,
+  answerSubmitted: false,
   error: null,
 };
 
 export const quizSlice = createSlice({
-  name: "quiz",
+  name: "lessonQuiz",
   initialState,
   reducers: {
+    changeQuestionStatus: (state, action: PayloadAction<QuestionStatus>) => {
+      state.currQuestionStatus = action.payload;
+    },
     changeResponse: (state, action: PayloadAction<QnResponse["id"][]>) => {
       const res = action.payload;
       state.answers = res;
@@ -51,38 +55,36 @@ export const quizSlice = createSlice({
         res.length > 0 ? QuestionStatus.InProgress : QuestionStatus.NotAnswered;
     },
     submitAnswer: (state) => {
-      //todo: handle response submission
-      const { currQuestionType: qnType, answers, responses } = state;
-      if (qnType?.label === QnsTypes.qcm && answers instanceof Array) {
-        state.currQuestionStatus = _.isEqual(
-          answers,
-          responses?.correctAnswersIds
-        )
-          ? QuestionStatus.AnsweredCorrectly
-          : QuestionStatus.AnsweredIncorrectly;
-      }
+      state.answerSubmitted = true;
     },
     nextQuestion: (state) => {
+      const { questions, questionsTypes, questionIndex } = state;
       if (
-        state.questions &&
-        state.questionIndex < state.questions.allIds.length - 1
+        questions &&
+        questionsTypes &&
+        state.questionIndex < questions.allIds.length - 1
       ) {
-        const currQnId = state.questions?.allIds[state.questionIndex];
-        const currQn = state.questions?.byId[currQnId];
+        const currQnId = questions?.allIds[questionIndex];
+        const currQn = questions?.byId[currQnId];
         state.questionIndex++;
         state.currQuestion = currQn;
-        state.currQuestionType =
-          state.questionsTypes.byId[currQn.questionTypeId];
+        state.currQuestionStatus = QuestionStatus.NotAnswered;
+        state.answerSubmitted = false;
+        state.currQuestionType = questionsTypes.byId[currQn.questionTypeId];
       }
     },
     previousQuestion: (state) => {
-      if (state.questions && state.questionIndex > 0) {
-        const currQnId = state.questions.allIds[state.questionIndex];
-        const currQn = state.questions.byId[currQnId];
+      const { questions, questionsTypes, questionIndex } = state;
+
+      if (questions && questionIndex > 0 && questionsTypes) {
+        const currQnId = questions.allIds[questionIndex];
+        const currQn = questions.byId[currQnId];
         state.questionIndex--;
         state.currQuestion = currQn;
-        state.currQuestionType =
-          state.questionsTypes.byId[currQn.questionTypeId];
+        state.currQuestionStatus = QuestionStatus.NotAnswered;
+        state.answerSubmitted = false;
+
+        state.currQuestionType = questionsTypes.byId[currQn.questionTypeId];
       }
     },
   },
@@ -90,33 +92,43 @@ export const quizSlice = createSlice({
     builder.addCase(fetchQuiz.pending, (state) => {
       state.isLoading = true;
       state.error = null;
+      state.currQuestionStatus = QuestionStatus.NotAnswered;
     });
     builder.addCase(
       fetchQuiz.fulfilled,
       (state, action: PayloadAction<FetchQuiz>) => {
-        console.log("working correctly");
-        const { quiz, responses: answers, questionTypes } = action.payload;
-        const currQnId = quiz.allIds[0];
-        const currQn = quiz.byId[currQnId];
-        state.currQuestion = currQn;
-        state.responses = answers;
-        state.questions = quiz;
-        state.questionsTypes = questionTypes;
-        state.currQuestionType =
-          state.questionsTypes.byId[currQn.questionTypeId];
         state.isLoading = false;
-        state.error = null;
+
+        const { quiz, responses: answers, questionTypes } = action.payload;
+        if (quiz.allIds.length > 0) {
+          const currQnId = quiz.allIds[0];
+          const currQn = quiz.byId[currQnId];
+          state.currQuestion = currQn;
+          state.responses = answers;
+          state.questions = quiz;
+          state.questionsTypes = questionTypes;
+          state.currQuestionType =
+            state.questionsTypes.byId[currQn.questionTypeId];
+          state.error = null;
+        } else {
+          state.error = "No questions found";
+        }
       }
     );
     builder.addCase(fetchQuiz.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = action.error.message || null;
+      state.error = action.error.message || "error fetching quiz";
     });
   },
 });
 
-export const { nextQuestion, previousQuestion, changeResponse, submitAnswer } =
-  quizSlice.actions;
+export const {
+  nextQuestion,
+  previousQuestion,
+  changeResponse,
+  submitAnswer,
+  changeQuestionStatus,
+} = quizSlice.actions;
 
 type FetchQuiz = {
   quiz: Questions;

@@ -1,30 +1,41 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import answers from "../../../assets/mock/qnAnswer.json";
-import quiz from "../../../assets/mock/quiz.json";
+import _ from "lodash";
+import {
+  getLessonQuizQnResponses,
+  getLessonQuizUrl,
+} from "../../constants/ApiUrls";
+import { ApiQnResponse } from "../../types/api/ApiQnResponse";
+import { ApiQuestion } from "../../types/api/ApiQuestion";
 import {
   normalizeQnResponse,
   normalizeQnsTypes,
   normalizeQuiz,
 } from "../../utils/normalizeUtils";
+import { getFetcher } from "../../utils/serverUtils";
 
 export const fetchQuiz = createAsyncThunk(
   "quiz/fetchQuiz",
-  async (type: "practice" | "homework") => {
-    // const fetchQns = getFetcher<ApiQuestion[]>("QUIZ_URL");
-    // const fetchAnswers = getFetcher<ApiQnAnswer[]>("ANSWERS_URL");
+  async (lessonId: number) => {
+    const questions = await getFetcher<ApiQuestion[]>(
+      getLessonQuizUrl(lessonId)
+    );
+    const qnsData = questions.data;
+    // if (qnsData.length === 0) {
+    //   throw new Error("No questions found");
+    // }
+    const qnTypes = qnsData.map((qn) => qn.typeDeQuestion);
 
-    // const data = await Promise.all([fetchQns, fetchAnswers]);
-    // return {
-    //   quiz: normalizeQuiz(data[0].data),
-    //   answers: normalizeQnAnswers(data[1].data),
-    // };
+    const responses = await Promise.all(
+      qnsData.map((qn) =>
+        getFetcher<ApiQnResponse[]>(getLessonQuizQnResponses(qn.id))
+      )
+    );
+    const responsesData = _.flatMap(responses, (res) => res.data);
 
-    //---------- MOCK DATA ----------------
-    const questionTypes = quiz.map((q) => q.typeDeQuestion);
     return {
-      quiz: normalizeQuiz(quiz),
-      responses: normalizeQnResponse(answers),
-      questionTypes: normalizeQnsTypes(questionTypes),
+      quiz: normalizeQuiz(qnsData),
+      responses: normalizeQnResponse(responsesData),
+      questionTypes: normalizeQnsTypes(qnTypes),
     };
   }
 );

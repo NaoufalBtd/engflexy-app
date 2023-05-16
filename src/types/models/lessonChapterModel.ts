@@ -14,7 +14,7 @@ export type LessonChapter = {
   content: string | null;
   questions: any;
   indicationProf: null;
-  numeroOrder: number;
+  orderNum: number;
   contentNum: number;
   categorySection: {
     id: number;

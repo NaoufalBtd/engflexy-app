@@ -8,5 +8,5 @@ export type QnResponse = {
 export type QnResponses = {
   allIds: number[];
   byId: { [key: string]: QnResponse };
-  correctAnswersIds: number[];
+  // correctAnswersIds: number[];
 };

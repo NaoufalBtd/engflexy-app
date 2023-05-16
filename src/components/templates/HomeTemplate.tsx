@@ -10,7 +10,6 @@ import UpperIntermediateSvg from "../../../assets/svg/sharing_knowledge.svg";
 import { PARCOURS_URL } from "../../constants/ApiUrls";
 import { getFetcher } from "../../utils/serverUtils";
 import NumericShowcaseBox from "../elements/NumericShowcaseBox";
-import ComingCourseWidget from "../modules/ComingCourseWidget";
 import LessonCard from "../modules/LessonCard";
 import FreePackDashboardTemplate from "./DashboardsTemplates/FreePackDashboardTemplate";
 
@@ -94,9 +93,7 @@ const HomeTemplate: React.FC<homeProps> = () => {
             <NumericShowcaseBox title="Total" number={7} />
           </Box>
         </Box>
-        <Box px="2">
-          <ComingCourseWidget />
-        </Box>
+        <Box px="2">{/* <ComingCourseWidget /> */}</Box>
         <FreePackDashboardTemplate />
         <Box py="10">
           <LessonCard title="Lesson 1" subtitle="Lorem ipsum dolor sit amet" />

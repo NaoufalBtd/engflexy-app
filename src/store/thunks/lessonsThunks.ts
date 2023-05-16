@@ -16,7 +16,6 @@ export const fetchLessons = createAsyncThunk(
   }
 );
 
-// todo:
 export const fetchLessonChapters = createAsyncThunk(
   "lessons/fetchLessonChapters",
   async (lessonId: string) => {

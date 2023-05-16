@@ -4,13 +4,14 @@ import React, { useEffect, useState } from "react";
 import { Image as RImage } from "react-native";
 import RenderHtml from "react-native-render-html";
 import { LessonChapter } from "../../../types/models/lessonChapterModel";
+import { generateUniqueId } from "../../../utils/textUtils";
 
 interface ArticleTemplateProps {
-  lesson: LessonChapter;
+  chapter: LessonChapter;
 }
 
-const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ lesson }) => {
-  const { label, imageUrl, content, imageUrl2, imageUrl3 } = lesson;
+const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ chapter }) => {
+  const { label, imageUrl, content, imageUrl2, imageUrl3 } = chapter;
   const [imagesWidth, setImagesWidth] = useState([1, 1, 1]);
   const [imagesHeight, setImagesHeight] = useState([1, 1, 1]);
   const [contentWidth, setContentWidth] = useState(0);
@@ -45,7 +46,7 @@ const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ lesson }) => {
           image ? (
             <NImage
               mx={"auto"}
-              key={index}
+              key={generateUniqueId()}
               flex={1}
               style={{ aspectRatio: imagesWidth[index] / imagesHeight[index] }}
               w={contentWidth}
@@ -58,7 +59,7 @@ const ArticleTemplate: React.FC<ArticleTemplateProps> = ({ lesson }) => {
             />
           ) : null
         )}
-        {content ? (
+        {content && contentWidth ? (
           <Box px={2}>
             <RenderHtml
               baseStyle={{ color: "white", fontSize: 16, lineHeight: 30 }}

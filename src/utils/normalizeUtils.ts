@@ -1,3 +1,5 @@
+import { QnCategory } from "../constants/Quiz";
+import { getLessonChapterComponent, getQuizQnComponent } from "../helpers";
 import { ApiHomework } from "../types/api/ApiHomework";
 import { ApiHomeworkQn } from "../types/api/ApiHomeworkQn";
 import { ApiHomeworkResponse } from "../types/api/ApiHomeworkResponse";
@@ -44,26 +46,30 @@ export const normalizeLessons = (lessons: ApiLesson[]): Lessons => {
 export const normalizeLessonChapters = (ch: ApiLessonChapter[]) => {
   const allIds: number[] = [];
   const byId = ch.reduce((acc, lesson) => {
-    acc[lesson.id] = {
-      id: lesson.id,
-      code: lesson.code,
-      label: lesson.libelle,
-      imageUrl: lesson.urlImage,
-      imageUrl2: lesson.urlImage2,
-      imageUrl3: lesson.urlImage3,
-      videoUrl: lesson.urlVideo,
-      content: lesson.contenu,
-      questions: lesson.questions,
-      indicationProf: lesson.indicationProf,
-      numeroOrder: lesson.numeroOrder,
-      contentNum: lesson.content,
-      categorySection: {
-        id: lesson.categorieSection.id,
-        code: lesson.categorieSection.code,
-        label: lesson.categorieSection.libelle,
-      },
-    };
-    allIds.push(lesson.id);
+    const component = getLessonChapterComponent(lesson.categorieSection.code);
+    if (component) {
+      acc[lesson.id] = {
+        id: lesson.id,
+        code: lesson.code,
+        label: lesson.libelle,
+        imageUrl: lesson.urlImage,
+        imageUrl2: lesson.urlImage2,
+        imageUrl3: lesson.urlImage3,
+        videoUrl: lesson.urlVideo,
+        content: lesson.contenu,
+        questions: lesson.questions,
+        indicationProf: lesson.indicationProf,
+        orderNum: lesson.numeroOrder,
+        contentNum: lesson.content,
+        categorySection: {
+          id: lesson.categorieSection.id,
+          code: lesson.categorieSection.code,
+          label: lesson.categorieSection.libelle,
+        },
+      };
+      allIds.push(lesson.id);
+    }
+
     return acc;
   }, {} as { [key: string]: LessonChapter });
 
@@ -73,16 +79,25 @@ export const normalizeLessonChapters = (ch: ApiLessonChapter[]) => {
 export const normalizeQuiz = (quiz: ApiQuestion[]): Questions => {
   const allIds: number[] = [];
   const byId = quiz.reduce((acc, quiz) => {
-    acc[quiz.id] = {
-      id: quiz.id,
-      ref: quiz.ref,
-      label: quiz.libelle,
-      number: quiz.numero,
-      pointRightAnswer: quiz.pointReponseJuste,
-      pointWrongAnswer: quiz.pointReponsefausse,
-      questionTypeId: quiz.typeDeQuestion.id,
-    };
-    allIds.push(quiz.id);
+    // Check if the component wrapper is available before adding the question
+    const componentWrapperAvailable = Boolean(
+      getQuizQnComponent(quiz.typeDeQuestion.ref || "")
+    );
+
+    if (componentWrapperAvailable) {
+      acc[quiz.id] = {
+        id: quiz.id,
+        ref: quiz.ref,
+        label: quiz.libelle,
+        number: quiz.numero,
+        pointRightAnswer: quiz.pointReponseJuste,
+        pointWrongAnswer: quiz.pointReponsefausse,
+        questionTypeId: quiz.typeDeQuestion.id,
+        category: QnCategory.practice,
+      };
+      allIds.push(quiz.id);
+    }
+
     return acc;
   }, {} as { [key: string]: Question });
 
@@ -105,10 +120,11 @@ export const normalizeQnResponse = (
     if (qnAnswer.etatReponse === "true") {
       correctAnswersIds.push(qnAnswer.id);
     }
+
     return acc;
   }, {} as { [key: string]: QnResponse });
 
-  return { allIds, byId, correctAnswersIds };
+  return { allIds, byId };
 };
 
 export const normalizeQnsTypes = (
@@ -118,7 +134,7 @@ export const normalizeQnsTypes = (
   const byId = qnTypes.reduce((acc, qnType) => {
     acc[qnType.id] = {
       id: qnType.id,
-      ref: qnType.ref,
+      ref: qnType.ref || "",
       label: qnType.lib,
     };
     allIds.push(qnType.id);
@@ -176,6 +192,7 @@ export const normalizeHomeworkQn = (
       pointWrongAnswer: homeworkQn.pointReponsefausse,
       ref: homeworkQn.ref,
       questionTypeId: homeworkQn.typeDeQuestion.id,
+      category: QnCategory.homework,
     };
     allIds.push(homeworkQn.id);
     return acc;
@@ -187,7 +204,6 @@ export const normalizeHomeworkQnResponse = (
   homeWorkQnResponse: ApiHomeworkResponse[]
 ): QnResponses => {
   const allIds: number[] = [];
-  const correctAnswersIds: number[] = [];
   const byId = homeWorkQnResponse.reduce((acc, qnAnswer) => {
     acc[qnAnswer.id] = {
       id: qnAnswer.id,
@@ -196,11 +212,9 @@ export const normalizeHomeworkQnResponse = (
       questionId: qnAnswer.homeWorkQuestion.id,
     };
     allIds.push(qnAnswer.id);
-    if (qnAnswer.etatReponse === "true") {
-      correctAnswersIds.push(qnAnswer.id);
-    }
+
     return acc;
   }, {} as { [key: string]: QnResponse });
 
-  return { allIds, byId, correctAnswersIds };
+  return { allIds, byId };
 };

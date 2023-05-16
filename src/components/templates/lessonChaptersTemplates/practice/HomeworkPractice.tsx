@@ -1,6 +1,10 @@
 import { Text } from "native-base";
 import React from "react";
-import { useAppSelector } from "../../../../hooks/stateHooks";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/stateHooks";
+import {
+  nextHomework,
+  submitAnswer,
+} from "../../../../store/reducers/homeworkReducer";
 import { Question } from "../../../../types/models/QuestionModel";
 import { getElementFromNormalizedData } from "../../../../utils";
 import SurfaceCenter from "../../../elements/SurfaceCenter";
@@ -16,7 +20,9 @@ const HomeworkPractice: React.FC = () => {
     currQuestionStatus,
     questionsTypes,
     homeworkResponses,
+    answerSubmitted,
   } = useAppSelector((state) => state.homework);
+  const dispatch = useAppDispatch();
 
   if (isLoading) return <Text>Loading...</Text>;
   if (error || !homeworkQuestions || !questionsTypes || !homeworkResponses)
@@ -30,7 +36,16 @@ const HomeworkPractice: React.FC = () => {
     homeworkQuestions,
     homeworkIndex
   );
+  console.log("currQuestion", currQuestion);
   const currQnType = questionsTypes.byId[currQuestion?.questionTypeId];
+
+  const handleAnswerSubmit = () => {
+    dispatch(submitAnswer());
+  };
+  const handleNextQuestion = () => {
+    dispatch(nextHomework());
+  };
+
   return (
     <PracticeTemplate
       question={currQuestion}
@@ -38,6 +53,9 @@ const HomeworkPractice: React.FC = () => {
       questionType={currQnType}
       responses={homeworkResponses}
       type="homework"
+      onAnswerSubmit={handleAnswerSubmit}
+      onPressNext={handleNextQuestion}
+      answerSubmitted={answerSubmitted}
     />
   );
 };

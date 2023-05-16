@@ -73,8 +73,7 @@ const HomeworkTemplate: React.FC<HomeworkTemplateProps> = () => {
     (state) => state.homework
   );
   const dispatch = useAppDispatch();
-  console.log("courseId", lessonId);
-  console.log("homeworks", homeworks);
+
   const Template = homeworkSections[homeworkIndex].component;
   const lessonsData = _.values(lessons?.byId);
   const data = _.find(
@@ -114,7 +113,7 @@ const HomeworkTemplate: React.FC<HomeworkTemplateProps> = () => {
             }
           : undefined
       }>
-      {data?.label === PRACTICE ? <Template /> : <Template lesson={data} />}
+      {data?.label === PRACTICE ? <Template /> : <Template chapter={data} />}
     </LessonContainerLayout>
   );
 };

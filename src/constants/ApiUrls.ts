@@ -15,10 +15,17 @@ export const getChaptersUrl = (lessonId: string) =>
 export const getVocabulary = (chapterId: number) =>
   `${BASE_URL}/admin/sectionItem/sectionId/${chapterId}`;
 
+// Lesson Quiz URLs
+export const getLessonQuizUrl = (quizId: number) =>
+  `${BASE_URL}/admin/question/quiz/ref/quiz-${quizId}`;
+export const getLessonQuizQnResponses = (questionId: number) =>
+  `${BASE_URL}/admin/reponse/question/id/${questionId}`;
 // Homework URLs
 export const getHomeworksUrl = (lessonId: number) =>
   `${BASE_URL}/admin/homeWork/cours/id/${lessonId}`;
-export const getHomeworkQnsUrl = (homeworkId: number) =>
+export const getHomeworksContentUrl = (homeworkId: number) =>
   `${BASE_URL}/etudiant/homeWorkQST/homework/${homeworkId}`;
-export const getHomeworkQnResponses = (questionId: number) =>
+export const getHomeworkQuizUrl = (homeworkId: number) =>
+  `${BASE_URL}/etudiant/homeWorkQST/homework/${homeworkId}`;
+export const getHomeworkQuizResponses = (questionId: number) =>
   `${BASE_URL}/etudiant/homeWorkqstReponse/question/${questionId}`;

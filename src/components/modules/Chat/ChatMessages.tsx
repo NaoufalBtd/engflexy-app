@@ -2,6 +2,7 @@ import { Box, Text } from "native-base";
 import React from "react";
 import { ROLE_STUDENT, ROLE_TEACHER } from "../../../constants/Roles";
 import { useAppTheme } from "../../../theme";
+import { generateUniqueId } from "../../../utils/textUtils";
 import { alpha } from "../../../utils/uiUtils";
 
 interface ChatMessagesProps {
@@ -29,7 +30,7 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({ messages }) => {
         const { sender, message } = msg;
         return (
           <Box
-            key={idx}
+            key={generateUniqueId()}
             flexDir={sender === ROLE_TEACHER ? "row" : "row-reverse"}
             alignItems="center"
             justifyContent="flex-start"

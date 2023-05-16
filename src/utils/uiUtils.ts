@@ -5,6 +5,8 @@ import ElementarySvg from "../../assets/svg/reading_book.svg";
 import UpperIntermediateSvg from "../../assets/svg/sharing_knowledge.svg";
 import { Parcours } from "../constants/Parours";
 import { QuestionStatus } from "../constants/Quiz";
+import { ITheme } from "../theme";
+import { QnResponse } from "../types/models/QnResponseModel";
 
 export const alpha = (color: string, opacity: number) => {
   const alphaValue = Math.round(opacity * 255);
@@ -17,33 +19,39 @@ export const alpha = (color: string, opacity: number) => {
 };
 
 export const quizAnswerFeedbackColor = (
-  currQuestionStatus: QuestionStatus
+  currQuestionStatus: QuestionStatus,
+  answerSubmitted: boolean,
+  colors: ITheme["colors"]
 ): string => {
+  if (!answerSubmitted) {
+    return colors.white;
+  }
   switch (currQuestionStatus) {
-    case QuestionStatus.NeedsAssistance:
-      return "yellow";
+    // case QuestionStatus.NeedsAssistance:
+    //   return "yellow";
     case QuestionStatus.AnsweredCorrectly:
-      return "green";
+      return colors.success[400];
     case QuestionStatus.AnsweredIncorrectly:
-      return "red";
+      return colors.error[400];
     case QuestionStatus.NotAnswered:
-      return "white";
+      return colors.info[400];
     default:
-      return "gray";
+      console.error("quizAnswerFeedbackColor Function: Invalid status handler");
+      return colors.white;
   }
 };
 
 export const getQcmCheckboxColor = (
-  answerId: number,
-  correctAnswersIds: number[],
-  selectedAnswersIds: string[]
+  answerIds: number[],
+  response: QnResponse,
+  colors: ITheme["colors"]
 ) => {
-  if (correctAnswersIds.includes(answerId)) {
-    return "success.400";
-  } else if (selectedAnswersIds.includes(answerId.toString())) {
-    return "error.400";
+  if (response.isCorrect) {
+    return colors.success[400];
+  } else if (!response.isCorrect && answerIds.includes(response.id)) {
+    return colors.error[400];
   } else {
-    return "background.surface";
+    return colors.background.level2;
   }
 };
 
