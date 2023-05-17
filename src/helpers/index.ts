@@ -1,5 +1,20 @@
+import { lazy } from "react";
 import { chaptersComponents } from "../constants/Lesson";
-import { quizComp } from "../constants/Quiz";
+import { QnsTypes } from "../constants/Quiz";
+
+const FillBlankTemplate = lazy(
+  () => import("../components/templates/quizTemplates/FillBlankTemplate")
+);
+const QcmTemplate = lazy(
+  () => import("../components/templates/quizTemplates/QcmTemplate")
+);
+
+const HomeworkPractice = lazy(
+  () =>
+    import(
+      "../components/templates/lessonChaptersTemplates/practice/HomeworkPractice"
+    )
+);
 
 export const getLessonChapterComponent = (chapterCategory: string) => {
   const component = chaptersComponents.find(
@@ -10,9 +25,23 @@ export const getLessonChapterComponent = (chapterCategory: string) => {
 };
 
 export const getQuizQnComponent = (questionType: string) => {
-  const component = quizComp.find(
-    (quiz) => quiz.questionType === questionType
-  )?.component;
+  switch (questionType) {
+    case QnsTypes.qcm:
+      return QcmTemplate;
+    case QnsTypes.writeCorrectForm:
+      return FillBlankTemplate;
+    case QnsTypes.correctMistake:
+      return FillBlankTemplate;
+    default:
+      return null;
+  }
+};
 
-  return component || null;
+export const getHomeWorkComponent = (typeHomework: string) => {
+  switch (typeHomework) {
+    case "Let's Practice":
+      return HomeworkPractice;
+    default:
+      return null;
+  }
 };

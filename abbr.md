@@ -3,3 +3,4 @@
 - ch: chapter
 - req: request
 - res: response
+- hw: homework

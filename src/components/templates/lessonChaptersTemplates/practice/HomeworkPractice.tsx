@@ -1,57 +1,71 @@
+import _ from "lodash";
 import { Text } from "native-base";
-import React from "react";
+import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/stateHooks";
 import {
-  nextHomework,
-  submitAnswer,
-} from "../../../../store/reducers/homeworkReducer";
-import { Question } from "../../../../types/models/QuestionModel";
-import { getElementFromNormalizedData } from "../../../../utils";
+  nextHwQuestion,
+  submitHwAnswer,
+} from "../../../../store/reducers/homeworkQuizReducer";
+import { fetchHomeworkQnsAndResponses } from "../../../../store/thunks/homeworkThunk";
 import SurfaceCenter from "../../../elements/SurfaceCenter";
 import ErrorBox from "../../../modules/ErrorBox";
 import PracticeTemplate from "./PracticeTemplate";
 
-const HomeworkPractice: React.FC = () => {
+interface HomeworkPracticeProps {
+  homeworkId: number;
+}
+
+const HomeworkPractice: React.FC<HomeworkPracticeProps> = ({ homeworkId }) => {
   const {
-    homeworkQuestions,
-    homeworkIndex,
+    homeworkQuizQuestions,
+    currQuestion,
     isLoading,
     error,
     currQuestionStatus,
     questionsTypes,
-    homeworkResponses,
+    homeworkQuizResponses,
     answerSubmitted,
-  } = useAppSelector((state) => state.homework);
+  } = useAppSelector((state) => state.homeworkQuiz);
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    dispatch(fetchHomeworkQnsAndResponses(homeworkId));
+  }, [homeworkId]);
+
   if (isLoading) return <Text>Loading...</Text>;
-  if (error || !homeworkQuestions || !questionsTypes || !homeworkResponses)
+  if (
+    error ||
+    !homeworkQuizQuestions ||
+    !questionsTypes ||
+    !homeworkQuizResponses ||
+    !currQuestion
+  )
     return (
       <SurfaceCenter>
         <ErrorBox />
       </SurfaceCenter>
     );
 
-  const currQuestion = getElementFromNormalizedData<Question>(
-    homeworkQuestions,
-    homeworkIndex
-  );
-  console.log("currQuestion", currQuestion);
   const currQnType = questionsTypes.byId[currQuestion?.questionTypeId];
+  const qnResponses = _.filter(
+    _.values(homeworkQuizResponses.byId),
+    (res) => res.questionId === currQuestion.id
+  );
 
   const handleAnswerSubmit = () => {
-    dispatch(submitAnswer());
+    dispatch(submitHwAnswer());
   };
   const handleNextQuestion = () => {
-    dispatch(nextHomework());
+    dispatch(nextHwQuestion());
   };
 
   return (
     <PracticeTemplate
+      questions={homeworkQuizQuestions}
       question={currQuestion}
       questionStatus={currQuestionStatus}
       questionType={currQnType}
-      responses={homeworkResponses}
+      responses={qnResponses}
       type="homework"
       onAnswerSubmit={handleAnswerSubmit}
       onPressNext={handleNextQuestion}

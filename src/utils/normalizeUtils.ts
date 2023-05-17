@@ -1,14 +1,23 @@
 import { QnCategory } from "../constants/Quiz";
-import { getLessonChapterComponent, getQuizQnComponent } from "../helpers";
+import {
+  getHomeWorkComponent,
+  getLessonChapterComponent,
+  getQuizQnComponent,
+} from "../helpers";
 import { ApiHomework } from "../types/api/ApiHomework";
 import { ApiHomeworkQn } from "../types/api/ApiHomeworkQn";
 import { ApiHomeworkResponse } from "../types/api/ApiHomeworkResponse";
+import { ApiHomeworkType } from "../types/api/ApiHomeworkType";
 import { ApiLesson } from "../types/api/ApiLesson";
 import { ApiLessonChapter } from "../types/api/ApiLessonChapter";
 import { ApiQnResponse } from "../types/api/ApiQnResponse";
 import { ApiQuestion } from "../types/api/ApiQuestion";
 import { ApiVocabulary } from "../types/api/ApiVocabulary";
-import { Homework, Homeworks } from "../types/models/HomeworkModel";
+import {
+  Homework,
+  HomeworkType,
+  Homeworks,
+} from "../types/models/HomeworkModel";
 import { QnResponse, QnResponses } from "../types/models/QnResponseModel";
 import {
   Question,
@@ -166,16 +175,40 @@ export const normalizeVocs = (vocs: ApiVocabulary[]): Vocabularies => {
 export const normalizeHomework = (homeworks: ApiHomework[]): Homeworks => {
   const allIds: number[] = [];
   const byId = homeworks.reduce((acc, homework) => {
-    acc[homework.id] = {
-      id: homework.id,
-      label: homework.libelle,
-      imageUrl: homework.urlImage,
-      videoUrl: homework.urlVideo,
-      homeworkTypeId: homework.typeHomeWork.id,
-    };
-    allIds.push(homework.id);
+    const componentWrapperAvailable = Boolean(
+      getHomeWorkComponent(homework.typeHomeWork.lib)
+    );
+    console.log(
+      "type de devoir",
+      homework.typeHomeWork.lib,
+      componentWrapperAvailable
+    );
+    if (componentWrapperAvailable) {
+      acc[homework.id] = {
+        id: homework.id,
+        label: homework.libelle,
+        imageUrl: homework.urlImage,
+        videoUrl: homework.urlVideo,
+        homeworkTypeId: homework.typeHomeWork.id,
+      };
+      allIds.push(homework.id);
+    }
     return acc;
   }, {} as Record<number, Homework>);
+  return { allIds, byId };
+};
+
+export const normalizeHomeworkTypes = (homeWorkTypes: ApiHomeworkType[]) => {
+  const allIds: number[] = [];
+  const byId = homeWorkTypes.reduce((acc, homeWorkType) => {
+    acc[homeWorkType.id] = {
+      id: homeWorkType.id,
+      label: homeWorkType.lib,
+      code: homeWorkType.code,
+    };
+    allIds.push(homeWorkType.id);
+    return acc;
+  }, {} as { [key: string]: HomeworkType });
   return { allIds, byId };
 };
 
@@ -195,6 +228,7 @@ export const normalizeHomeworkQn = (
       category: QnCategory.homework,
     };
     allIds.push(homeworkQn.id);
+
     return acc;
   }, {} as Record<number, Question>);
   return { allIds, byId };

@@ -1,0 +1,192 @@
+[
+  {
+    "id": 28477,
+    "libelle": "Let's Practice",
+    "urlImage": null,
+    "urlVideo": null,
+    "cours": {
+      "id": 25003,
+      "description": null,
+      "image": null,
+      "libelle": "1 Impression",
+      "code": null,
+      "etatCours": null,
+      "parcours": {
+        "id": 25000,
+        "datePublication": null,
+        "dateCreation": null,
+        "description": null,
+        "libelle": "4 UPPER INTERMEDIATE",
+        "code": "4 UPPER INTERMEDIATE",
+        "numeroOrder": 0,
+        "nombreCours": 51,
+        "centre": {
+          "id": 83,
+          "libelle": "American Center 1",
+          "description": null,
+          "log": null,
+          "password": null,
+          "ref": "a1"
+        }
+      },
+      "nombreSectionFinalise": 4,
+      "nombreSectionEnCours": 4,
+      "nombreLinkEnCours": 3,
+      "nombreLinkFinalise": 5,
+      "numeroOrder": 1
+    },
+    "typeHomeWork": { "id": 2, "lib": "Let's Practice", "code": "OBLIGATORY" }
+  },
+  {
+    "id": 29832,
+    "libelle": "Phrasebook",
+    "urlImage": null,
+    "urlVideo": null,
+    "cours": {
+      "id": 25003,
+      "description": null,
+      "image": null,
+      "libelle": "1 Impression",
+      "code": null,
+      "etatCours": null,
+      "parcours": {
+        "id": 25000,
+        "datePublication": null,
+        "dateCreation": null,
+        "description": null,
+        "libelle": "4 UPPER INTERMEDIATE",
+        "code": "4 UPPER INTERMEDIATE",
+        "numeroOrder": 0,
+        "nombreCours": 51,
+        "centre": {
+          "id": 83,
+          "libelle": "American Center 1",
+          "description": null,
+          "log": null,
+          "password": null,
+          "ref": "a1"
+        }
+      },
+      "nombreSectionFinalise": 4,
+      "nombreSectionEnCours": 4,
+      "nombreLinkEnCours": 3,
+      "nombreLinkFinalise": 5,
+      "numeroOrder": 1
+    },
+    "typeHomeWork": { "id": 4, "lib": "Phrasebook", "code": "ADDITIONAL" }
+  },
+  {
+    "id": 39199,
+    "libelle": "Reading",
+    "urlImage": "https://drive.google.com/uc?export=view&id=178b6bdMkmr0vs0je7scHTZN2sP7ybKc9",
+    "urlVideo": null,
+    "cours": {
+      "id": 25003,
+      "description": null,
+      "image": null,
+      "libelle": "1 Impression",
+      "code": null,
+      "etatCours": null,
+      "parcours": {
+        "id": 25000,
+        "datePublication": null,
+        "dateCreation": null,
+        "description": null,
+        "libelle": "4 UPPER INTERMEDIATE",
+        "code": "4 UPPER INTERMEDIATE",
+        "numeroOrder": 0,
+        "nombreCours": 51,
+        "centre": {
+          "id": 83,
+          "libelle": "American Center 1",
+          "description": null,
+          "log": null,
+          "password": null,
+          "ref": "a1"
+        }
+      },
+      "nombreSectionFinalise": 4,
+      "nombreSectionEnCours": 4,
+      "nombreLinkEnCours": 3,
+      "nombreLinkFinalise": 5,
+      "numeroOrder": 1
+    },
+    "typeHomeWork": { "id": 1, "lib": "Reading", "code": "ADDITIONAL" }
+  },
+  {
+    "id": 30938,
+    "libelle": "Write it up",
+    "urlImage": "https://drive.google.com/uc?id=1CPymQTEp_S4LVHekibSbAZ8FbyDct0Kf&export=download",
+    "urlVideo": null,
+    "cours": {
+      "id": 25003,
+      "description": null,
+      "image": null,
+      "libelle": "1 Impression",
+      "code": null,
+      "etatCours": null,
+      "parcours": {
+        "id": 25000,
+        "datePublication": null,
+        "dateCreation": null,
+        "description": null,
+        "libelle": "4 UPPER INTERMEDIATE",
+        "code": "4 UPPER INTERMEDIATE",
+        "numeroOrder": 0,
+        "nombreCours": 51,
+        "centre": {
+          "id": 83,
+          "libelle": "American Center 1",
+          "description": null,
+          "log": null,
+          "password": null,
+          "ref": "a1"
+        }
+      },
+      "nombreSectionFinalise": 4,
+      "nombreSectionEnCours": 4,
+      "nombreLinkEnCours": 3,
+      "nombreLinkFinalise": 5,
+      "numeroOrder": 1
+    },
+    "typeHomeWork": { "id": 3, "lib": "Write it Up", "code": "OBLIGATORY" }
+  },
+  {
+    "id": 36613,
+    "libelle": "Watch it",
+    "urlImage": null,
+    "urlVideo": "https://www.youtube.com/watch?v=vXcFGgwP1J4",
+    "cours": {
+      "id": 25003,
+      "description": null,
+      "image": null,
+      "libelle": "1 Impression",
+      "code": null,
+      "etatCours": null,
+      "parcours": {
+        "id": 25000,
+        "datePublication": null,
+        "dateCreation": null,
+        "description": null,
+        "libelle": "4 UPPER INTERMEDIATE",
+        "code": "4 UPPER INTERMEDIATE",
+        "numeroOrder": 0,
+        "nombreCours": 51,
+        "centre": {
+          "id": 83,
+          "libelle": "American Center 1",
+          "description": null,
+          "log": null,
+          "password": null,
+          "ref": "a1"
+        }
+      },
+      "nombreSectionFinalise": 4,
+      "nombreSectionEnCours": 4,
+      "nombreLinkEnCours": 3,
+      "nombreLinkFinalise": 5,
+      "numeroOrder": 1
+    },
+    "typeHomeWork": { "id": 5, "lib": "Watch it", "code": "ADDITIONAL" }
+  }
+]

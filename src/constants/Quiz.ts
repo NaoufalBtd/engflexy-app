@@ -1,5 +1,3 @@
-import { lazy } from "react";
-
 export const CHOOSE_CORRECT_FORM = "Choose the correct alternative";
 
 export const WRITE_CORRECT_FORM = "Write the correct form";
@@ -25,24 +23,3 @@ export enum QnCategory {
   homework = "homework",
   practice = "practice",
 }
-
-const FillBlankTemplate = lazy(
-  () => import("../components/templates/quizTemplates/FillBlankTemplate")
-);
-const QcmTemplate = lazy(
-  () => import("../components/templates/quizTemplates/QcmTemplate")
-);
-export const quizComp = [
-  {
-    questionType: QnsTypes.qcm,
-    component: QcmTemplate,
-  },
-  {
-    questionType: QnsTypes.writeCorrectForm,
-    component: FillBlankTemplate,
-  },
-  {
-    questionType: QnsTypes.correctMistake,
-    component: FillBlankTemplate,
-  },
-];

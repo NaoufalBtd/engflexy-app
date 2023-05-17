@@ -21,3 +21,14 @@ export type HomeworkQns = {
   allIds: number[];
   byId: Record<number, HomeworkQn>;
 };
+
+export type HomeworkType = {
+  id: number;
+  label: string;
+  code: string;
+};
+
+export type HomeworkTypes = {
+  allIds: number[];
+  byId: Record<number, HomeworkType>;
+};

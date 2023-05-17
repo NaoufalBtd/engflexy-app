@@ -29,3 +29,7 @@ export const getHomeworkQuizUrl = (homeworkId: number) =>
   `${BASE_URL}/etudiant/homeWorkQST/homework/${homeworkId}`;
 export const getHomeworkQuizResponses = (questionId: number) =>
   `${BASE_URL}/etudiant/homeWorkqstReponse/question/${questionId}`;
+export const getStudentSaveHomeworkUrl = () =>
+  `${BASE_URL}/etudiant/homeWorkEtudiant/`;
+export const getStudentSaveHomeworkAnswer = () =>
+  `${BASE_URL}/etudiant/reponseEtudiantHomeWork/`;

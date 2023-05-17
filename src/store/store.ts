@@ -6,6 +6,7 @@ import { persistReducer } from "redux-persist";
 
 import authReducer from "./reducers/authReducer";
 import courseReducer from "./reducers/courseReducer";
+import homeworkQuizReducer from "./reducers/homeworkQuizReducer";
 import homeworkReducer from "./reducers/homeworkReducer";
 import quizReducer from "./reducers/lessonQuizReducer";
 import lessonsReducer from "./reducers/lessonReducer";
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   lessonQuiz: quizReducer,
   course: courseReducer,
   homework: homeworkReducer,
+  homeworkQuiz: homeworkQuizReducer,
 });
 
 export const store = configureStore({

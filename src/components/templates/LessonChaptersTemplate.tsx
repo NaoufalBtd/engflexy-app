@@ -14,7 +14,7 @@ import ErrorBox from "../modules/ErrorBox";
 interface LessonChaptersTemplateProps {}
 
 const LessonChaptersTemplate: React.FC<LessonChaptersTemplateProps> = () => {
-  const { chapters, chapter, isLoading, error, lessonId } = useAppSelector(
+  const { chapters, chapter, isLoading, error } = useAppSelector(
     (state) => state.lessons
   );
   const nextChapterTitle = useAppSelector(selectNextChapterTitle);

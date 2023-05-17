@@ -1,4 +1,3 @@
-import _ from "lodash";
 import { Text } from "native-base";
 import React, { useEffect } from "react";
 import {
@@ -10,13 +9,14 @@ import {
   WATCH_IT,
   WRITE_UP,
 } from "../../constants/Lesson";
+import { getHomeWorkComponent } from "../../helpers";
 import { useAppDispatch, useAppSelector } from "../../hooks/stateHooks";
 import {
   nextHomework,
   previousHomework,
+  selectNextHomeworkTitle,
 } from "../../store/reducers/homeworkReducer";
 import { fetchHomeworks } from "../../store/thunks/homeworkThunk";
-import { isLastIndex } from "../../utils";
 import SurfaceCenter from "../elements/SurfaceCenter";
 import LessonContainerLayout from "../layouts/LessonContainerLayout";
 import ErrorBox from "../modules/ErrorBox";
@@ -67,20 +67,12 @@ const homeworkSections = [
 ];
 
 const HomeworkTemplate: React.FC<HomeworkTemplateProps> = () => {
-  const { chapters: lessons } = useAppSelector((state) => state.lessons);
   const { lessonId } = useAppSelector((state) => state.lessons);
-  const { homeworkIndex, homeworks, isLoading } = useAppSelector(
-    (state) => state.homework
-  );
+  const { homeworks, isLoading, error, currHomework, homeworksTypes } =
+    useAppSelector((state) => state.homework);
+  const nextHomeworkTitle = useAppSelector(selectNextHomeworkTitle);
+  const prevHomeworkTitle = useAppSelector(selectNextHomeworkTitle);
   const dispatch = useAppDispatch();
-
-  const Template = homeworkSections[homeworkIndex].component;
-  const lessonsData = _.values(lessons?.byId);
-  const data = _.find(
-    lessonsData,
-    (lesson) =>
-      lesson.categorySection.label === homeworkSections[homeworkIndex].title
-  );
 
   useEffect(() => {
     console.log("mounted");
@@ -88,32 +80,36 @@ const HomeworkTemplate: React.FC<HomeworkTemplateProps> = () => {
   }, [lessonId]);
 
   if (isLoading) return <Text>Loading...</Text>;
-  if (!data || !homeworks)
+  if (error || !currHomework || !homeworks || !homeworksTypes)
     return (
       <SurfaceCenter>
         <ErrorBox />
       </SurfaceCenter>
     );
 
+  const HwComponent = getHomeWorkComponent(
+    homeworksTypes.byId[currHomework.homeworkTypeId]?.label
+  );
+
   return (
     <LessonContainerLayout
       previous={
-        homeworkIndex > 0
+        prevHomeworkTitle
           ? {
-              title: homeworkSections[homeworkIndex - 1]?.title,
-              action: () => dispatch(nextHomework()),
+              title: prevHomeworkTitle,
+              action: () => dispatch(previousHomework()),
             }
           : undefined
       }
       next={
-        !isLastIndex(_.values(homeworks.byId), homeworkIndex)
+        nextHomeworkTitle
           ? {
-              title: homeworkSections[homeworkIndex + 1]?.title,
-              action: () => dispatch(previousHomework()),
+              title: nextHomeworkTitle,
+              action: () => dispatch(nextHomework()),
             }
           : undefined
       }>
-      {data?.label === PRACTICE ? <Template /> : <Template chapter={data} />}
+      {HwComponent && <HwComponent homeworkId={currHomework.id} />}
     </LessonContainerLayout>
   );
 };

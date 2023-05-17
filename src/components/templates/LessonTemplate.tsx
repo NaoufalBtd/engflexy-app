@@ -1,7 +1,8 @@
-import { Box, Text } from "native-base";
+import { Text } from "native-base";
 import React from "react";
 import LessonLayout from "../layouts/LessonLayout";
 import ChatTemplate from "./ChatTemplate";
+import HomeworkTemplate from "./HomeworkTemplate";
 import LessonChaptersTemplate from "./LessonChaptersTemplate";
 
 interface LessonTemplateProps {}
@@ -12,8 +13,8 @@ const LessonTemplate: React.FC<LessonTemplateProps> = () => {
       bg={"background.surface"}
       h={"full"}
       lessonTemplate={() => <LessonChaptersTemplate />}
-      // homeWorkTemplate={() => <HomeworkTemplate />}
-      homeWorkTemplate={() => <Box />}
+      homeWorkTemplate={() => <HomeworkTemplate />}
+      // homeWorkTemplate={() => <Box />}
       dictionaryTemplate={() => <Text>Dictionary</Text>}
       chatTemplate={() => <ChatTemplate />}
     />
